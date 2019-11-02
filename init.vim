@@ -12,6 +12,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
+"Android Dev and Kotlin syntax highlighting
+Plug 'hsanson/vim-android'
+Plug 'udalov/kotlin-vim'
 "Multi Cursor
 "Plug 'vim-multiple-cursors'
 
@@ -84,5 +87,7 @@ set showcmd
 set number
 set numberwidth=2
 
+" Two semicolons are easy to type.
+:imap ;; <Esc>
 "Git prompt
 " display incomplete commands
