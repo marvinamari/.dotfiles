@@ -1,1 +1,10 @@
-/home/marvinamari/.alias
+#git
+
+# Python
+alias py="python3"
+
+# Vim
+alias vd="nvim -d"
+alias v="nvim"
+alias sv="sudo nvim"
+
