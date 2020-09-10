@@ -1,0 +1,30 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"AdvancedNewFile",
+		"Anaconda",
+		"Apache Hive",
+		"Apache Pig",
+		"AutoFileName",
+		"BracketHighlighter",
+		"Color Highlighter",
+		"DocBlockr",
+		"Emmet",
+		"GitGutter",
+		"Javatar",
+		"Material Theme",
+		"Package Control",
+		"Scala Syntax",
+		"Search WordPress Codex or QueryPosts",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"TypeScript",
+		"WordPress"
+	]
+}

@@ -18,13 +18,29 @@ Plug 'vim-airline/vim-airline'
 "Run tests
 "Plug 'janko/vim-test'
 
+"Python
+Plug 'vim-scripts/indentpython.vim'
+Plug 'majutsushi/tagbar'
+
 "Color Scheme
 Plug 'tomasr/molokai'
 Plug 'vim-syntastic/syntastic'
+
+" Utility
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-test/vim-test'
+Plug 'tpope/vim-fugitive'
+Plug 'benmills/vimux'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " =====================================
 "
+
+" Show trailing whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhiteSpace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
 "Set color scheme
 let g:molokai_original = 1
@@ -83,6 +99,34 @@ set showcmd
 "Show line numbers
 set number
 set numberwidth=2
+
+" Enable Mouse
+"set mouse=a " on OSX press alt and click
+" Easier moving of code blocks
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+
+" Folding
+"au BufNewFile,BufRead *.py \
+"    set foldmethod=indent
+"nnoremap <space> za
+
+" MSC
+:imap ;; <Esc>
+
+" let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
+" Disable multiple swap file events if having issues running tests
+" Test suite running multiple times
+"set nobackup
+"set nowritebackup
+"set noswapfile
+
+" Make search case insensitive
+"set hlsearch
+"set incsearch
+"set ignorecase
+"set smartcase
 
 "Git prompt
 " display incomplete commands
