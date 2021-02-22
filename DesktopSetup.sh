@@ -27,6 +27,7 @@ clamav clamav-daemon virtualbox virtualbox-ext-pack cups neovim zsh tmux \
 
 sudo dpkg-reconfigure wireshark-common
 sudo adduser $USER wireshark
+# Install Eclipse for Enterpise Java Developers
 
 # Enable Cups After start locate at localhost:631
 sudo systemctl enable cups

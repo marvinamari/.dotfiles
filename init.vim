@@ -1,12 +1,12 @@
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
+"Language Server Protocol
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'scrooloose/nerdtree'
 " update &runtimepath and initialize plugin system
 " Automatically executes `filetype plugin indent` on and `syntax enable`
-
-"Language Server Protocol
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "Design
 Plug 'vim-airline/vim-airline'
@@ -14,16 +14,19 @@ Plug 'vim-airline/vim-airline'
 
 "Multi Cursor
 "Plug 'vim-multiple-cursors'
-
+"Langs
+Plug 'udalov/kotlin-vim'
 "Run tests
 "Plug 'janko/vim-test'
-
+Plug 'dense-analysis/ale'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'leafgarland/typescript-vim'
 "Python
 Plug 'vim-scripts/indentpython.vim'
 Plug 'majutsushi/tagbar'
 
 "Color Scheme
-Plug 'tomasr/molokai'
+Plug 'flazz/vim-colorschemes'
 Plug 'vim-syntastic/syntastic'
 
 " Utility
@@ -32,10 +35,41 @@ Plug 'vim-test/vim-test'
 Plug 'tpope/vim-fugitive'
 Plug 'benmills/vimux'
 Plug 'vimwiki/vimwiki'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-surround'
+
 call plug#end()
 
+let NERDTreeMouseMode = 2
+set mouse=a
 " =====================================
 "
+" Coc Settings
+let g:coc_global_extensions = [
+            \'coc-pairs',
+            \'coc-tsserver',
+            \'coc-snippets',
+            \'coc-prettier',
+            \'coc-json',
+            \'coc-python',
+            \'coc-css',
+            \'coc-java',
+            \'coc-emmet',
+            \'coc-git',
+            \'coc-eslint',
+            \'coc-graphql',
+            \'coc-html',
+            \'coc-markdownlint',
+            \'coc-yaml'
+            \]
+
+"Let ALE lint
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint'],
+\   'javascript': ['eslint'],
+\   'vue': ['eslint']
+\}
+let g:ale_fix_on_save = 1
 
 " Show trailing whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -43,8 +77,9 @@ autocmd ColorScheme * highlight ExtraWhiteSpace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
 "Set color scheme
-let g:molokai_original = 1
-colorscheme molokai
+let g:airline_theme='luna'
+colorscheme atom
+
 "Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -72,6 +107,7 @@ filetype plugin indent on
 "show existing tab with 4 spaces width
 set tabstop=4
 set shiftwidth=4
+"au Filetype python setl et ts=4 sw=4
 set expandtab
 set smarttab
 set softtabstop=4
@@ -100,6 +136,14 @@ set showcmd
 set number
 set numberwidth=2
 
+"remap Prettier
+nnoremap <F5> mzgggqG`z
+"IDE Features
+"Make enter select autocomplete
+"Cycle through popup with tab
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+inoremap <expr> <ENTER> pumvisible() ? "\<C-Y>":"\<ENTER>"
 " Enable Mouse
 "set mouse=a " on OSX press alt and click
 " Easier moving of code blocks
