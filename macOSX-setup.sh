@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-brew install ctags tmux tree httpie
-
-brew install --cask robo-3t
+brew install ctags ripgrep tree httpie handbrake koekeishiya/formulae/yabai
+brew install --HEAD neovim
+brew install --cask robo-3t kitty
 
 # Install Eclipse for Enterpise Java Developers + Add C++ support
 

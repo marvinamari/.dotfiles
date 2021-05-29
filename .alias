@@ -8,3 +8,4 @@ alias vd="nvim -d"
 alias v="nvim"
 alias sv="sudo nvim"
 
+alias wiki="nvim ~/vimwiki/index.md"

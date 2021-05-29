@@ -19,6 +19,11 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.cache/zsh/history
 
+# Environment Vars
+#export VIRTUAL_ENV="$HOME/neovim/debug/python/debugpy"
+export E="/Volumes/Nvme SSD"
+export EHOME=$E/$HOME 
+
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -49,6 +54,18 @@ rmd () {
   pandoc $1 | lynx -stdin
 }
 
+# Path
+export PATH=/usr/local/sbin:$PATH
+
+# Kitty Configuration
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
+# Increase file count for "too many files open" error
+ulimit -n 10240
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -56,6 +73,13 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+#Ruby
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/amari/.sdkman"
 [[ -s "/Users/amari/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/amari/.sdkman/bin/sdkman-init.sh"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
