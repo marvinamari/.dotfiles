@@ -24,13 +24,16 @@ return require('packer').startup(function()
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use 'sainnhe/sonokai'
   use 'norcalli/snippets.nvim'
-  use 'windwp/nvim-autopairs'
+  --use 'windwp/nvim-autopairs'
   use 'p00f/nvim-ts-rainbow'
+
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
 
 -- Debug
   use 'mfussenegger/nvim-dap'
-  use { 'nvim-telescope/telescope-vimspector.nvim' }
+  use 'theHamsta/nvim-dap-virtual-text' 
+  use 'nvim-telescope/telescope-dap.nvim'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
 -- Utility
 --  use 'vim-test/vim-test'
@@ -40,7 +43,21 @@ return require('packer').startup(function()
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
+  use 'folke/which-key.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+-- Contributions
+  use { 
+      '~/.config/nvim/repo-plugins/surround.nvim',
+      disable = false,
+      branch = 'master',
+      config = function()
+--          vim.g.surround_prefix = "<c-s>"
+--          vim.g.surround_load_autogroups = true
+          require "surround".setup {}
+      end
+      --commit = '',
+    }
 end)
 
 

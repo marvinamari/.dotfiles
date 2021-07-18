@@ -1,0 +1,9 @@
+[submodule "nvim/open-source-plugins/surround"]
+	path = nvim/open-source-plugins/surround
+	url = git@github.com:blackCauldron7/surround.nvim.git
+[submodule "nvim/open-source-plugins/surround.nvim"]
+	path = nvim/open-source-plugins/surround.nvim
+	url = git@github.com:blackCauldron7/surround.nvim.git
+[submodule "nvim/repo-plugins/surround.nvim"]
+	path = nvim/repo-plugins/surround.nvim
+	url = git@github.com:blackCauldron7/surround.nvim.git

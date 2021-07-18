@@ -72,6 +72,9 @@ vim.wo.number=true
 vim.wo.relativenumber=true
 vim.wo.numberwidth=2
 
+-- which key set time to wait for map sequence 
+vim.g.timeoutlen=1000 
+
 -- vim.o.
 -- Keep space when scrolling
 vim.g.scrolloff=7

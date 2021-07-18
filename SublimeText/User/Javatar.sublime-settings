@@ -4,12 +4,277 @@
 		"JDK11.0.1":
 		{
 			"path": "/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/bin",
-			"version": "11.0.1"
+			"version": "11.0.1",
 		},
-		"use": ""
+		"use": "",
 	},
 	"message_id": 20,
 	"project_data":
 	{
-	}
+		/*"2": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum/optimize_something",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum/optimize_something",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\""
+				}
+			],
+		},*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum/assess_learners",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3": null,*/
+		/*"4": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum/defeat_learners",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum/defeat_learners",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum/defeat_learners",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles",
+				}
+			],
+		},*/
+		"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},
+	},
 }
