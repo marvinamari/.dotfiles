@@ -32,13 +32,29 @@ local function try_loadstring(s, component, name)
 end
 
 _G.packer_plugins = {
-  ["completion-nvim"] = {
+  ["flutter-tools.nvim"] = {
     loaded = true,
-    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/completion-nvim"
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/lualine.nvim"
+  },
+  ncm2 = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/ncm2"
+  },
+  ["ncm2-vim-lsp"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/ncm2-vim-lsp"
+  },
+  neogit = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/neogit"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-bufferline.lua"] = {
     loaded = true,
@@ -60,6 +76,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
+  ["nvim-remote-containers"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-remote-containers"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
@@ -75,6 +95,10 @@ _G.packer_plugins = {
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+  },
+  ["nvim-yarp"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-yarp"
   },
   ["packer.nvim"] = {
     loaded = false,
@@ -101,11 +125,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/sonokai"
   },
-  ["surround.nvim"] = {
-    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rsurround\frequire\0" },
-    loaded = true,
-    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/surround.nvim"
-  },
   ["telescope-dap.nvim"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
@@ -113,6 +132,14 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-lsp"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/vim-lsp"
+  },
+  ["vim-lsp-settings"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/vim-lsp-settings"
   },
   vimwiki = {
     loaded = true,
@@ -124,8 +151,6 @@ _G.packer_plugins = {
   }
 }
 
--- Config for: surround.nvim
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
 END
 
 catch

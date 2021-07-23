@@ -6,3 +6,11 @@ When creating a symlink, ensure your link creation was successful this may requi
 
 
 
+Delete submodules
+mv a/submodule a/submodule_tmp
+git submodule deinit -f -- a/submodule    
+rm -rf .git/modules/a/submodule
+git rm -f a/submodule
+
+
+

@@ -31,6 +31,7 @@
 		"SublimeLinter",
 		"SyncedSideBar",
 		"TypeScript",
-		"WordPress"
+		"Vue Syntax Highlight",
+		"WordPress",
 	],
 }

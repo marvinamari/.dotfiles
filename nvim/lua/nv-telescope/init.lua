@@ -28,10 +28,10 @@ require('telescope').setup{
         vertical = {
           mirror = false,
         },
-        width = 0.75,
-        prompt_position = "bottom",
+        width = 0.8,
+        prompt_position = "top",
         preview_cutoff = 120,
-        height = 1,
+        height = 0.8,
     },
     border = {},
     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },

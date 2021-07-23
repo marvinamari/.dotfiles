@@ -11,11 +11,14 @@ git clone https://github.com/wbthomason/packer.nvim\
 
 git clone --recursive https://github.com/marvinamari/.dotfiles.git # to manually download submodules use git submodule update --init --recursive
 git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
-mkdir -p ~/.config/
-ln -s ~/.dotfiles/.bashrc ~/.config/
-ln -s ~/.dotfiles/nvim ~/.config/
-ln -s ~/.dotfiles/.alias ~/
+
+#chmod u+x "~/.bash_it/install.sh"
+. "~/.bash_it/install.sh -s"
+mkdir -p ~/.config
+ln -s /.dotfiles/install_devtools/.bashrc ~/
+ln -s /.dotfiles/nvim ~/.config/
+ln -s /.dotfiles/.alias ~/
 
 #~/.dotfiles/nvim/lua/lsp/install_lang_servers.sh
 
-source ~/.bashrc
+#. "~/.bashrc"

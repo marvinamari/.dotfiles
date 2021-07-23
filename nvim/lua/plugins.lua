@@ -15,19 +15,27 @@ return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
   use {'wbthomason/packer.nvim', opt = true}
 
+  --  Language Protocol Server
   use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
+  use 'prabirshrestha/vim-lsp'
+  use 'mattn/vim-lsp-settings'
+
+  -- Autocomplete
+  use 'ncm2/ncm2'
+  use 'roxma/nvim-yarp'
+  use 'ncm2/ncm2-vim-lsp'
 
 -- Editor
+  use 'kyazdani42/nvim-web-devicons'
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use 'sainnhe/sonokai'
   use 'norcalli/snippets.nvim'
-  --use 'windwp/nvim-autopairs'
+  use 'windwp/nvim-autopairs'
+  use 'kyazdani42/nvim-tree.lua'
   use 'p00f/nvim-ts-rainbow'
-
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
+-- Dart/Flutter
+  use 'akinsho/flutter-tools.nvim'
 
 -- Debug
   use 'mfussenegger/nvim-dap'
@@ -36,8 +44,6 @@ return require('packer').startup(function()
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
 -- Utility
---  use 'vim-test/vim-test'
---  use 'tpope/vim-fugitive'
   use 'vimwiki/vimwiki'
   use 'BurntSushi/ripgrep'
   use 'nvim-lua/popup.nvim'
@@ -46,18 +52,10 @@ return require('packer').startup(function()
   use 'folke/which-key.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
--- Contributions
-  use { 
-      '~/.config/nvim/repo-plugins/surround.nvim',
-      disable = false,
-      branch = 'master',
-      config = function()
---          vim.g.surround_prefix = "<c-s>"
---          vim.g.surround_load_autogroups = true
-          require "surround".setup {}
-      end
-      --commit = '',
-    }
+  use 'TimUntersberger/neogit'
+  use 'mfussenegger/nvim-dap'
+  use 'jamestthompson3/nvim-remote-containers'
+  
 end)
 
 

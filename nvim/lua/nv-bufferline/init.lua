@@ -5,8 +5,8 @@ require'bufferline'.setup{
     number_style = "superscript",
     mappings = true,
     buffer_close_icon= '',
-    modified_icon = '●',
     close_icon = '',
+    modified_icon = '●',
     left_trunc_marker = '',
     right_trunc_marker = '',
     max_name_length = 18,
@@ -32,8 +32,8 @@ require'bufferline'.setup{
      --   return true
     --  end
    -- end,
-    show_buffer_close_icons = false,
-    show_close_icon = false,
+    show_buffer_close_icons = true,
+    show_close_icon = true,
     show_tab_indicators = true,
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators

@@ -258,7 +258,7 @@
 				}
 			],
 		},*/
-		"2":
+		/*"2":
 		{
 			"folders":
 			[
@@ -275,6 +275,302 @@
 					"shell_cmd": "\"python\" -u \"$file\"",
 				}
 			],
-		},
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML4T/ML4T_2021Sum",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Git/blubliss",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Git/blubliss",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Git/blubliss",
+				}
+			],
+		},*/
+		/*"3": null,*/
+		/*"2": null,*/
+		/*"3": null,*/
+		/*"4":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Git/blubliss",
+				}
+			],
+		},*/
+		/*"2": null,*/
+		/*"3": null,*/
+		/*"4":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Git/blubliss",
+				}
+			],
+		},*/
+		/*"2": null,*/
+		/*"2": null,*/
+		/*"2": null,*/
+		/*"3": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/ML",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2": null,*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL",
+				}
+			],
+		},*/
+		/*"4": null,*/
+		/*"2": null,*/
+		/*"3": null,*/
+		/*"4": null,*/
+		/*"5":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/notebooks",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/notebooks",
+				}
+			],
+		},*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_2",
+				}
+			],
+		},*/
+		/*"4":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"5": {
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_2",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_2",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_2",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\""
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_3",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_3",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3": null,*/
+		/*"4": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_3",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3": null,*/
+		/*"4": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/GaTech/RL/7642Fall2021mdore6/Project_3",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles/nvim",
+				}
+			],
+		},*/
 	},
 }

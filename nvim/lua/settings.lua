@@ -2,8 +2,7 @@
 -- MUST be inserted BEFORE the colorscheme command
 --Disable showmode since using airline
 --vim.o.noshowmode=true
---filetype plugin indent on
-
+vim.cmd[[filetype plugin indent on]]
 --Editor
 vim.o.fileencoding = "utf-8" -- The encoding written to file
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers

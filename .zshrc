@@ -14,6 +14,13 @@ autoload -U colors && colors
 # Theme
 source ~/.zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # History in cache directory:
 HISTSIZE=1000
 SAVEHIST=1000
@@ -35,7 +42,7 @@ compinit
 _comp_options+=(globdots) # Include hidden files
 
 # vi mode
-# bindkey -v
+bindkey -v
 # export KEYTIMEOUT=1
 
 
@@ -57,11 +64,6 @@ rmd () {
 # Path
 export PATH=/usr/local/sbin:$PATH
 
-# Kitty Configuration
-autoload -Uz compinit
-compinit
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
 
 # Increase file count for "too many files open" error
 ulimit -n 10240
@@ -73,9 +75,17 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#Ruby
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # When running MACOS
+    # Kitty Configuration
+    autoload -Uz compinit
+    compinit
+    # Completion for kitty
+    kitty + complete setup zsh | source /dev/stdin
+    #Ruby
+    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+    export PATH="/usr/local/opt/ruby/bin:$PATH"
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/amari/.sdkman"
