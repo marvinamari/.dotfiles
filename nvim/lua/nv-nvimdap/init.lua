@@ -1,69 +1,81 @@
+--https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
+require('utils')
 local dap = require('dap')
-dap.configurations.python = {
-  {
-    -- The first three options are required by nvim-dap
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-    name = "Launch file";
 
-    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-    program = "${file}"; -- This configuration will launch the current file if used.
-    pythonPath = function()
-      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-      local cwd = vim.fn.getcwd()
-      if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-        return cwd .. '/venv/bin/python'
-      elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-        return cwd .. '/.venv/bin/python'
-      else
-        return '/usr/bin/python'
-      end
-    end;
+require('telescope').load_extension('dap')
+require('nv-nvimdap.python')
+require('nvim-dap-virtual-text').setup()
+require("dapui").setup({
+  -- icons = { expanded = "?", collapsed = "?" },
+  mappings = {
+    -- Use a table to apply multiple mappings
+    expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    edit = "e",
+    repl = "r",
   },
-}
+  sidebar = {
+    -- You can change the order of elements in the sidebar
+    elements = {
+      -- Provide as ID strings or tables with "id" and "size" keys
+      { id = "scopes", size = 0.25 },
+      { id = "breakpoints", size = 0.20 },
+      { id = "stacks", size = 0.25 },
+      { id = "watches", size = 0.30 },
+    },
+    size = 50,  -- Width
+    position = "right", -- Can be "left", "right", "top", "bottom"
+  },
+  tray = {
+    elements = { "repl" },
+    size = 10,
+    position = "bottom", -- Can be "left", "right", "top", "bottom"
+  },
+  floating = {
+    max_height = nil, -- These can be integers or a float between 0 and 1.
+    max_width = nil, -- Floats will be treated as percentage of your screen.
+    mappings = {
+      close = { "q", "<Esc>" },
+    },
+  },
+  windows = { indent = 1 },
+})
 
--- key bindings
--- mfussenegger/nvim-dap
-dap.adapters.node2 = {
-  type = 'executable',
-  command = 'node',
-  args = {os.getenv('HOME') .. '/apps/vscode-node-debug2/out/src/nodeDebug.js'},
-}
+-- nvim-dap-virtual-text. Show virtual text for current frame
+vim.g.dap_virtual_text = true
+
+-- require('dap').set_log_level('INFO')
+dap.defaults.fallback.terminal_win_cmd = '80vsplit new'
 vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointRejected', {text='🟦', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 
---vim.api.nvim_set_keymap( 'n',  '<leader>dh', ":lua require'dap'.toggle_breakpoint()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<S-k>',      ":lua require'dap'.step_out()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<S-l>',      ":lua require'dap'.step_into()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<S-j>',      ":lua require'dap'.step_over()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>ds', ":lua require'dap'.stop()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>dn', ":lua require'dap'.continue()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>dk', ":lua require'dap'.up()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>dj', ":lua require'dap'.down()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>d_', ":lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>di', ":lua require'dap.ui.variables'.hover()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>dr', ":lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l", {noremap = true})
---vim.api.nvim_set_keymap( 'v',  '<leader>di', ":lua require'dap.ui.variables'.visual_hover()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>d?', ":lua require'dap.ui.variables'.scopes()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>de', ":lua require'dap'.set_exception_breakpoints({'all'})<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>da', ":lua require'debugHelper'.attach()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>dA', ":lua require'debugHelper'.attachToRemote()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>di', ":lua require'dap.ui.widgets'.hover()<CR>", {noremap = true})
---vim.api.nvim_set_keymap( 'n',  '<leader>d?', ":lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>", {noremap = true})
 
--- Plug 'nvim-telescope/telescope-dap.nvim'
-require('telescope').setup()
-require('telescope').load_extension('dap')
---vim.api.nvim_set_keymap( 'n', '<leader>df', ':Telescope dap frames<CR>', { noremap = true})
---vim.api.nvim_set_keymap( 'n', '<leader>dc', ':Telescope dap commands<CR>', { noremap = true})
---vim.api.nvim_set_keymap( 'n', '<leader>db', ':Telescope dap list_breakpoints<CR>', { noremap = true})
+map('n',  '<leader>dh', ":lua require'dap'.toggle_breakpoint()<CR>")
+map('n',  '<S-F11>',      ":lua require'dap'.step_out()<CR>")
+map('n',  '<F11>',      ":lua require'dap'.step_into()<CR>")
+map('n',  '<F10>',      ":lua require'dap'.step_over()<CR>")
+map('n',  '<leader>ds', ":lua require'dap'.stop()<CR>")
+map('n',  '<leader>dn', ":lua require'dap'.continue()<CR>")
+map('n',  '<leader>dk', ":lua require'dap'.up()<CR>")
+map('n',  '<leader>dj', ":lua require'dap'.down()<CR>")
+map('n',  '<leader>d_', ":lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>")
+map('n',  '<leader>dih', ":lua require'dap.ui.variables'.hover()<CR>")
+map('n',  '<leader>dr', ":lua require'dap'.repl.toggle({}, 'vsplit')<CR><C-w>l")
+map('v',  '<leader>di', ":lua require'dap.ui.variables'.visual_hover()<CR>")
+map('n',  '<leader>d?', ":lua require'dap.ui.variables'.scopes()<CR>")
+map('n',  '<leader>de', ":lua require'dap'.set_exception_breakpoints({'all'})<CR>")
+--map('n',  '<leader>da', ":lua require'debugHelper'.attach()<CR>")
+--map('n',  '<leader>dA', ":lua require'debugHelper'.attachToRemote()<CR>")
+map('n', '<leader>duh', '<cmd>lua require"dap.ui.widgets".hover()<CR>')
+map('n', '<leader>duf', "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>")
+-- nvim-dap-ui
+map('n', '<leader>dui', '<cmd>lua require"dapui".toggle()<CR>')
 
--- theHamsta/nvim-dap-virtual-text and mfussenegger/nvim-dap
-vim.g.dap_virtual_text = 'v:true'
-
--- Plug 'rcarriga/nvim-dap-ui'
--- lua require("dapui").setup()
--- nnoremap <leader>dq :lua require("dapui").toggle()<CR>
+-- telescope-dap
+map('n', '<leader>df', ':Telescope dap frames<CR>')
+map('n', '<leader>dcc', ':Telescope dap commands<CR>')
+map('n', '<leader>dco', ':Telescope dap configurations<CR>')
+map('n', '<leader>dlb', ':Telescope dap list_breakpoints<CR>')
+map('n', '<leader>dv', ':Telescope dap variables<CR>')

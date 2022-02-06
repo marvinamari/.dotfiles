@@ -65,26 +65,6 @@ vim.api.nvim_set_keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = tr
 vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
 
--- nv-nvim-dapp
-vim.api.nvim_set_keymap( 'n',  '<leader>dh', ":lua require'dap'.toggle_breakpoint()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<S-k>',      ":lua require'dap'.step_out()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<S-l>',      ":lua require'dap'.step_into()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<S-j>',      ":lua require'dap'.step_over()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>ds', ":lua require'dap'.stop()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>dn', ":lua require'dap'.continue()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>dk', ":lua require'dap'.up()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>dj', ":lua require'dap'.down()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>d_', ":lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>di', ":lua require'dap.ui.variables'.hover()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>dr', ":lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l", {noremap = true})
-vim.api.nvim_set_keymap( 'v',  '<leader>di', ":lua require'dap.ui.variables'.visual_hover()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>d?', ":lua require'dap.ui.variables'.scopes()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>de', ":lua require'dap'.set_exception_breakpoints({'all'})<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>da', ":lua require'debugHelper'.attach()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>dA', ":lua require'debugHelper'.attachToRemote()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>di', ":lua require'dap.ui.widgets'.hover()<CR>", {noremap = true})
-vim.api.nvim_set_keymap( 'n',  '<leader>d?', ":lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>", {noremap = true})
-
 -- dapp & Telescope
 vim.api.nvim_set_keymap( 'n', '<leader>df', ':Telescope dap frames<CR>', { noremap = true})
 vim.api.nvim_set_keymap( 'n', '<leader>dc', ':Telescope dap commands<CR>', { noremap = true})

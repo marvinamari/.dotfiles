@@ -16,9 +16,10 @@ return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   --  Language Protocol Server
-  use 'neovim/nvim-lspconfig'
-  use 'prabirshrestha/vim-lsp'
-  use 'mattn/vim-lsp-settings'
+  use {
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer',
+      }
 
   -- Autocomplete
   use 'ncm2/ncm2'
@@ -34,14 +35,22 @@ return require('packer').startup(function()
   use 'kyazdani42/nvim-tree.lua'
   use 'p00f/nvim-ts-rainbow'
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
--- Dart/Flutter
+  --- Dart/Flutter
   use 'akinsho/flutter-tools.nvim'
 
 -- Debug
   use 'mfussenegger/nvim-dap'
   use 'theHamsta/nvim-dap-virtual-text' 
   use 'nvim-telescope/telescope-dap.nvim'
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use 'mfussenegger/nvim-dap-python'
+  use 'Pocco81/DAPInstall.nvim'
+  use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+  use {
+        'rcarriga/vim-ultest',
+        config = "require('nv-ultest').post()",
+        run = ":UpdateRemotePlugins",
+        requires = {'vim-test/vim-test'}
+      }
 
 -- Utility
   use 'vimwiki/vimwiki'
@@ -51,9 +60,7 @@ return require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use 'folke/which-key.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-
   use 'TimUntersberger/neogit'
-  use 'mfussenegger/nvim-dap'
   use 'jamestthompson3/nvim-remote-containers'
   
 end)

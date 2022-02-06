@@ -32,6 +32,10 @@ local function try_loadstring(s, component, name)
 end
 
 _G.packer_plugins = {
+  ["DAPInstall.nvim"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim"
+  },
   ["flutter-tools.nvim"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim"
@@ -64,6 +68,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-dap"
   },
+  ["nvim-dap-python"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
+  },
   ["nvim-dap-ui"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-dap-ui"
@@ -71,6 +79,10 @@ _G.packer_plugins = {
   ["nvim-dap-virtual-text"] = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -133,13 +145,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/amari/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
-  ["vim-lsp"] = {
+  ["vim-test"] = {
     loaded = true,
-    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/vim-lsp"
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/vim-test"
   },
-  ["vim-lsp-settings"] = {
+  ["vim-ultest"] = {
+    config = { "require('nv-ultest').post()" },
     loaded = true,
-    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/vim-lsp-settings"
+    path = "/Users/amari/.local/share/nvim/site/pack/packer/start/vim-ultest"
   },
   vimwiki = {
     loaded = true,
@@ -151,6 +164,8 @@ _G.packer_plugins = {
   }
 }
 
+-- Config for: vim-ultest
+require('nv-ultest').post()
 END
 
 catch

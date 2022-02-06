@@ -17,5 +17,7 @@ require('nv-nvim-remote-containers')
 require('nv-nvim-autopairs')
 require('nv-ncm2')
 require('nv-neogit')
+require('nv-ultest')
+
 -- LSP
 require('nv-lsp')

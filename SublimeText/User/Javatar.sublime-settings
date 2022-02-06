@@ -572,5 +572,24 @@
 				}
 			],
 		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles/nvim",
+				}
+			],
+		},*/
+		/*"3": null,*/
+		"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles/nvim",
+				}
+			],
+		},
 	},
 }
