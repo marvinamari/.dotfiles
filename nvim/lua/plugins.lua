@@ -34,6 +34,7 @@ return require('packer').startup(function()
   use 'windwp/nvim-autopairs'
   use 'kyazdani42/nvim-tree.lua'
   use 'p00f/nvim-ts-rainbow'
+  use 'gpanders/editorconfig.nvim'
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
   --- Dart/Flutter
   use 'akinsho/flutter-tools.nvim'
@@ -47,7 +48,7 @@ return require('packer').startup(function()
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
   use {
         'rcarriga/vim-ultest',
-        config = "require('nv-ultest').post()",
+        config = "require('config.ultest').post()",
         run = ":UpdateRemotePlugins",
         requires = {'vim-test/vim-test'}
       }

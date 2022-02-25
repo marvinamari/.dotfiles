@@ -582,12 +582,66 @@
 			],
 		},*/
 		/*"3": null,*/
-		"2":
+		/*"2":
 		{
 			"folders":
 			[
 				{
 					"path": "/Users/amari/.dotfiles/nvim",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/projects/blubliss",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/projects/blubliss",
+				}
+			],
+		},*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles",
+				}
+			],
+		},*/
+		/*"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles/nvim",
+				}
+			],
+		},*/
+		"4":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
 				}
 			],
 		},

@@ -1,3 +1,14 @@
+local M = {}
+
+M.keymap = function(mode, lhs, rhs, opts)
+  vim.api.nvim_set_keymap(
+    mode,
+    lhs,
+    rhs,
+    vim.tbl_extend('keep', opts or {}, { noremap = true, silent = true })
+  )
+end
+
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
@@ -22,3 +33,5 @@ function attach()
       skipFiles = {'<node_internals>/**/*.js'},
       })
 end
+
+return M

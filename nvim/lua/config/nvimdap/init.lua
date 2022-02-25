@@ -3,7 +3,7 @@ require('utils')
 local dap = require('dap')
 
 require('telescope').load_extension('dap')
-require('nv-nvimdap.python')
+require('config.nvimdap.python')
 require('nvim-dap-virtual-text').setup()
 require("dapui").setup({
   -- icons = { expanded = "?", collapsed = "?" },

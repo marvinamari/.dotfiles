@@ -44,5 +44,5 @@ end
 
 
 -- lsp-config (must come before lsp-install)
-require('nv-lsp/lsp-config')
+require('lsp/lsp-config')
 
