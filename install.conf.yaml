@@ -1,1 +1,18 @@
 #https://github.com/anishathalye/dotbot/issues/57
+- defaults:
+    link:
+      if: '[[ "$(uname)" == "Darwin" ]]'
+- link:
+  ~/.zshrc: .zshrc
+  ~/.alias: .alias
+  ~/.config/nvim: nvim
+  ~/.config/kitty/kitty.conf: kitty.conf
+
+- defaults:
+    link:
+      if: '[[ "awk -F= '/^NAME/{print $2' | /etc/os-relesae" == "Ubuntu" ]]'
+- link:
+  ~/.zshrc: .zshrc
+  ~/.alias: .alias
+  ~/.config/nvim: nvim
+  ~/.config/kitty/kitty.conf: kitty.conf

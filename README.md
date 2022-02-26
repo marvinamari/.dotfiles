@@ -14,5 +14,7 @@ git submodule deinit -f -- a/submodule
 rm -rf .git/modules/a/submodule
 git rm -f a/submodule
 
-
-
+Install dotfiles
+cp dotbot/tools/git-submodule/install .
+or
+cp dotbot/tools/git-submodule/install.ps1 .

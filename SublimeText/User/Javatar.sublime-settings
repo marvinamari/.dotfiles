@@ -627,7 +627,7 @@
 				}
 			],
 		},*/
-		"4":
+		/*"4":
 		{
 			"folders":
 			[
@@ -642,6 +642,15 @@
 					"name": "Anaconda Python Builder",
 					"selector": "source.python",
 					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles",
 				}
 			],
 		},
