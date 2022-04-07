@@ -17,7 +17,7 @@
 
 - defaults:
     link:
-      if: '[[ "awk -F= \"/^NAME/{print $2}\" /etc/os-release" == "Ubuntu" ]]'
+      if: '[[ -f "/etc/lsb-release" && -n "$(awk -F= "/^.*Ubuntu/{print $1}" /etc/os-release" ]]'
 - link:
     ~/.zshrc: .zshrc
     ~/.alias: .alias
