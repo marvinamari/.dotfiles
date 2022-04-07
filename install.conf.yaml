@@ -3,16 +3,27 @@
     link:
       if: '[[ "$(uname)" == "Darwin" ]]'
 - link:
-  ~/.zshrc: .zshrc
-  ~/.alias: .alias
-  ~/.config/nvim: nvim
-  ~/.config/kitty/kitty.conf: kitty.conf
+    ~/.zshrc: .zshrc
+    ~/.alias: .alias
+    ~/.config/nvim:
+        create: true
+        path: nvim
+    ~/.config/kitty/kitty.conf:
+        create: true
+        path: kitty.conf
+    ~/.hammerspoon/init.lua:
+        create: true
+        path: hammerspoon.lua
 
 - defaults:
     link:
-      if: '[[ "awk -F= '/^NAME/{print $2' | /etc/os-relesae" == "Ubuntu" ]]'
+      if: '[[ "awk -F= \"/^NAME/{print $2}\" /etc/os-release" == "Ubuntu" ]]'
 - link:
-  ~/.zshrc: .zshrc
-  ~/.alias: .alias
-  ~/.config/nvim: nvim
-  ~/.config/kitty/kitty.conf: kitty.conf
+    ~/.zshrc: .zshrc
+    ~/.alias: .alias
+    ~/.config/nvim:
+        create: true
+        path: nvim
+    ~/.config/kitty/kitty.conf:
+        create: true
+        path: kitty.conf
