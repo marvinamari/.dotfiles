@@ -20,11 +20,13 @@ return require('packer').startup(function()
       'neovim/nvim-lspconfig',
       'williamboman/nvim-lsp-installer',
       }
-
+  
   -- Autocomplete
   use 'ncm2/ncm2'
   use 'roxma/nvim-yarp'
-  use 'ncm2/ncm2-vim-lsp'
+  use { 'ms-jpq/coq_nvim', branch= 'coq' }
+  use { 'ms-jpq/coq.artifacts', branch= 'artifacts' }
+  use { 'ms-jpq/coq.thirdparty', branch= '3p' }
 
 -- Editor
   use 'kyazdani42/nvim-web-devicons'
