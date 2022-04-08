@@ -17,7 +17,7 @@
 
 - defaults:
     link:
-      if: '[[ -f "/etc/lsb-release" && -n "$(awk -F= "/^.*Ubuntu/{print $1}" /etc/os-release" ]]'
+      if: '[[ -f "/etc/lsb-release" && -n "$(awk -F= "/^.*Ubuntu/{print $1}" /etc/os-release)" ]]'
 - link:
     ~/.zshrc: .zshrc
     ~/.alias: .alias
@@ -27,3 +27,4 @@
     ~/.config/kitty/kitty.conf:
         create: true
         path: kitty.conf
+    ~/.p10k.zsh: .p10k.zsh

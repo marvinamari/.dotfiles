@@ -1,20 +1,29 @@
 # setup
-## Neo-Vim
-Use [vim-plug][] as the plugin manager
-
-When creating a symlink, ensure your link creation was successful this may require you to use the physical path to the file.
-
-Adding submodules
-git submodule add https://github.com/anishathalye/dotbot dotbot
-git submodule update --init --recursive
-
-Delete submodules
-mv a/submodule a/submodule_tmp
-git submodule deinit -f -- a/submodule    
-rm -rf .git/modules/a/submodule
-git rm -f a/submodule
+To install activate dotbot by running:
+`git submodule update --init`
 
 Install dotfiles
 cp dotbot/tools/git-submodule/install .
 or
 cp dotbot/tools/git-submodule/install.ps1 .
+
+https://github.com/ms-jpq/coq_nvim
+Requires install
+python virtual env 
+```
+# Ubuntu
+apt install --yes python3-venv'
+# Pip
+pip install virtualenv
+```
+
+universal c tags
+```
+# MacOS
+brew uninstall ctags           # bad
+brew install   universal-ctags # good
+
+# Ubuntu
+apt remove  ctags              # bad
+apt install universal-ctags    # good
+```
