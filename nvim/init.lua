@@ -20,4 +20,4 @@ require('config.neogit')
 require('config.ultest')
 
 -- LSP
-require('config.lsp.language_servers')
+require('config.lsp')

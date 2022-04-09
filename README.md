@@ -27,3 +27,6 @@ brew install   universal-ctags # good
 apt remove  ctags              # bad
 apt install universal-ctags    # good
 ```
+Final step to activate coq is running in nvim
+:COQdeps
+:COQnow

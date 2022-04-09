@@ -37,7 +37,8 @@ local servers = {
 	"dockerls",
     "sqlls",
     "jsonls",
-    "intelephense"
+    "intelephense",
+    "rust_analyzer"
 }
 
 ---@diagnostic disable-next-line: undefined-global
