@@ -1,8 +1,8 @@
 config = function()
-    require("which-key").setup {
+    require('which-key').setup {
         plugins = {
             marks = true, -- shows a list of your marks on ' and `
-            registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+            registers = true, -- shows your registers on ' in NORMAL or <C-r> in INSERT mode
             -- the presets plugin, adds help for a bunch of default keybindings in Neovim
             -- No actual key bindings are created
             spelling = {
@@ -21,22 +21,22 @@ config = function()
           },
           -- add operators that will trigger motion and text object completion
           -- to enable all native operators, set the preset / operators plugin above
-          operators = { gc = "Comments" },
+          operators = { gc = 'Comments' },
           key_labels = {
             -- override the label used to display some keys. It doesn't effect WK in any other way.
             -- For example:
-            -- ["<space>"] = "SPC",
-            -- ["<cr>"] = "RET",
-            -- ["<tab>"] = "TAB",
+            -- ['<space>'] = 'SPC',
+            -- ['<cr>'] = 'RET',
+            -- ['<tab>'] = 'TAB',
           },
           icons = {
-            breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-            separator = "➜", -- symbol used between a key and it's label
-            group = "+", -- symbol prepended to a group
+            breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
+            separator = '➜', -- symbol used between a key and it's label
+            group = '+', -- symbol prepended to a group
           },
           window = {
-            border = "none", -- none, single, double, shadow
-            position = "bottom", -- bottom, top
+            border = 'none', -- none, single, double, shadow
+            position = 'bottom', -- bottom, top
             margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
             padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
           },
@@ -44,19 +44,19 @@ config = function()
             height = { min = 4, max = 25 }, -- min and max height of the columns
             width = { min = 20, max = 50 }, -- min and max width of the columns
             spacing = 3, -- spacing between columns
-            align = "left", -- align columns left, center or right
+            align = 'left', -- align columns left, center or right
           },
           ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
-          hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+          hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ '}, -- hide mapping boilerplate
           show_help = true, -- show help message on the command line when the popup is visible
-          triggers = "auto", -- automatically setup triggers
-          -- triggers = {"<leader>"} -- or specify a list manually
+          triggers = 'auto', -- automatically setup triggers
+          -- triggers = {'<leader>'} -- or specify a list manually
           triggers_blacklist = {
             -- list of mode / prefixes that should never be hooked by WhichKey
             -- this is mostly relevant for key maps that start with a native binding
             -- most people should not need to change this
-            i = { "j", "k" },
-            v = { "j", "k" },
+            i = { 'j', 'k' },
+            v = { 'j', 'k' },
           },
       -- your configuration comes here
       -- or leave it empty to use the default settings
@@ -65,5 +65,45 @@ config = function()
   end
 
 -- Register whichkey to automatically trigger
-local wk = require("which-key")
-wk.register({}, {})
+local wk = require('which-key')
+wk.register({
+	d = {
+		name = 'Debug',
+		s = {
+			name = 'Step',
+			s = { '<cmd>lua require"dap".stop()<CR>', 'Stop' },
+			c = { '<cmd>lua require"dap".continue()<CR>', 'Continue' },
+			u = { '<cmd>lua require"dap".up()<CR>', 'Up' },
+			d = { '<cmd>lua require"dap".down()<CR>', 'Down' },
+		},
+		h = {
+			name = 'Hover',
+			h = { '<cmd>lua require("dap.ui.variables").hover()<CR>', 'Hover' },
+			v = { '<cmd>lua require("dap.ui.variables").visual_hover()<CR>', 'Visual Hover' },
+		},
+		u = {
+			name = 'UI',
+			h = { '<cmd>lua require("dap.ui.widgets").hover()<CR>', 'Hover' },
+			f = { 'local widgets=require("dap.ui.widgets");widgets.centered_float(widgets.scopes)<CR>', 'Float' },
+		},
+		r = {
+			name = 'Repl',
+			o = { '<cmd>lua require("dap").repl.open()<CR>', 'Open' },
+			l = { '<cmd>lua require("dap").repl.run_last()<CR>', 'Run Last' },
+		},
+		b = {
+			name = 'Breakpoints',
+			c = {
+				'<cmd>lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>',
+				'Breakpoint Condition',
+			},
+			m = {
+				'<cmd>lua require("dap").set_breakpoint({ nil, nil, vim.fn.input("Log point message: ") })<CR>',
+				'Log Point Message',
+			},
+			t = { '<cmd>lua require("dap").toggle_breakpoint()<CR>', 'Create' },
+		},
+		c = { '<cmd>lua require("dap").scopes()<CR>', 'Scopes' },
+		i = { '<cmd>lua require("dap").toggle()<CR>', 'Toggle' },
+	},
+}, { prefix = '<leader>' })

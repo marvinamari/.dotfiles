@@ -2,19 +2,19 @@
 vim.cmd[[filetype plugin indent on]]
 
 --Editor
-vim.o.fileencoding = "utf-8" -- The encoding written to file
+vim.o.fileencoding = 'utf-8' -- The encoding written to file
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
 vim.wo.wrap = false -- Display long lines as just one line
-vim.cmd('syntax on') -- move to next line with theses keys
+--vim.cmd('syntax on') -- move to next line with theses keys
 vim.o.pumheight = 10 -- Makes popup menu smaller
 vim.o.cmdheight = 2 -- More space for displaying messages
-vim.o.mouse = "a" -- Enable your mouse
+vim.o.mouse = 'a' -- Enable your mouse
 vim.o.splitbelow = true -- Horizontal splits will automatically be below
 vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.o.conceallevel = 0 -- So that I can see `` in markdown files
 vim.o.updatetime = 300 -- Faster completion
 --vim.o.timeoutlen = 100 -- By default timeoutlen is 1000 ms, this causes leader key not to work
-vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
+vim.o.clipboard = 'unnamedplus' -- Copy paste between vim and everything else
 vim.cmd[[ set dir=~/neovim/swaps ]]
 
 vim.bo.tabstop=4

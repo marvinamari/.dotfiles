@@ -23,7 +23,7 @@ end
 
 -- nvim-dap
 function attach()
-  print("attaching")
+  print('attaching')
   dap.run({
       type = 'node2',
       request = 'attach',

@@ -16,55 +16,42 @@ return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   --  Language Protocol Server
-  use {
-      'neovim/nvim-lspconfig',
-      'williamboman/nvim-lsp-installer',
-      }
-  
+  use { 'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer' }
+
   -- Autocomplete
-  use 'ncm2/ncm2'
-  use 'roxma/nvim-yarp'
   use { 'ms-jpq/coq_nvim', branch= 'coq' }
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts' }
   use { 'ms-jpq/coq.thirdparty', branch= '3p' }
 
 -- Editor
   use 'kyazdani42/nvim-web-devicons'
-  use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use 'sainnhe/sonokai'
   use 'norcalli/snippets.nvim'
   use 'windwp/nvim-autopairs'
   use 'kyazdani42/nvim-tree.lua'
   use 'p00f/nvim-ts-rainbow'
   use 'gpanders/editorconfig.nvim'
+  use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
-  --- Dart/Flutter
-  use 'akinsho/flutter-tools.nvim'
 
 -- Debug
   use 'mfussenegger/nvim-dap'
+  use 'Pocco81/DAPInstall.nvim'
   use 'theHamsta/nvim-dap-virtual-text' 
   use 'nvim-telescope/telescope-dap.nvim'
-  use 'mfussenegger/nvim-dap-python'
-  use 'Pocco81/DAPInstall.nvim'
+  use 'vim-test/vim-test'
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
-  use {
-        'rcarriga/vim-ultest',
-        config = "require('config.ultest').post()",
-        run = ":UpdateRemotePlugins",
-        requires = {'vim-test/vim-test'}
-      }
+  use { 'rcarriga/vim-ultest', requires = {'vim-test/vim-test'}, run = ':UpdateRemotePlugins' }
 
 -- Utility
-  use 'vimwiki/vimwiki'
   use 'BurntSushi/ripgrep'
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'folke/which-key.nvim'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'TimUntersberger/neogit'
   use 'jamestthompson3/nvim-remote-containers'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   
 end)

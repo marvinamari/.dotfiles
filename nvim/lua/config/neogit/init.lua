@@ -1,4 +1,4 @@
-local neogit = require("neogit")
+local neogit = require('neogit')
 
 neogit.setup {
   disable_signs = false,
@@ -7,9 +7,9 @@ neogit.setup {
   -- customize displayed signs
   signs = {
     -- { CLOSED, OPENED }
-    section = { ">", "v" },
-    item = { ">", "v" },
-    hunk = { "", "" },
+    section = { '>', 'v' },
+    item = { '>', 'v' },
+    hunk = { '', '' },
   },
   integrations = {
     -- Neogit only provides inline diffs. If you want a more traditional way to look at diffs, you can use `sindrets/diffview.nvim`.
@@ -30,10 +30,10 @@ neogit.setup {
   mappings = {
     -- modify status buffer mappings
     status = {
-      -- Adds a mapping with "B" as key that does the "BranchPopup" command
-      ["B"] = "BranchPopup",
-      -- Removes the default mapping of "s"
-      ["s"] = "",
+      -- Adds a mapping with 'B' as key that does the 'BranchPopup' command
+      ['B'] = 'BranchPopup',
+      -- Removes the default mapping of 's'
+      ['s'] = '',
     }
   }
 }

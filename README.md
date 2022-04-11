@@ -30,3 +30,12 @@ apt install universal-ctags    # good
 Final step to activate coq is running in nvim
 :COQdeps
 :COQnow
+
+Vim Test requires pynvim
+`pip3 instal --user pynvim` or you can just install as root without user flag
+
+When you upgrade neovim upgrade pynvim as well
+`pip3 install --upgrade pynvim`
+
+Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
