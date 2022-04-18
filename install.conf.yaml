@@ -14,7 +14,9 @@
     ~/.hammerspoon/init.lua:
         create: true
         path: hammerspoon.lua
-    ~/.config/helix/config.toml: helix/config.toml
+    ~/.config/helix/config.toml:
+        create: true
+        path: helix/config.toml
 
 - defaults:
     link:
