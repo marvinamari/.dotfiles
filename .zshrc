@@ -13,6 +13,7 @@ export PATH=/usr/local/sbin:$PATH
 
 # Enable colors and change prompt:
 autoload -U colors && colors
+export COLORTERM=truecolor
 
 # History in cache directory:
 HISTSIZE=1000

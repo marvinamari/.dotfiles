@@ -14,6 +14,7 @@
     ~/.hammerspoon/init.lua:
         create: true
         path: hammerspoon.lua
+    ~/.config/helix/config.toml: helix/config.toml
 
 - defaults:
     link:
@@ -28,3 +29,4 @@
         create: true
         path: kitty.conf
     ~/.p10k.zsh: .p10k.zsh
+    ~/.config/helix/config.toml: helix/config.toml
