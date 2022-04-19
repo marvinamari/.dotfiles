@@ -3,8 +3,10 @@
     link:
       if: '[[ "$(uname)" == "Darwin" ]]'
 - link:
-    ~/.zshrc: .zshrc
-    ~/.alias: .alias
+    ~/.zprofile: .zprofile
+    ~/.config/zsh:
+        create: true
+        path: zsh
     ~/.config/nvim:
         create: true
         path: nvim
@@ -17,18 +19,33 @@
     ~/.config/helix/config.toml:
         create: true
         path: helix/config.toml
+    ~/.config/alacritty/alacritty.yml:
+        create: true
+        path: alacritty/alacritty_mac.yml
+    ~/.tmux.conf:
+        create: true
+        path: .tmux.conf
 
 - defaults:
     link:
       if: '[[ -f "/etc/lsb-release" && -n "$(awk -F= "/^.*Ubuntu/{print $1}" /etc/os-release)" ]]'
 - link:
-    ~/.zshrc: .zshrc
-    ~/.alias: .alias
+    ~/.bash_profile: .bash_profile
+    ~/.config/zsh:
+        create: true
+        path: zsh
     ~/.config/nvim:
         create: true
         path: nvim
     ~/.config/kitty/kitty.conf:
         create: true
         path: kitty.conf
-    ~/.p10k.zsh: .p10k.zsh
-    ~/.config/helix/config.toml: helix/config.toml
+    ~/.config/helix/config.toml:
+        create: true
+        path: helix/config.toml
+    ~/.config/alacritty/alacritty.yml:
+        create: true
+        path: alacritty/alacritty_mac.yml
+    ~/.tmux.conf:
+        create: true
+        path: .tmux.conf
