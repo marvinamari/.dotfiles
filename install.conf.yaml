@@ -45,7 +45,7 @@
         path: helix/config.toml
     ~/.config/alacritty/alacritty.yml:
         create: true
-        path: alacritty/alacritty_mac.yml
+        path: alacritty/alacritty_ubuntu.yml
     ~/.tmux.conf:
         create: true
         path: .tmux.conf
