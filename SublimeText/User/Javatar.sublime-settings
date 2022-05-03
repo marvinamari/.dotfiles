@@ -674,5 +674,23 @@
 			],
 		},*/
 		/*"3": null,*/
+		/*"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/.dotfiles",
+				}
+			],
+		},*/
+		"4":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/projects/blubliss",
+				}
+			],
+		},
 	},
 }

@@ -39,3 +39,6 @@ When you upgrade neovim upgrade pynvim as well
 
 Install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+Brew backup restore packages: https://tomlankhorst.nl/brew-bundle-restore-backup/
+

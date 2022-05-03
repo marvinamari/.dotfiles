@@ -2,3 +2,5 @@
 nvim/plugin/packer_compiled*
 nvim/.netrwhist
 install
+*.zsh_sessions
+*.zsh_history
