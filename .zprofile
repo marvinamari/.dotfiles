@@ -1,2 +1,6 @@
-export GEM_HOME=$HOME/.gem
-#export PATH=$GEM_HOME/ruby/3.0.0/gems/cocoapods-1.11.2/bin:$PATH
+# Environment variables set everywhere
+export EDITOR="hx"
+export TERMINAL="alacritty"
+
+# Change zsh config path
+export ZDOTDIR=$HOME/.config/zsh
