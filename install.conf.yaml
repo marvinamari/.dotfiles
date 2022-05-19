@@ -15,6 +15,7 @@
         create: true
         path: hammerspoon.lua
     ~/.config/helix/config.toml: helix/config.toml
+    ~/.config/helix/languages.toml: helix/languages.toml
 
 - defaults:
     link:
@@ -30,3 +31,13 @@
         path: kitty.conf
     ~/.p10k.zsh: .p10k.zsh
     ~/.config/helix/config.toml: helix/config.toml
+    ~/.config/helix/languages.toml: helix/languages.toml
+
+- defaults:
+    link:
+      if: '[[Get-CimInstance Win32_OperatingSystem | Select-Object "Caption" | Format-Table -AutoSize]]'
+- link:
+    ~/AppData/Roaming/helix/config.toml:
+        create: true
+        path: helix/config.toml
+    ~/AppData/Roaming/helix/languages.toml: helix/languages.toml
