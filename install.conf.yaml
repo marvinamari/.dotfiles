@@ -47,6 +47,10 @@
     ~/.tmux.conf:
         create: true
         path: .tmux.conf
+#     ~/UbuntuSetup.sh:
+#         path: Scripts/UbuntuSetup.sh
+# - shell:
+#     - ~/UbuntuSetup.sh
 
 - defaults:
     link:
