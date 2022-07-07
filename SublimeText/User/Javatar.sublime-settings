@@ -683,7 +683,7 @@
 				}
 			],
 		},*/
-		"4":
+		/*"4":
 		{
 			"folders":
 			[
@@ -691,6 +691,52 @@
 					"path": "/Users/amari/projects/blubliss",
 				}
 			],
-		},
+		},*/
+		/*"3": null,*/
+		/*"2": null,*/
+		/*"3": null,*/
+		/*"4": null,*/
+		/*"5": null,*/
+		/*"6": null,*/
+		/*"7":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Playground/GA",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"8":
+		{
+			"folders":
+			[
+				{
+					"path": "/Users/amari/Playground/GA/Project1",
+				}
+			],
+			"build_systems":
+			[
+				{
+					"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+					"name": "Anaconda Python Builder",
+					"selector": "source.python",
+					"shell_cmd": "\"python\" -u \"$file\"",
+				}
+			],
+		},*/
+		/*"2": null,*/
+		/*"2": null,*/
+		/*"3": null,*/
+		"2": null,
 	},
 }

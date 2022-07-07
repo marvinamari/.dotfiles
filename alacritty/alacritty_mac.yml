@@ -11,7 +11,7 @@ window:
   class:
     instance: alacritty
     general: alacritty
-  startup_mode: Fullscreen
+  startup_mode: Maximized
 
 scrolling:
   history: 10000

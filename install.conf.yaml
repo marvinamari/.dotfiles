@@ -31,7 +31,7 @@
     link:
       if: '[[ -f "/etc/lsb-release" && -n "$(awk -F= "/^.*Ubuntu/{print $1}" /etc/os-release)" ]]'
 - link:
-    ~/.bash_profile: .bash_profile
+    ~/.zprofile: .zprofile
     ~/.config/zsh:
         create: true
         path: zsh
