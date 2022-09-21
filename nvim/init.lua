@@ -16,7 +16,7 @@ require('config.whichkey')
 require('config.nvim-remote-containers')
 require('config.nvim-autopairs')
 require('config.neogit')
-require('config.ultest')
+require('config.neotest')
 
 -- LSP
 require('config.lsp')

@@ -9,7 +9,7 @@ keymap('n', '<Space>', '<NOP>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 
 -- Remap ESC
---keymap('i', ';;', '<ESC>', { noremap = true, silent = true })
+keymap('i', ';;', '<ESC>', { noremap = true, silent = true })
 
 -- Allow gf to open non-existent files
 keymap('', 'gf', ':edit <cfile><CR>')

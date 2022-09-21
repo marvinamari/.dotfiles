@@ -14,22 +14,41 @@ require('dapui').setup({
     edit = 'e',
     repl = 'r',
   },
-  sidebar = {
-    -- You can change the order of elements in the sidebar
-    elements = {
-      -- Provide as ID strings or tables with 'id' and 'size' keys
-      { id = 'scopes', size = 0.25 },
-      { id = 'breakpoints', size = 0.20 },
-      { id = 'stacks', size = 0.25 },
-      { id = 'watches', size = 0.30 },
+  layouts = {
+    {
+      elements = {
+      -- Elements can be strings or table with id and size keys.
+        { id = "scopes", size = 0.25 },
+        "breakpoints",
+        "stacks",
+        "watches",
+      },
+      size = 40, -- 40 columns
+      position = "left",
     },
-    size = 50,  -- Width
-    position = 'right', -- Can be 'left', 'right', 'top', 'bottom'
+    {
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 0.25, -- 25% of total lines
+      position = "bottom",
+    },
   },
-  tray = {
-    elements = { 'repl' },
-    size = 10,
-    position = 'bottom', -- Can be 'left', 'right', 'top', 'bottom'
+  controls = {
+    enabled = true,
+    -- Display controls in this element
+    element = "repl",
+    icons = {
+      pause = "",
+      play = "",
+      step_into = "",
+      step_over = "",
+      step_out = "",
+      step_back = "",
+      run_last = "↻",
+      terminate = "□",
+    },
   },
   floating = {
     max_height = nil, -- These can be integers or a float between 0 and 1.

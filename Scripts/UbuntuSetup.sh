@@ -23,7 +23,7 @@ sudo apt-get install -yy git curl\
                         xmonad copyq desktop-file-utils \
                         kdeconnect ubuntu-restricted-extras \
                         ubuntu-restricted-addons \
-                        software-properties-common
+                        software-properties-common neovim
 
 echo "Set ZSH default============"
 chsh -s $(which zsh)
@@ -80,13 +80,13 @@ gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz 
 cd ~
 
 # Helix
-echo "========= Installing Helix ========="
-git clone https://github.com/helix-editor/helix
-cd helix
-cargo install --path helix-term
-hx --grammar fetch
-hx --grammar build
-cd ~
+#echo "========= Installing Helix ========="
+#git clone https://github.com/helix-editor/helix
+#cd helix
+#cargo install --path helix-term
+#hx --grammar fetch
+#hx --grammar build
+#cd ~
 
 # Cerebro
 echo "========= Installing Cerebro ========="

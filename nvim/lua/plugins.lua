@@ -13,10 +13,14 @@ vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
 
 return require('packer').startup(function()
   -- Packer can manage itself as an optional plugin
-  use {'wbthomason/packer.nvim', opt = true}
+  use {'wbthomason/packer.nvim', opt = true} -- Package manager
 
   --  Language Protocol Server
-  use { 'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer' }
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
 
   -- Autocomplete
   use { 'ms-jpq/coq_nvim', branch= 'coq' }
@@ -36,12 +40,10 @@ return require('packer').startup(function()
 
 -- Debug
   use 'mfussenegger/nvim-dap'
-  use 'Pocco81/DAPInstall.nvim'
   use 'theHamsta/nvim-dap-virtual-text' 
   use 'nvim-telescope/telescope-dap.nvim'
-  use 'vim-test/vim-test'
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
-  use { 'rcarriga/vim-ultest', requires = {'vim-test/vim-test'}, run = ':UpdateRemotePlugins' }
+  use 'nvim-neotest/neotest'
 
 -- Utility
   use 'BurntSushi/ripgrep'

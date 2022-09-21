@@ -1,9 +1,9 @@
 require'bufferline'.setup{
+  numbers = function(opts)
+    return string.format('%s|%s.'), opts.id, opts.raise(opts.ordinal)
+  end,
   options = {
     view =  'default',
-    numbers = 'ordinal',
-    number_style = 'superscript',
-    mappings = true,
     buffer_close_icon= '',
     close_icon = '',
     modified_icon = '●',
