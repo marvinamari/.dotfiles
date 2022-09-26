@@ -20,6 +20,7 @@ return require('packer').startup(function()
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
+    "jose-elias-alvarez/null-ls.nvim"
   }
 
   -- Autocomplete
@@ -37,6 +38,7 @@ return require('packer').startup(function()
   use 'gpanders/editorconfig.nvim'
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
+  use {"akinsho/toggleterm.nvim", tag = 'v2.2.1'}
 
 -- Debug
   use 'mfussenegger/nvim-dap'

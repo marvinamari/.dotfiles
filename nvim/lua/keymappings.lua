@@ -8,6 +8,9 @@ local keymap = require 'utils'.keymap
 keymap('n', '<Space>', '<NOP>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 
+-- Format
+keymap('n', '<leader>f', ':Format<cr>')
+
 -- Remap ESC
 keymap('i', ';;', '<ESC>', { noremap = true, silent = true })
 
@@ -113,7 +116,7 @@ map('n', '<leader>dlb', ":Telescope dap list_breakpoints<CR>")
 map('n', '<leader>dv', ":Telescope dap variables<CR>")
 
 -- Telescope
-map("n", "<Leader>fff", ":Telescope find_files<CR>")
+map("n", "<Leader>ff", ":Telescope find_files<CR>")
 map("n", "<Leader>ffb", ':lua require("telescope").extensions.file_browser.file_browser()<CR>')
 map("n", "<Leader>fo", ":Telescope oldfiles<CR>")
 map("n", "<Leader>fc", ":Telescope colorscheme<CR>")

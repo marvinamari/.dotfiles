@@ -34,4 +34,16 @@ function attach()
       })
 end
 
+local function lsp_keymaps(bufnr)
+  local opts = { noremap = true, silent = true }
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+end
+
+M.on_attach = function(client, bufnr)
+  if client.name == "tsserver" then
+    client.resolved_capabilities.document_formatting = false
+  end
+  lsp_keymaps(bufnr)
+end
+
 return M
