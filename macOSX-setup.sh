@@ -19,3 +19,6 @@ brew link --overwrite graphviz
 brew install --cask maccy
 brew install pandoc lynx
 # Instal Mongo: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+
+brew update&& brew install golang
+mkdir -p $HOME/go/{bin,src,pkg}

@@ -17,9 +17,10 @@ return require('packer').startup(function()
 
   --  Language Protocol Server
   use {
+    "neovim/nvim-lspconfig",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "jose-elias-alvarez/null-ls.nvim"
   }
 
