@@ -1,7 +1,4 @@
 require'bufferline'.setup{
-  numbers = function(opts)
-    return string.format('%s|%s.'), opts.id, opts.raise(opts.ordinal)
-  end,
   options = {
     view =  'default',
     buffer_close_icon= '',
@@ -29,7 +26,10 @@ require'bufferline'.setup{
                 guifg = tabline_sel_bg,
                 guibg = '#ffffff'
             },
-    }
+    },
+    numbers = function(opts)
+    return string.format('%s|%s.'), opts.id, opts.raise(opts.ordinal)
+  end,
 }
 }
 
