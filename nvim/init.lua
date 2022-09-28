@@ -18,7 +18,6 @@ require('config.nvim-autopairs')
 require('config.neogit')
 require('config.neotest')
 require('config.toggleterm')
-require('config.null-ls')
 
 -- LSP
 require('config.lsp')

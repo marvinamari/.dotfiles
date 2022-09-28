@@ -13,6 +13,7 @@ null_ls.setup({
         formatting.prettier.with({ extra_args = {"--single-quote", "--jsx-single-quote"}}),
         formatting.black.with({ extra_args = { "--fast" }}),
         formatting.stylelua,
-        diagnostics.flake8
+        diagnostics.flake8,
+        completion.luasnip
     },
 })

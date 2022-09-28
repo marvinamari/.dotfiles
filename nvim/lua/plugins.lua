@@ -27,10 +27,11 @@ return require('packer').startup(function()
   use { 'ms-jpq/coq_nvim', branch= 'coq' }
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts' }
   use { 'ms-jpq/coq.thirdparty', branch= '3p' }
+  use({"L3MON4D3/LuaSnip", tag = "v1.0.0"})
 
 -- Editor
+  use 'themercorp/themer.lua'
   use 'kyazdani42/nvim-web-devicons'
-  use 'sainnhe/sonokai'
   use 'norcalli/snippets.nvim'
   use 'windwp/nvim-autopairs'
   use 'kyazdani42/nvim-tree.lua'
