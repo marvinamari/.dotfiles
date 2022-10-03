@@ -51,10 +51,15 @@ keymap('i', t'<C-a>', '<C-o>0', { noremap = true, silent = true })
 keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
 keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
 
-
 -- Tab switch buffer
 keymap('n', '<TAB>', ':bnext<CR>', {noremap = true, silent = true})
 keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silent = true})
+
+-- Replace word under cursor and press to repeat operation, n to skip
+keymap('n', 's*', ":let @/='<'.expand('<cword>').'>'<CR>cgn", {noremap = true, silent = true})
+keymap('x', 's*', 'sy:let @/=@s<CR>cgn', {noremap = true, silent = true})
+keymap('n', '<leader>rn', '%s///g<Left><Left>', {noremap = true, silent = false})
+keymap('x', '<leader>rn', '%s///g<Left><Left>', {noremap = true, silent = true})
 
 -- TODO fix this
 -- resize with arrows

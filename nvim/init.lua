@@ -15,7 +15,7 @@ require('config.ts_rainbow')
 require('config.whichkey')
 require('config.nvim-remote-containers')
 require('config.nvim-autopairs')
-require('config.neogit')
+require('config.gitsigns')
 require('config.neotest')
 require('config.toggleterm')
 

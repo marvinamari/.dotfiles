@@ -56,10 +56,14 @@ return require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use 'folke/which-key.nvim'
-  use 'TimUntersberger/neogit'
+  use 'kdheepak/lazygit.nvim'
   use 'jamestthompson3/nvim-remote-containers'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use {
+  'lewis6991/gitsigns.nvim',
+  -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+  }
   
 end)
 
