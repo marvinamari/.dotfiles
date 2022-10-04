@@ -18,6 +18,7 @@ require('config.nvim-autopairs')
 require('config.gitsigns')
 require('config.neotest')
 require('config.toggleterm')
+require('config.harpoon')
 
 -- LSP
 require('config.lsp')

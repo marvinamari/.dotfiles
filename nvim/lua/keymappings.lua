@@ -15,13 +15,13 @@ keymap('n', '<leader>f', ':Format<cr>')
 keymap('i', ';;', '<ESC>', { noremap = true, silent = true })
 
 -- Allow gf to open non-existent files
-keymap('', 'gf', ':edit <cfile><CR>')
+keymap('', 'gf', ':edit <cfile><CR>', {})
 
 -- better window movement
 keymap('n', '<C-h>', '<C-w>h', {silent = true})
-keymap('n', '<C-j>', '<C-w>j', {silent = true})
-keymap('n', '<C-k>', '<C-w>k', {silent = true})
-keymap('n', '<C-l>', '<C-w>l', {silent = true})
+keymap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
+keymap('n', '<C-k>', '<C-w>k', {noremap = true, silent = true})
+keymap('n', '<C-l>', '<C-w>l', {noremap = true, silent = true})
 
 
 -- Copy and paste
@@ -70,6 +70,17 @@ vim.cmd([[
   nnoremap <silent> <C-Right> :vertical resize +2<CR>
 ]])
 
+-- harpoon
+keymap('n', '<leader>hm', ':lua require("harpoon.mark").add_file()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>hr', ':lua require("harpoon.mark").rm_file()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>hc', ':lua require("harpoon.mark").clear_all()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>ht', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>hn', ':lua require("harpoon.ui").nav_next()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>hp', ':lua require("harpoon.ui").nav_prev()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>h1', ':lua require("harpoon.ui").nav_file(1)<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>h2', ':lua require("harpoon.ui").nav_file(2)<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>h3', ':lua require("harpoon.ui").nav_file(3)<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>h4', ':lua require("harpoon.ui").nav_file(4)<CR>', { noremap = true, silent = true })
 
 -- nv-nvim-tree
 keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
@@ -134,8 +145,8 @@ map("n", "<Leader>fp", ":Telescope projects<CR>")
 map("n", "<Leader>fgs", ":Telescope git_status<CR>")
 map("n", "<Leader>fgf", ":Telescope git_files<CR>")
 map("n", "<Leader>fgc", ":Telescope git_commits<CR>")
-map("n", "<Leader>fgb", ":Telescope git_branches<CR>")
 map("n", "<Leader>fgt", ":Telescope git_stash<CR>")
+map("n", "<Leader>fgb", ":Telescope git_branches<CR>")
 
 -- keymap('i', '<expr><TAB>', 'pumbisible() ? \'\\<C-n>\' : \'\\<TAB>\'', { noremap = true, silent = true })
 -- keymap('i', '<expr><ENTER>', 'pumbisible() ? \'\\<C-Y>\' : \'\\<ENTER>\'', { noremap = true, silent = true })

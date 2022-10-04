@@ -41,6 +41,7 @@ return require('packer').startup(function()
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
   use {"akinsho/toggleterm.nvim", tag = 'v2.2.1'}
+  use 'ThePrimeagen/harpoon'
 
 -- Debug
   use 'mfussenegger/nvim-dap'
