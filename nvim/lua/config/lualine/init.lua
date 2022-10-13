@@ -6,6 +6,7 @@ require('lualine').setup{
   	component_separators = {'', ''}
   },
   sections = {
-    lualine_c = {'filename', 'hostname'}
+    lualine_a = {{'filename', path = 3}},
+    lualine_c = {'hostname'}
   }
 }

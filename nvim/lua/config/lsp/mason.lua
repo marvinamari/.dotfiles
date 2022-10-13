@@ -1,3 +1,4 @@
+-- Mason path ~/.local/share/nvim/mason/bin
 require("mason").setup({
     ui = {
         icons = {
@@ -38,6 +39,7 @@ require('mason-tool-installer').setup {
     "pyright",
     "black",
     "flake8",
+    "debugpy",
     "prettier",
     "sqlfluff",
     "typescript-language-server",

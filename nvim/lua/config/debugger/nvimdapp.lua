@@ -1,6 +1,52 @@
 --https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
 require('utils')
 local dap = require('dap')
+-- local configurations = dap.configurations
+-- configurations.python = {{
+--     type = 'python';
+--     request = 'launch';
+--     name = 'launch file';
+--     program = '${file}';
+--     pythonPath = function()
+--       return '/Users/amari/.pyenv/shims/python3'
+--     end
+--   }}
+
+--Python
+dap.adapters.python = {
+    type = 'executable';
+    command = '/Users/amari/.local/share/nvim/mason/packages/debugpy/venv/bin/python';
+    args = { '-m', 'debugpy.adapter'};
+}
+dap.configurations.python = {
+  {
+    type = 'python';
+    request = 'launch';
+    name = 'launch file';
+    program = '${file}';
+    pythonPath = function()
+      return '/Users/amari/.pyenv/shims/python3'
+    end
+  }
+}
+--
+-- DotNet
+dap.adapters.coreclr = {
+  type = 'executable',
+  command = '/Users/amari/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
+  args = {'--interpreter=vscode'}
+}
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+        return vim.fn.input('/Users/amari/.local/share/nvim/mason/packages/', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
+}
+--
 
 require('telescope').load_extension('dap')
 require('nvim-dap-virtual-text').setup()

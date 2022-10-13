@@ -1,5 +1,8 @@
+-- local builtin = require("telescope.builtin")
+
 require('telescope').setup{
   defaults = {
+    dynamic_preview_title = true,
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -61,3 +64,10 @@ require('telescope').setup{
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
+
+-- builtin.find_files({
+--         -- use fd to "find files" and return absolute paths
+--   find_command = { "fd", "-t=f", "-a" },
+--   path_display = { "absolute" },
+--         wrap_results = true
+-- })

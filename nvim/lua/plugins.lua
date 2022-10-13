@@ -39,6 +39,8 @@ return require('packer').startup(function()
   use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
   use {"akinsho/toggleterm.nvim", tag = 'v2.2.1'}
   use 'ThePrimeagen/harpoon'
+  use 'kevinhwang91/nvim-hlslens'
+  use 'lvimuser/lsp-inlayhints.nvim'
 
 -- Debug
   use 'mfussenegger/nvim-dap'

@@ -19,6 +19,7 @@ require('config.gitsigns')
 require('config.neotest')
 require('config.toggleterm')
 require('config.harpoon')
+require('config.hlslens')
 
 -- LSP
 require('config.lsp')

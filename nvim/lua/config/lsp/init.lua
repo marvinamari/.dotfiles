@@ -1,6 +1,8 @@
 require('config.lsp.coq')
 require('config.lsp.null-ls')
 require('config.lsp.mason')
+require('config.lsp.lsp-inlay-hints')
+
 local lspconfig = require('lspconfig')
 
 

@@ -117,10 +117,10 @@ map('n', '<Leader>dbm', ":lua require('dap').set_breakpoint({ nil, nil, vim.fn.i
 map('n',  '<leader>dhh', ":lua require'dap.ui.variables'.hover()<CR>")
 map('v',  '<leader>dhv', ":lua require'dap.ui.variables'.visual_hover()<CR>")
 map('n',  '<leader>d?', ":lua require'dap.ui.variables'.scopes()<CR>")
-map('n', '<leader>di', ":lua require('dapui').toggle()<CR>")
+map('n', '<leader>dui', ":lua require('dapui').toggle()<CR>")
 map('n', '<leader>duh', "<cmd>lua require'dap.ui.widgets'.hover()<CR>")
 map('n', '<leader>duf', "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>")
-map('n', '<leader>dui', ":lua require('dapui').toggle()<CR>")
+--map('n', '<leader>dui', ":lua require('dapui').toggle()<CR>")
 map('n', '<F4>', ":lua require('dapui').toggle()<CR>")
 
 
