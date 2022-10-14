@@ -47,7 +47,40 @@ return require('packer').startup(function()
   use 'theHamsta/nvim-dap-virtual-text' 
   use 'nvim-telescope/telescope-dap.nvim'
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
-  use 'nvim-neotest/neotest'
+  use {
+  "nvim-neotest/neotest",
+  opt = true,
+  wants = {
+    "plenary.nvim",
+    "nvim-treesitter",
+    "FixCursorHold.nvim",
+    "neotest-python",
+    "neotest-plenary",
+    "neotest-go",
+    "neotest-jest",
+    "neotest-dotnet",
+    "neotest-scala",
+    "neotest-rust",
+    "neotest-haskell",
+    "neotest-vim-test",
+  },
+  requires = {
+    "antoinemadec/FixCursorHold.nvim",
+    "nvim-neotest/neotest-python",
+    "nvim-neotest/neotest-plenary",
+    "nvim-neotest/neotest-go",
+    "haydenmeade/neotest-jest",
+    "Issafalcon/neotest-dotnet",
+    "stevanmilic/neotest-scala",
+    "rouge8/neotest-rust",
+    "mrcjkb/neotest-haskell",
+    "nvim-neotest/neotest-vim-test",
+  },
+  module = { "neotest" },
+  config = function()
+    require("config.neotest").setup()
+  end,
+}
 
 -- Utility
   use 'BurntSushi/ripgrep'
@@ -60,7 +93,6 @@ return require('packer').startup(function()
   use 'kdheepak/lazygit.nvim'
   use 'jamestthompson3/nvim-remote-containers'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use {
   'lewis6991/gitsigns.nvim',
   -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)

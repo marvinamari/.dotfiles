@@ -1,9 +1,9 @@
 local kopts = {noremap = true, silent = true}
 
 require('hlslens').setup({
-    -- calm_down = true,
-    -- nearest_only = true,
-    -- nearest_float_when = 'always'
+    calm_down = true,
+    nearest_only = true,
+    --nearest_float_when = 'always'
 })
 
 vim.api.nvim_set_keymap('n', 'n',

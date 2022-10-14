@@ -15,10 +15,17 @@ for _, lsp in ipairs(servers) do
 end
 
 -- omnisharp lsp config
--- lspconfig.omnisharp.setup {
---   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
---   on_attach = function(_, bufnr)
---     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
---   end,
---   cmd = { "/path/to/omnisharp-roslyn/bin/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
--- }
+lspconfig.omnisharp.setup {
+  -- capabilities = require('coq').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  -- on_attach = function(_, bufnr)
+  --   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- end,
+  cmd = { "dotnet", "/Users/amari/.local/share/nvim/mason/packages/omnisharp/OmniSharp.dll" },
+  enable_editorconfig_support = true,
+  enable_ms_build_load_projects_on_demand = true,
+  enable_roslyn_analyzers = false,
+  organize_imports_on_format = false,
+  enable_import_completion = true,
+  sdk_include_prereleases = true,
+  analyze_open_documents_only = false,
+}
