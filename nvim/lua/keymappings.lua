@@ -4,24 +4,25 @@ local function t(str)
 end
 
 local keymap = require 'utils'.keymap
+local opts = { noremap=true, silent=true }
 
-keymap('n', '<Space>', '<NOP>', { noremap = true, silent = true })
+keymap('n', '<Space>', '<NOP>', opts)
 vim.g.mapleader = ' '
 
 -- Format
-keymap('n', '<leader>f', ':Format<cr>')
+--keymap('n', '<leader>f', ':Format<cr>')
 
 -- Remap ESC
-keymap('i', ';;', '<ESC>', { noremap = true, silent = true })
+--keymap('i', ';;', '<ESC>', opts)
 
 -- Allow gf to open non-existent files
 keymap('', 'gf', ':edit <cfile><CR>', {})
 
 -- better window movement
 keymap('n', '<C-h>', '<C-w>h', {silent = true})
-keymap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
-keymap('n', '<C-k>', '<C-w>k', {noremap = true, silent = true})
-keymap('n', '<C-l>', '<C-w>l', {noremap = true, silent = true})
+keymap('n', '<C-j>', '<C-w>j', opts)
+keymap('n', '<C-k>', '<C-w>k', opts)
+keymap('n', '<C-l>', '<C-w>l', opts)
 
 
 -- Copy and paste
@@ -31,35 +32,35 @@ keymap('v', '<C-v>', 'c<ESC>"+p', { silent = true })
 keymap('v', '<C-V>', '<ESC>"+pa', { silent = true })
 
 -- Better indenting
-keymap('v', '<', '<gv', { noremap = true, silent = true })
-keymap('v', '>', '>gv', { noremap = true, silent = true })
+keymap('v', '<', '<gv', opts)
+keymap('v', '>', '>gv', opts)
 
 
--- Move while insert mode 
-keymap('i', '<C-l>', '<Right>', {noremap = true, silent = true})
-keymap('i', '<C-h>', '<Left>', {noremap = true, silent = true})
-keymap('i', '<C-j>', '<Down>', {noremap = true, silent = true})
-keymap('i', '<C-k>', '<Up>', {noremap = true, silent = true})
+-- Move while insert mode
+keymap('i', '<C-l>', '<Right>', opts)
+keymap('i', '<C-h>', '<Left>', opts)
+keymap('i', '<C-j>', '<Down>', opts)
+keymap('i', '<C-k>', '<Up>', opts)
 
 -- Moving to start or end of line (insert mode)
 -- <C-o> switches vim to insert mode for one command
-keymap('i', t'<C-e>', '<C-o>$', { noremap = true, silent = true })
-keymap('i', t'<C-a>', '<C-o>0', { noremap = true, silent = true })
+keymap('i', t'<C-e>', '<C-o>$', opts)
+keymap('i', t'<C-a>', '<C-o>0', opts)
 
 
 -- Move selected block in visual mode
-keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
-keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
+keymap('x', 'K', ':move \'<-2<CR>gv-gv', opts)
+keymap('x', 'J', ':move \'>+1<CR>gv-gv', opts)
 
 -- Tab switch buffer
-keymap('n', '<TAB>', ':bnext<CR>', {noremap = true, silent = true})
-keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silent = true})
+keymap('n', '<TAB>', ':bnext<CR>', opts)
+keymap('n', '<S-TAB>', ':bprevious<CR>', opts)
 
 -- Replace word under cursor and press to repeat operation, n to skip
-keymap('n', 's*', ":let @/='<'.expand('<cword>').'>'<CR>cgn", {noremap = true, silent = true})
-keymap('x', 's*', 'sy:let @/=@s<CR>cgn', {noremap = true, silent = true})
+keymap('n', 's*', ":let @/='<'.expand('<cword>').'>'<CR>cgn", opts)
+keymap('x', 's*', 'sy:let @/=@s<CR>cgn', opts)
 keymap('n', '<leader>rn', '%s///g<Left><Left>', {noremap = true, silent = false})
-keymap('x', '<leader>rn', '%s///g<Left><Left>', {noremap = true, silent = true})
+keymap('x', '<leader>rn', '%s///g<Left><Left>', opts)
 
 -- TODO fix this
 -- resize with arrows
@@ -70,22 +71,73 @@ vim.cmd([[
   nnoremap <silent> <C-Right> :vertical resize +2<CR>
 ]])
 
+-- LSP
+keymap('n', '<leader>e', ':lua vim.diagnostic.open_float()<CR>', opts)
+keymap('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
+keymap('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
+keymap('n', '<leader>q', ':lua vim.diagnostic.setloclist()<CR>', opts)
+
+keymap('n', '<leader>gD', ':lua vim.lsp.buf.declaration()<CR>', opts)
+keymap('n', '<leader>gd', ':lua vim.lsp.buf.definition()<CR>', opts)
+keymap('n', '<leader>K', ':lua vim.lsp.buf.hover()<CR>', opts)
+keymap('n', '<leader>gi', ':lua vim.lsp.buf.implementation()<CR>', opts)
+keymap('n', '<leader>hh', ':lua vim.lsp.buf.signature_help()<CR>', opts)
+keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+keymap('n', '<leader>wl', ':lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+keymap('n', '<leader>D', ':lua vim.lsp.buf.type_definition()<CR>', opts)
+keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', opts)
+keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', opts)
+keymap('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', opts)
+keymap('n', '<leader>F', ':lua vim.lsp.buf.formatting({ async = true })<CR>', opts)
+
+
 -- harpoon
-keymap('n', '<leader>hm', ':lua require("harpoon.mark").add_file()<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>hr', ':lua require("harpoon.mark").rm_file()<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>hc', ':lua require("harpoon.mark").clear_all()<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>ht', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>hn', ':lua require("harpoon.ui").nav_next()<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>hp', ':lua require("harpoon.ui").nav_prev()<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>h1', ':lua require("harpoon.ui").nav_file(1)<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>h2', ':lua require("harpoon.ui").nav_file(2)<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>h3', ':lua require("harpoon.ui").nav_file(3)<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>h4', ':lua require("harpoon.ui").nav_file(4)<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>hm', ':lua require("harpoon.mark").add_file()<CR>', opts)
+keymap('n', '<leader>hr', ':lua require("harpoon.mark").rm_file()<CR>', opts)
+keymap('n', '<leader>hc', ':lua require("harpoon.mark").clear_all()<CR>', opts)
+keymap('n', '<leader>ht', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
+keymap('n', '<leader>hn', ':lua require("harpoon.ui").nav_next()<CR>', opts)
+keymap('n', '<leader>hp', ':lua require("harpoon.ui").nav_prev()<CR>', opts)
+keymap('n', '<leader>h1', ':lua require("harpoon.ui").nav_file(1)<CR>', opts)
+keymap('n', '<leader>h2', ':lua require("harpoon.ui").nav_file(2)<CR>', opts)
+keymap('n', '<leader>h3', ':lua require("harpoon.ui").nav_file(3)<CR>', opts)
+keymap('n', '<leader>h4', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
+
+-- toggleterm
+keymap('n', '<leader>tt', ':ToggleTerm size=20 direction=horizontal<CR>', opts)
+keymap('n', '<leader>tv', ':ToggleTerm size=110 direction=vertical<CR>', opts)
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead of term://*
+vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({
+	cmd = "lazygit",
+	dir = "git_dir",
+	direction= "float"
+})
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+
 
 -- nv-nvim-tree
-keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', opts)
+keymap('n', '<leader>n', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', opts)
 
 -- nvim-dap
 map('n', '<F2>', ":lua require('dap').toggle_breakpoint()<CR>")
@@ -149,9 +201,7 @@ map("n", "<Leader>fgc", ":Telescope git_commits<CR>")
 map("n", "<Leader>fgt", ":Telescope git_stash<CR>")
 map("n", "<Leader>fgb", ":Telescope git_branches<CR>")
 
--- keymap('i', '<expr><TAB>', 'pumbisible() ? \'\\<C-n>\' : \'\\<TAB>\'', { noremap = true, silent = true })
--- keymap('i', '<expr><ENTER>', 'pumbisible() ? \'\\<C-Y>\' : \'\\<ENTER>\'', { noremap = true, silent = true })
-
+-- Bufferline
 --' These commands will navigate through buffers in order regardless of which mode you are using
 --' e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
 --nnoremap <silent>[b :BufferLineCycleNext<CR>

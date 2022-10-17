@@ -24,6 +24,7 @@ vim.bo.expandtab=true
 vim.o.smarttab=true
 vim.bo.copyindent=true 
 
+--vim.cmd[[ set list listchars=trail:- ]] -- remove trailing whitespace
 vim.cmd[[ set nowrap ]]
 vim.cmd[[ set colorcolumn=80,120 ]]
 vim.cmd[[ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey ]]
