@@ -47,39 +47,20 @@ return require('packer').startup(function()
   use 'nvim-telescope/telescope-dap.nvim'
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
   use {
-  "nvim-neotest/neotest",
-  opt = true,
-  wants = {
-    "plenary.nvim",
-    "nvim-treesitter",
-    "FixCursorHold.nvim",
-    "neotest-python",
-    "neotest-plenary",
-    "neotest-go",
-    "neotest-jest",
-    "neotest-dotnet",
-    "neotest-scala",
-    "neotest-rust",
-    "neotest-haskell",
-    "neotest-vim-test",
-  },
-  requires = {
-    "antoinemadec/FixCursorHold.nvim",
-    "nvim-neotest/neotest-python",
-    "nvim-neotest/neotest-plenary",
-    "nvim-neotest/neotest-go",
-    "haydenmeade/neotest-jest",
-    "Issafalcon/neotest-dotnet",
-    "stevanmilic/neotest-scala",
-    "rouge8/neotest-rust",
-    "mrcjkb/neotest-haskell",
-    "nvim-neotest/neotest-vim-test",
-  },
-  module = { "neotest" },
-  config = function()
-    require("config.neotest").setup()
-  end,
-}
+    "nvim-neotest/neotest",
+    requires = {
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-go",
+      "haydenmeade/neotest-jest",
+      "Issafalcon/neotest-dotnet",
+      "stevanmilic/neotest-scala",
+      "rouge8/neotest-rust",
+      "mrcjkb/neotest-haskell",
+      "nvim-neotest/neotest-vim-test",
+    }
+  }
 
 -- Utility
   use 'BurntSushi/ripgrep'
