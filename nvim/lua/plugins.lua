@@ -46,6 +46,9 @@ return require('packer').startup(function()
   use 'theHamsta/nvim-dap-virtual-text' 
   use 'nvim-telescope/telescope-dap.nvim'
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+
+-- Test
+  use 'vim-test/vim-test'
   use {
     "nvim-neotest/neotest",
     requires = {

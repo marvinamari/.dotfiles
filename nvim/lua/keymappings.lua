@@ -202,7 +202,7 @@ map("n", "<Leader>fgt", ":Telescope git_stash<CR>")
 map("n", "<Leader>fgb", ":Telescope git_branches<CR>")
 
 -- neotest
-map("n", "<leader>ntt", ':lua require("neotest").run.run()<CR>', opts)
+map("n", "<leader>ntt", ':lua require("neotest").run.run()<CR>')
 map("n", "<leader>ntf", ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>', opts)
 map("n", "<leader>ntd", ':lua require("neotest").run.run({strategy = "dap"})<CR>', opts)
 map("n", "<leader>nts", ':lua require("neotest").run.stop()<CR>', opts)

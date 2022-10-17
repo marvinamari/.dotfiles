@@ -13,7 +13,7 @@ null_ls.setup({
     sources = {
         formatting.prettier.with({ extra_args = {"--single-quote", "--jsx-single-quote"}}),
         formatting.black.with({ extra_args = { "--fast" }}),
-        formatting.stylelua,
+        formatting.stylua,
         diagnostics.flake8,
         completion.luasnip,
         code_actions.gitsigns

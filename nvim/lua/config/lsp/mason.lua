@@ -42,6 +42,7 @@ require('mason-tool-installer').setup {
     "debugpy",
     "prettier",
     "sqlfluff",
+    "stylua",
     "typescript-language-server",
     --dap
     "js-debug-adapter"
