@@ -40,6 +40,7 @@ return require('packer').startup(function()
   use 'ThePrimeagen/harpoon'
   use 'kevinhwang91/nvim-hlslens'
   use 'lvimuser/lsp-inlayhints.nvim'
+  use 'numToStr/Comment.nvim'
 
 -- Debug
   use 'mfussenegger/nvim-dap'

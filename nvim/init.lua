@@ -20,6 +20,7 @@ require('config.neotest')
 require('config.toggleterm')
 require('config.harpoon')
 require('config.hlslens')
+require('config.comment')
 
 -- LSP
 require('config.lsp')
