@@ -176,6 +176,9 @@ map('n', '<leader>duf', "<cmd>lua local widgets=require'dap.ui.widgets';widgets.
 map('n', '<F4>', ":lua require('dapui').toggle()<CR>")
 
 
+-- change list
+map('n', '<leader>cl', ":changes<CR>", opts)
+
 -- telescope-dap
 map('n', '<leader>df', ":Telescope dap frames<CR>")
 map('n', '<leader>dcc', ":Telescope dap commands<CR>")
@@ -190,7 +193,9 @@ map("n", "<Leader>fo", ":lua require('telescope.builtin').oldfiles()<CR>")
 map("n", "<Leader>fc", ":lua require('telescope.builtin').colorscheme()<CR>")
 map("n", "<Leader>fb", ":lua require('telescope.builtin').buffers()<CR>")
 map("n", "<Leader>fm", ":Telescope commands<CR>")
-map("n", "<Leader>fq", ":Telescope quick_fix<CR>")
+map("n", "<Leader>fj", ":Telescope jumplist<CR>")
+map("n", "<Leader>fq", ":Telescope quickfix<CR>")
+map("n", "<Leader>fqh", ":Telescope quickfixhistory<CR>")
 map("n", "<Leader>fgg", ":Telescope live_grep<CR>")
 map("n", "<Leader>fgo", ":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>")
 map("n", "<Leader>fr", ":Telescope marks<CR>")
