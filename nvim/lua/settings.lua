@@ -24,10 +24,11 @@ vim.bo.expandtab=true
 vim.o.smarttab=true
 vim.bo.copyindent=true 
 
---vim.cmd[[ set list listchars=trail:- ]] -- remove trailing whitespace
+-- highlight color
 vim.cmd[[ set nowrap ]]
 vim.cmd[[ set colorcolumn=80,120 ]]
-vim.cmd[[ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey ]]
+--vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg=0, bg=LightGrey })
+--vim.api.nvim_set_hl(0, "Normal", { ctermfg=White,  ctermbg=Black })
 
 --vim.cmd[[ let g:vimwiki_list = \[{'path':'~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}\] ]]
 --vim.cmd[[ let g:vimwiki_ext2syntax = {'.md':'markdown', '.markdown': 'markdown', '.mdown': 'markdown'} ]]

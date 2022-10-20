@@ -10,6 +10,31 @@ require("themer").setup({
                   variableBuiltIn = { style = 'italic' },
                 parameter  = { style = 'italic' },
             },
+	    remaps = {
+		highlights = {
+		globals = {
+			plugins = {
+				telescope = {
+					TelescopeBorder = { fg = "#1a1a2e", bg = "NONE" },
+					TelescopePromptBorder = { fg = "NONE", bg = "NONE" },
+					TelescopePromptNormal = { fg = "white", bg = "NONE" },
+					TelescopePromptPrefix = { fg = "#84c49b", bg = "NONE" },
+					
+					TelescopePromptTitle = { fg = "black", bg = "#fb5c8e" },
+					TelescopePreviewTitle = { fg = "black", bg = "#a29dff" },
+					TelescopeResultsTitle = { fg = "black", bg = "#f79f79" },
+					
+					TelescopeResults = { bg = "NONE" },
+					TelescopeNormal = { bg = "NONE" },
+					TelescopeSelection = { bg = "#565393" },
+				}
+			}
+		},
+		doom_one = {
+			--base = { Normal = {bg = "#FFFFFF"} },
+		}
+	}
+	}
         })
 
 --vim.cmd [[let g:airline_theme = 'sonokai']]
