@@ -1,6 +1,6 @@
 -- General settings
 vim.cmd[[filetype plugin indent on]]
-
+		
 --Editor
 vim.o.fileencoding = 'utf-8' -- The encoding written to file
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
@@ -16,13 +16,13 @@ vim.o.updatetime = 300 -- Faster completion
 --vim.o.timeoutlen = 100 -- By default timeoutlen is 1000 ms, this causes leader key not to work
 vim.o.clipboard = 'unnamedplus' -- Copy paste between vim and everything else
 vim.cmd[[ set dir=~/neovim/swaps ]]
-
-vim.bo.tabstop=4
-vim.bo.shiftwidth=4
-vim.bo.softtabstop=4
-vim.bo.expandtab=true
-vim.o.smarttab=true
-vim.bo.copyindent=true 
+	
+vim.opt.tabstop=4
+vim.opt.shiftwidth=4
+vim.opt.softtabstop=4
+vim.opt.expandtab=true
+vim.opt.smarttab=true
+vim.opt.copyindent=true 
 
 -- highlight color
 vim.cmd[[ set nowrap ]]
@@ -35,7 +35,7 @@ vim.cmd[[ set colorcolumn=80,120 ]]
 
 vim.g.vimwiki_markdown_link_ext = 1
 vim.g.wildmenu=true
-vim.o.sidescroll=6
+vim.o.sidescrolloff=7
 vim.o.hlsearch=true
 vim.o.splitright=true
 vim.o.splitbelow=true
@@ -45,7 +45,7 @@ vim.g.syntax=true
 vim.wo.number=true
 vim.wo.relativenumber=true
 vim.wo.numberwidth=2
-vim.g.scrolloff=7
+vim.o.scrolloff=7
 vim.g.noswapfile=true
 
 -- set Vim-specific sequences for RGB colors
