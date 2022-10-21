@@ -47,6 +47,9 @@ keymap('i', '<C-k>', '<Up>', opts)
 keymap('i', t'<C-e>', '<C-o>$', opts)
 keymap('i', t'<C-a>', '<C-o>0', opts)
 
+-- Scroll
+keymap('n', '<S-h>', '20zh', opts)
+keymap('n', '<S-l>', '20zl', opts)
 
 -- Move selected block in visual mode
 keymap('x', 'K', ':move \'<-2<CR>gv-gv', opts)
