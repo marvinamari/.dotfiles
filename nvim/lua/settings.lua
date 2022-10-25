@@ -1,10 +1,18 @@
 -- General settings
+local wo = vim.wo
+local g = vim.g
+local opt = vim.opt
+
 vim.cmd[[filetype plugin indent on]]
 		
 --Editor
-vim.o.fileencoding = 'utf-8' -- The encoding written to file
+opt.backup = false
+opt.wrap = false
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8' -- The encoding written to file
+opt.termencoding = 'utf-8'
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
-vim.wo.wrap = false -- Display long lines as just one line
+--vim.wo.wrap = false -- Display long lines as just one line
 --vim.cmd('syntax on') -- move to next line with theses keys
 vim.o.pumheight = 10 -- Makes popup menu smaller
 vim.o.cmdheight = 2 -- More space for displaying messages
@@ -25,7 +33,7 @@ vim.opt.smarttab=true
 vim.opt.copyindent=true 
 
 -- highlight color
-vim.cmd[[ set nowrap ]]
+--vim.cmd[[ set nowrap ]]
 vim.cmd[[ set colorcolumn=80,120 ]]
 --vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg=0, bg=LightGrey })
 --vim.api.nvim_set_hl(0, "Normal", { ctermfg=White,  ctermbg=Black })
@@ -47,6 +55,16 @@ vim.wo.relativenumber=true
 vim.wo.numberwidth=2
 vim.o.scrolloff=7
 vim.g.noswapfile=true
+
+vim.cmd([[
+" Deal with unwanted white spaces (show them in red)
+	highlight ExtraWhitespace ctermbg=red guibg=red
+	match ExtraWhitespace /\s\+$/
+	autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+	autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+	autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+	autocmd BufWinLeave * call clearmatches()
+]])
 
 -- set Vim-specific sequences for RGB colors
 vim.cmd[["set t_8f=^[[38;2;%lu;%lu;%lum"]]
