@@ -73,21 +73,23 @@ map <leader>nf :NERDTreeFind<CR>
 " Navigation
 nmap <leader>h :action Back<cr>
 nmap <leader>l :action Forward<cr>
-nmap <leader>L :action RecentLocations<cr>
+nmap <leader>rl :action RecentLocations<cr>
 nmap <leader>gr :action FindUsages<cr>
 nmap <leader>C :action CallHierarchy<cr>
 nmap <leader>fff :action GotoFile<cr>
+nmap <leader>fgg :action FindInPath<cr>
 nmap <leader>gc :action GotoClass<cr>
-nmap <leader>s :action GotoSymbol<cr>
+nmap <leader>gs :action GotoSymbol<cr>
 nmap <leader>hm :action ToggleBookmark<cr>
 nmap <leader>; :action FileStructurePopup<cr>
 nmap <leader>M :action ActivateStructureToolWindow<cr>
 nmap <leader>d :action ShowErrorDescription<cr>
-nmap <leader>gi :action GotoImplementation<cr>
+nmap <leader>gd :action GotoImplementation<cr>
+nmap <leader>gD :action GotoDeclaration<cr>
 nmap <leader>U :action GotoSuperMethod<cr>
 nmap <leader>I :action SelectIn<cr>
-nmap <leader>e :action RecentFiles<cr>
-nmap <leader>a :action RecentChangedFiles<cr>
+nmap <leader>rf :action RecentFiles<cr>
+nmap <leader>rc :action RecentChangedFiles<cr>
 nmap <leader>t :action GotoTest<cr>
 nmap <leader>p :action JumpToLastWindow<cr>
 nmap <leader>ht :action ShowBookmarks<cr>
@@ -110,6 +112,7 @@ nmap <leader>X :action GotoPreviousError<cr>
 vmap T :action Refactorings.QuickListPopupAction<cr>
 vmap <leader>rm :action ExtractMethod<cr>
 nmap <leader>rr :action RenameElement<cr>
+nmap <leader>rq :action Refactoring.QuickListPopupAction<cr>
 nmap <leader>rg :action Generate<cr>
 nmap <leader>rI :action OptimizeImports<cr>
 " Inspection
