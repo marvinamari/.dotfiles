@@ -142,6 +142,11 @@ keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', opts)
 keymap('n', '<leader>n', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', opts)
 
+-- git
+keymap('n', '<leader>DL', ':diffget local<CR>', opts)
+keymap('n', '<leader>DB', ':diffget base<CR>', opts)
+keymap('n', '<leader>DR', ':diffget remote<CR>', opts)
+
 -- nvim-dap
 map('n', '<F2>', ":lua require('dap').toggle_breakpoint()<CR>")
 map('n', '<F5>', ":lua require('dap').continue()<CR>")

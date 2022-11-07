@@ -39,6 +39,15 @@ nmap Q gqap
 " nmap <leader>k <c-w>k
 " nmap <leader>j <c-w>j
 
+imap <C-h> <Left>
+imap <C-k> <Up>
+imap <C-j> <Down>
+imap <C-l> <Right>
+
+
+" Terminal
+nmap <leader>tt :action ActivateTerminalToolWindow<cr>
+
 " Closing tabs
 nmap <leader>q :action CloseContent<cr>
 nmap <leader>Q :action ReopenClosedTab<cr>
@@ -80,7 +89,6 @@ nmap <leader>fff :action GotoFile<cr>
 nmap <leader>fgg :action FindInPath<cr>
 nmap <leader>gc :action GotoClass<cr>
 nmap <leader>gs :action GotoSymbol<cr>
-nmap <leader>hm :action ToggleBookmark<cr>
 nmap <leader>; :action FileStructurePopup<cr>
 nmap <leader>M :action ActivateStructureToolWindow<cr>
 nmap <leader>d :action ShowErrorDescription<cr>
@@ -89,10 +97,14 @@ nmap <leader>gD :action GotoDeclaration<cr>
 nmap <leader>U :action GotoSuperMethod<cr>
 nmap <leader>I :action SelectIn<cr>
 nmap <leader>rf :action RecentFiles<cr>
-nmap <leader>rc :action RecentChangedFiles<cr>
+nmap <leader>cl :action RecentChangedFiles<cr>
+nmap <leader>hm :action togglebookmark<cr>
+nmap <leader>ht :action showbookmarks<cr>
+nmap <leader>hn :action GotoNextBookmarkInEditor<cr>
+nmap <leader>hp :action GotoPreviousBookmarkInEditor<cr>
+nmap <leader>p :action jumptolastwindow<cr>
 nmap <leader>t :action GotoTest<cr>
-nmap <leader>p :action JumpToLastWindow<cr>
-nmap <leader>ht :action ShowBookmarks<cr>
+nmap <leader>g; :action JumpToLastChange<cr>
 
 " Useful Git actions
 nmap <leader>gb :action Git.Branches<cr>
@@ -129,7 +141,7 @@ nmap <leader>yr :action Git.ResolveConflicts<cr>
 nmap <leader>yo :action Github.Open.In.Browser<cr>
 
 " Terminal
-nmap <leader>T :action ActivateTerminalToolWindow<cr>
+"nmap <leader>T :action ActivateTerminalToolWindow<cr>
 
 " Gradle
 nmap <leader>G :action ActivateGradleToolWindow<cr>
@@ -169,11 +181,11 @@ nmap <leader>/ :action Find<cr>
 nmap <leader>\ :action FindInPath<cr>
 
 " Moving lines
-nmap [e :action MoveLineUp<cr>
-nmap ]e :action MoveLineDown<cr>
+nmap K :action MoveLineUp<cr>
+nmap J :action MoveLineDown<cr>
 " Moving statements
-nmap [s :action MoveStatementUp<cr>
-nmap ]s :action MoveStatementDown<cr>
+nmap KK :action MoveElementRight<cr>
+nmap JJ :action MoveElementLeft<cr>
 
 " Building, Running and Debugging
 nmap ,c :action CompileDirty<cr>
