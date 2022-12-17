@@ -20,9 +20,10 @@ return require('packer').startup(function()
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     'jose-elias-alvarez/null-ls.nvim'
   }
+  use 'folke/trouble.nvim'
 
   -- Autocomplete
-  use { 'ms-jpq/coq_nvim', branch= 'coq' }
+  use { '~/opensource/coq_nvim', branch= 'coq' }
   use { 'ms-jpq/coq.artifacts', branch= 'artifacts' }
   use { 'ms-jpq/coq.thirdparty', branch= '3p' }
   use({ 'L3MON4D3/LuaSnip', tag = 'v1.0.0'})
@@ -31,7 +32,7 @@ return require('packer').startup(function()
   use 'themercorp/themer.lua'
   use 'kyazdani42/nvim-web-devicons'
   use 'windwp/nvim-autopairs'
-  use 'kyazdani42/nvim-tree.lua'
+  use { '~/opensource/chadtree', branch= 'chad', run= 'python3 -m chadtree deps'}
   use 'p00f/nvim-ts-rainbow'
   use 'gpanders/editorconfig.nvim'
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }

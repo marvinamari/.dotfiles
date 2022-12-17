@@ -76,7 +76,7 @@ nmap <leader>wd :action OpenEditorInOppositeTabGroup<cr>
 " nmap <leader>ww :action JumpToLastWindow<cr>
 
 " NERDTree
-map <leader>nn :NERDTree<CR>
+map <leader>co :NERDTree<CR>
 map <leader>nf :NERDTreeFind<CR>
 
 " Navigation
@@ -92,19 +92,20 @@ nmap <leader>gs :action GotoSymbol<cr>
 nmap <leader>; :action FileStructurePopup<cr>
 nmap <leader>M :action ActivateStructureToolWindow<cr>
 nmap <leader>d :action ShowErrorDescription<cr>
-nmap <leader>gd :action GotoImplementation<cr>
+nmap <leader>gi :action GotoImplementation<cr>
+nmap <leader>gd :action GotoDefinition<cr>
 nmap <leader>gD :action GotoDeclaration<cr>
 nmap <leader>U :action GotoSuperMethod<cr>
 nmap <leader>I :action SelectIn<cr>
 nmap <leader>rf :action RecentFiles<cr>
 nmap <leader>cl :action RecentChangedFiles<cr>
-nmap <leader>hm :action togglebookmark<cr>
-nmap <leader>ht :action showbookmarks<cr>
-nmap <leader>hn :action GotoNextBookmarkInEditor<cr>
-nmap <leader>hp :action GotoPreviousBookmarkInEditor<cr>
-nmap <leader>p :action jumptolastwindow<cr>
+nmap <leader>bb :action ToggleBookmark<cr>
+nmap <leader>bl :action ShowBookmarks<cr>
+nmap <leader>bn :action GotoNextBookmarkInEditor<cr>
+nmap <leader>bp :action GotoPreviousBookmarkInEditor<cr>
+nmap <leader>p :action JumpToLastWindow<cr>
 nmap <leader>t :action GotoTest<cr>
-nmap <leader>g; :action JumpToLastChange<cr>
+nmap <leader>cc :action JumpToLastChange<cr>
 
 " Useful Git actions
 nmap <leader>gb :action Git.Branches<cr>

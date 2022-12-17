@@ -16,8 +16,8 @@ brew install libtool
 brew link libtool
 brew install graphviz
 brew link --overwrite graphviz
-brew install --cask maccy
-brew install pandoc lynx
+brew install --cask maccy visual-studio-code
+brew install pandoc lynx git-delta bat
 # Instal Mongo: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 brew update&& brew install golang
