@@ -1,15 +1,16 @@
--- Convert invit.vim to init.lua : https://www.khuedoan.com/posts/convert-from-init-vim-to-init-lua/    
-require('utils')
+-- Install packer
 require('plugins')
+
+require('utils')
 require('settings')
 require('config.colorscheme')
 require('keymappings')
 require('config.treesitter')
 require('config.telescope')
 require('config.bufferline')
+require('config.nvim-tree')
 require('config.lualine')
 require('config.web_devicons')
-require('config.chad-tree')
 require('config.debugger')
 require('config.ts_rainbow')
 require('config.whichkey')
@@ -22,6 +23,7 @@ require('config.harpoon')
 require('config.hlslens')
 require('config.comment')
 require('config.trouble')
+require('config.neoclip')
 
 -- LSP
 require('config.lsp')

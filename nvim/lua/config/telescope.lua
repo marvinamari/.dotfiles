@@ -61,9 +61,8 @@ require('telescope').setup{
   }
 }
 
--- To get fzf loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
+-- Enable telescope fzf native, if installed
+pcall(require('telescope').load_extension, 'fzf')
 
 -- builtin.find_files({
 --         -- use fd to "find files" and return absolute paths

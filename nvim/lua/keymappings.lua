@@ -7,7 +7,11 @@ local keymap = require 'utils'.keymap
 local opts = { noremap=true, silent=true }
 
 keymap('n', '<Space>', '<NOP>', opts)
-vim.g.mapleader = ' '
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
 
 -- Allow gf to open non-existent files
 keymap('', 'gf', ':edit <cfile><CR>', {})
@@ -24,6 +28,9 @@ keymap('v', '<C-c>', '"+yi', { silent = true })
 keymap('v', '<C-x>', '"+c', { silent = true })
 keymap('v', '<C-v>', 'c<ESC>"+p', { silent = true })
 keymap('v', '<C-V>', '<ESC>"+pa', { silent = true })
+
+-- Neoclip
+keymap('n', '<leader>cm', ':Telescope neoclip<CR>', opts)
 
 -- Better indenting
 keymap('v', '<', '<gv', opts)
@@ -69,25 +76,11 @@ vim.cmd([[
 ]])
 
 -- LSP
-keymap('n', '<leader>e', ':lua vim.diagnostic.open_float()<CR>', opts)
-keymap('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
-keymap('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
-keymap('n', '<leader>q', ':lua vim.diagnostic.setloclist()<CR>', opts)
-
-keymap('n', '<leader>gD', ':lua vim.lsp.buf.declaration()<CR>', opts)
-keymap('n', '<leader>gd', ':lua vim.lsp.buf.definition()<CR>', opts)
-keymap('n', '<leader>K', ':lua vim.lsp.buf.hover()<CR>', opts)
-keymap('n', '<leader>gi', ':lua vim.lsp.buf.implementation()<CR>', opts)
-keymap('n', '<leader>hh', ':lua vim.lsp.buf.signature_help()<CR>', opts)
-keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-keymap('n', '<leader>wl', ':lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-keymap('n', '<leader>gt', ':lua vim.lsp.buf.type_definition()<CR>', opts)
-keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', opts)
-keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', opts)
-keymap('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', opts)
-keymap('n', '<leader>F', ':lua vim.lsp.buf.formatting({ async = true })<CR>', opts)
-
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- harpoon
 keymap('n', '<leader>bb', ':lua require("harpoon.mark").add_file()<CR>', opts)
@@ -132,11 +125,8 @@ vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {no
 
 -- nv-nvim-tree
 keymap('n', '<leader>nr', ':NvimTreeRefresh<CR>', opts)
-keymap('n', '<leader>nt', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<leader>nn', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', opts)
-
--- chad-tree
-keymap('n', '<leader>co', ':CHADopen<CR>', opts)
 
 -- git
 keymap('n', '<leader>DL', ':diffget local<CR>', opts)
@@ -189,12 +179,12 @@ map('n', '<leader>dto', ":Telescope dap configurations<CR>")
 map('n', '<leader>dlb', ":Telescope dap list_breakpoints<CR>")
 map('n', '<leader>dv', ":Telescope dap variables<CR>")
 
--- Telescope
-map("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>")
+-- Telescope -- See `:help telescope.builtin`
+vim.keymap.set("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>", { desc = '[f]ind [f]iles' })
 map("n", "<Leader>fb", ':lua require("telescope").extensions.file_browser.file_browser()<CR>')
-map("n", "<Leader>fo", ":lua require('telescope.builtin').oldfiles()<CR>")
 map("n", "<Leader>fc", ":lua require('telescope.builtin').colorscheme()<CR>")
-map("n", "<Leader>fb", ":lua require('telescope.builtin').buffers()<CR>")
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 map("n", "<Leader>fm", ":Telescope commands<CR>")
 map("n", "<Leader>fj", ":Telescope jumplist<CR>")
 map("n", "<Leader>fq", ":Telescope quickfix<CR>")
@@ -209,6 +199,20 @@ map("n", "<Leader>fgc", ":Telescope git_commits<CR>")
 map("n", "<Leader>fgt", ":Telescope git_stash<CR>")
 map("n", "<Leader>fgb", ":Telescope git_branches<CR>")
 
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
+
+-- vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+-- vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+-- vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+-- vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+
+
 -- neotest
 map("n", "<leader>tr", ':lua require("neotest").run.run()<CR>')
 map("n", "<leader>tf", ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>', opts)
@@ -218,3 +222,13 @@ map("n", "<leader>ta", ':lua require("neotest").run.attach()<CR>', opts)
 map("n", "<leader>tS", ':lua require("neotest").summary.toggle()<CR>', opts)
 map("n", "<leader>to", ':lua require("neotest").summary.output()<CR>', opts)
 
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})

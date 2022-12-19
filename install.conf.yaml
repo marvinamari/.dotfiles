@@ -10,16 +10,16 @@
     ~/.config/nvim:
         create: true
         path: nvim
-    ~/.config/kitty/kitty.conf:
-        create: true
-        path: kitty.conf
+    # ~/.config/kitty/kitty.conf:
+    #     create: true
+    #     path: kitty.conf
     ~/.hammerspoon/init.lua:
         create: true
         path: hammerspoon.lua
     ~/.config/helix/config.toml:
         create: true
         path: helix/config.toml
-   ~/.config/helix/languages.toml: helix/languages.toml
+    ~/.config/helix/languages.toml: helix/languages.toml
     ~/.config/alacritty/alacritty.yml:
         create: true
         path: alacritty/alacritty_mac.yml

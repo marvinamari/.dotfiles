@@ -4,7 +4,10 @@ local g = vim.g
 local opt = vim.opt
 
 vim.cmd[[filetype plugin indent on]]
-		
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 --Editor
 opt.backup = false
 opt.wrap = false
@@ -20,7 +23,6 @@ vim.o.mouse = 'a' -- Enable your mouse
 vim.o.splitbelow = true -- Horizontal splits will automatically be below
 vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.o.conceallevel = 0 -- So that I can see `` in markdown files
-vim.o.updatetime = 300 -- Faster completion
 --vim.o.timeoutlen = 100 -- By default timeoutlen is 1000 ms, this causes leader key not to work
 vim.o.clipboard = 'unnamedplus' -- Copy paste between vim and everything else
 vim.cmd[[ set dir=~/neovim/swaps ]]
@@ -55,6 +57,23 @@ vim.wo.relativenumber=true
 vim.wo.numberwidth=2
 vim.o.scrolloff=7
 vim.g.noswapfile=true
+
+-- Enable break indent
+vim.o.breakindent = true
+
+-- Save undo history
+vim.o.undofile = true
+
+-- Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Decrease update time
+vim.o.updatetime = 250
+vim.wo.signcolumn = 'yes'
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
 
 vim.cmd([[
 " Deal with unwanted white spaces (show them in red)
