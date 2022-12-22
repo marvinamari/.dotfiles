@@ -1,5 +1,19 @@
 -- Install packer
+function get_os_type ()
+    local operating_system = package.config:sub(1,1)
+    local result = ""
+    if operating_system == '/' then
+       result = "unix"
+    elseif operating_system == '\\' or operating_system == "\\" then
+        result = "windows"
+    end
+    return result
+end
+
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if get_os_type() == "windows" then
+    install_path = "$env:LOCALAPPDATA\\nvim-data\\site\\pack\\packer\\start\\packer.nvim"
+end
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   is_bootstrap = true

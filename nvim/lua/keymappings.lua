@@ -22,6 +22,8 @@ keymap('n', '<C-j>', '<C-w>j', opts)
 keymap('n', '<C-k>', '<C-w>k', opts)
 keymap('n', '<C-l>', '<C-w>l', opts)
 
+-- Clear search
+vim.api.nvim_create_user_command('C', 'let @/=""', {})
 
 -- Copy and paste
 keymap('v', '<C-c>', '"+yi', { silent = true })

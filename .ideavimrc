@@ -85,8 +85,8 @@ nmap <leader>l :action Forward<cr>
 nmap <leader>rl :action RecentLocations<cr>
 nmap <leader>gr :action FindUsages<cr>
 nmap <leader>C :action CallHierarchy<cr>
-nmap <leader>fff :action GotoFile<cr>
-nmap <leader>fgg :action FindInPath<cr>
+nmap <leader>ff :action GotoFile<cr>
+nmap <leader>gg :action FindInPath<cr>
 nmap <leader>gc :action GotoClass<cr>
 nmap <leader>gs :action GotoSymbol<cr>
 nmap <leader>; :action FileStructurePopup<cr>
@@ -103,7 +103,7 @@ nmap <leader>bb :action ToggleBookmark<cr>
 nmap <leader>bl :action ShowBookmarks<cr>
 nmap <leader>bn :action GotoNextBookmarkInEditor<cr>
 nmap <leader>bp :action GotoPreviousBookmarkInEditor<cr>
-nmap <leader>p :action JumpToLastWindow<cr>
+nmap <leader>jp :action JumpToLastWindow<cr>
 nmap <leader>t :action GotoTest<cr>
 nmap <leader>cc :action JumpToLastChange<cr>
 
