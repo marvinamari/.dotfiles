@@ -1,5 +1,5 @@
 -- Install packer
-function get_os_type ()
+local get_os_type = function()
     local operating_system = package.config:sub(1,1)
     local result = ""
     if operating_system == '/' then
@@ -14,12 +14,18 @@ local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.n
 if get_os_type() == "windows" then
     install_path = "$env:LOCALAPPDATA\\nvim-data\\site\\pack\\packer\\start\\packer.nvim"
 end
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
-  vim.cmd [[packadd packer.nvim]]
+
+local ensure_packer = function()
+  local fn = vim.fn
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+
+local is_bootstrap = ensure_packer()
 
 require('packer').startup(function(use)
   -- Packer can manage itself as an optional plugin
@@ -70,7 +76,7 @@ require('packer').startup(function(use)
 
 -- Debug
   use 'mfussenegger/nvim-dap'
-  use 'theHamsta/nvim-dap-virtual-text' 
+  use 'theHamsta/nvim-dap-virtual-text'
   use 'nvim-telescope/telescope-dap.nvim'
   use 'jbyuki/one-small-step-for-vimkind'
   use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }

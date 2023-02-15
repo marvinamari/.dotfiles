@@ -25,6 +25,12 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 -- Clear search
 vim.api.nvim_create_user_command('C', 'let @/=""', {})
 
+-- Delte white space
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
+
 -- Copy and paste
 keymap('v', '<C-c>', '"+yi', { silent = true })
 keymap('v', '<C-x>', '"+c', { silent = true })

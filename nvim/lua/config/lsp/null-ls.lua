@@ -13,7 +13,7 @@ null_ls.setup({
    sources = {
      formatting.prettier.with({ extra_args = {"--single-quote", "--jsx-single-quote"}}),
       -- formatting.stylua,
-      formatting.black.with({ extra_args = { "--fast" }}),
+      formatting.black.with({ extra_args = { "--fast", "--line-length=120" }}),
        diagnostics.flake8,
      -- completion.luasnip,
 --       code_actions.gitsigns
