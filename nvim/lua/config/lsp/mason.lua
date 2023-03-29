@@ -49,6 +49,10 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
 -- Setup mason so it can manage external tooling
 require("mason").setup({
     ui = {
@@ -63,7 +67,7 @@ require("mason").setup({
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
 local lsp_servers = { 'bashls', 'dockerls', 'jsonls', 'pyright', 'tsserver', 'tailwindcss',
-                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls' }
+                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls', 'astro' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -76,8 +80,8 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, lsp in ipairs(lsp_servers) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+    on_attach = lsp_status.on_attach,
+    capabilities = lsp_status.capabilities,
   }
 end
 

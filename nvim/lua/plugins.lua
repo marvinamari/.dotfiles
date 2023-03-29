@@ -41,6 +41,7 @@ require('packer').startup(function(use)
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
       'jose-elias-alvarez/null-ls.nvim',
+      'nvim-lua/lsp-status.nvim'
     },
   }
 
@@ -50,7 +51,6 @@ require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   }
-
 
 -- Editor
   use 'themercorp/themer.lua'
@@ -65,6 +65,7 @@ require('packer').startup(function(use)
   use 'kevinhwang91/nvim-hlslens'
   use 'lvimuser/lsp-inlayhints.nvim'
   use 'numToStr/Comment.nvim'
+  use 'sQVe/sort.nvim'
   use { "AckslD/nvim-neoclip.lua",
     requires = {
         {'kkharji/sqlite.lua', module = 'sqlite'},
@@ -73,6 +74,18 @@ require('packer').startup(function(use)
         require('neoclip').setup()
       end,
     }
+
+-- Copilot
+  use { "zbirenbaum/copilot.lua" }
+  use {
+    "zbirenbaum/copilot-cmp",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
 
 -- Debug
   use 'mfussenegger/nvim-dap'

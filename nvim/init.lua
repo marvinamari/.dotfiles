@@ -24,6 +24,8 @@ require('config.hlslens')
 require('config.comment')
 require('config.trouble')
 require('config.neoclip')
+require('config.sort')
+require('config.copilot')
 
 -- LSP
 require('config.lsp')
