@@ -12,4 +12,7 @@ alias vd="nvim -d"
 alias v="nvim"
 alias sv="sudo nvim"
 
+alias x="xplr"
+alias ze="zellij"
+
 alias wiki="nvim ~/vimwiki/index.md"

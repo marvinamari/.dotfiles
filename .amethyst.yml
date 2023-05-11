@@ -1,0 +1,36 @@
+# Use tall and fullscreen layouts
+layouts:
+    - tall
+    - fullscreen
+    - two-pane
+    - 3column-right
+    - column
+    - row
+    - floating
+    - bsp
+
+# Add "command" to the default mods
+mod1:
+    - option
+    - shift
+mod2:
+    - option
+    - shift
+    - control
+
+# Float windows
+floating:
+    - com.apple.systempreferences
+    - com.apple.finder
+# Modify the amethyst relaunch to use x and not z
+relaunch-amethyst:
+    mod: mod2
+    key: x
+
+# Enable focus-follows-mouse
+mouse-follows-focus: false
+focus-follows-mouse: true
+
+# Add 10px margin between windows
+window-margins: true
+window-margin-size: 5

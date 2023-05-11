@@ -1,0 +1,56 @@
+[[language]]
+name = "sql"
+scope = "source.sql"
+file-types = ["sql"]
+formatter = { command = "sql-formatter" }
+language-server = { command = "sql-language-server", args = ["up", "--method", "stdio"] }
+config = {}
+auto-format = true
+
+[[language]]
+name = "python"
+roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+auto-format = true
+formatter = {command = 'black', args = ["--quiet", "-"]}
+config = ""
+
+[language.debugger]
+name = "debugpy"
+transport = "stdio"
+command = "python"
+args = ["-m",  "debugpy.adapter"]
+
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+completion = [ { name = "entrypoint", completion = "filename", default = "." } ]
+args = { mode = "debug", program = "{0}" }
+
+
+[[language]]
+name = "html"
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "markdown"
+formatter = { command = 'prettier', args = ["--parser", "markdown"] }
+auto-format = true

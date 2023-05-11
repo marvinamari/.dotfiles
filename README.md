@@ -44,3 +44,6 @@ Brew backup restore packages: https://tomlankhorst.nl/brew-bundle-restore-backup
 
 Binaries for linting:
 black, flake8, prettier
+
+Vieew brew tree
+`brew deps --tree --installed`
