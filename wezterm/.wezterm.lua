@@ -13,6 +13,7 @@ end
 -- This is where you actually apply your config choices
 
 config.font = wezterm.font 'JetBrains Mono'
+config.font_size = 18
 config.color_scheme = 'DimmedMonokai'
 
 -- and finally, return the configuration to wezterm

@@ -4,7 +4,7 @@ env:
 window:
   dimensions:
    columns: 500
-   lines: 50
+   lines: 500
   padding:
     x: 5
     y: 5
@@ -12,6 +12,7 @@ window:
     instance: alacritty
     general: alacritty
   startup_mode: Maximized
+  option_as_alt: Both
 
 scrolling:
   history: 10000
@@ -30,7 +31,7 @@ font:
   bold_italic:
     family: Hack Nerd Font
     style: Bold Italic
-  size: 15.0
+  size: 18.0
 
 draw_bold_text_with_bright_colors: true
   
@@ -71,4 +72,7 @@ live_config_reload: true
 #   program: /bin/zsh --login
 
 key_bindings:
-  - { key: N, mods: Super|Shift, action: SpawnNewInstance }
+  - { key: N, mods: Alt| Option| Super, action: None }
+  #- { key: N, mods: Super|Shift, action: SpawnNewInstance }
+
+

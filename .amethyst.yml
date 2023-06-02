@@ -26,10 +26,12 @@ floating:
 relaunch-amethyst:
     mod: mod2
     key: x
-
+toggleFullscreen:
+    mod: mod1
+    key: f
 # Enable focus-follows-mouse
 mouse-follows-focus: false
-focus-follows-mouse: true
+focus-follows-mouse: false
 
 # Add 10px margin between windows
 window-margins: true
