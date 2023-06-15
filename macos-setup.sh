@@ -6,5 +6,6 @@
 # source "$HOME/.sdkman/bin/sdkman-init.sh"
 # ln -s ~/.sdkman ~/sdkman
 
-brew update && brew install git bat zsh helix ripgrep yarn pnpm xplr zellij pyenv nvm zoxide docker rust
-# magic-wormhole jabba
+/bin/bash ./brew-setup.sh
+
+brew install --cask amethyst alacritty authy font-hack-nerd-font hammerspoon maccy keepassxc kdiff3 visual-studio-code yarn dbeaver-community logseq elgato-camera-hub virtualbox

@@ -10,9 +10,9 @@
     ~/.config/nvim:
         create: true
         path: nvim
-    # ~/.config/kitty/kitty.conf:
-    #     create: true
-    #     path: kitty.conf
+    ~/.alias:
+        create: true
+        path: .alias
     ~/.hammerspoon/init.lua:
         create: true
         path: hammerspoon.lua
@@ -23,12 +23,9 @@
     ~/.config/alacritty/alacritty.yml:
         create: true
         path: alacritty/alacritty_mac.yml
-    ~/.config/kitty/kitty.conf:
+    ~/.config/zellij:
         create: true
-        path: kitty/kitty.conf    
-    ~/.tmux.conf:
-        create: true
-        path: .tmux.conf
+        path: zellij
 
 - defaults:
     link:
@@ -41,22 +38,23 @@
     ~/.config/nvim:
         create: true
         path: nvim
+    ~/.alias:
+        create: true
+        path: .alias
     ~/.config/helix/config.toml:
         create: true
+        path: helix/config.toml
     ~/.config/helix/languages.toml: helix/languages.toml
     ~/.config/alacritty/alacritty.yml:
         create: true
         path: alacritty/alacritty_ubuntu.yml
-    ~/.config/kitty/kitty.conf:
+    ~/.config/zellij:
         create: true
-        path: kitty/kitty.conf
-    ~/.tmux.conf:
-        create: true
-        path: .tmux.conf
-#     ~/UbuntuSetup.sh:
-#         path: Scripts/UbuntuSetup.sh
-# - shell:
-#     - ~/UbuntuSetup.sh
+        path: zellij
+    ~/UbuntuSetup.sh:
+        path: Scripts/UbuntuSetup.sh
+- shell:
+    - ~/UbuntuSetup.sh
 
 - defaults:
     link:
