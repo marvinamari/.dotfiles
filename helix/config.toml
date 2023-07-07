@@ -6,6 +6,7 @@ mouse = true
 scrolloff = 7
 bufferline = "always"
 shell = ["zsh", "-c"]
+# display-inlay-hints = true
 
 [editor.cursor-shape]
 insert = "bar"

@@ -74,5 +74,6 @@ live_config_reload: true
 key_bindings:
   - { key: N, mods: Alt| Option| Super, action: None }
   #- { key: N, mods: Super|Shift, action: SpawnNewInstance }
-
+  - { key: PageUp,  action: ScrollLineUp }
+  - { key: PageDown, action: ScrollLineDown }
 

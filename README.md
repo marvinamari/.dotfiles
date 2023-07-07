@@ -47,3 +47,14 @@ black, flake8, prettier
 
 Vieew brew tree
 `brew deps --tree --installed`
+
+
+# Set zsh as default shell
+# First view list of shells, if bash not listed and you add zsh you might find you can no longer log in as root and bash doesn't work
+cat /etc/shells
+
+# add zsh
+command -v zsh | sudo tee -a /etc/shells
+
+# now we have told terminal zsh is valid shell login, set as default
+sudo chsh -s $(which zsh) $USER

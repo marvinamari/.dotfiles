@@ -29,7 +29,7 @@ font:
   bold_italic:
     family: Hack Nerd Font
     style: Bold Italic
-  size: 15.0
+  size: 18.0
 
 draw_bold_text_with_bright_colors: true
   
@@ -57,7 +57,7 @@ colors:
     white:   '0xfeffff'
 
 selection:
-  save_to_clipboard: false
+  save_to_clipboard: true
 
 cursor:
   style:
@@ -71,3 +71,8 @@ live_config_reload: true
 
 key_bindings:
   - { key: N, mods: Super|Shift, action: SpawnNewInstance }
+  - { key: PageUp,  action: ScrollLineUp }
+  - { key: PageDown, action: ScrollLineDown }
+
+mouse_bindings:
+  - { mouse: Right, action: Paste }

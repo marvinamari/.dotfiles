@@ -29,7 +29,7 @@
 
 - defaults:
     link:
-      if: '[[ -f "/etc/lsb-release" && -n "$(awk -F= "/^.*Ubuntu/{print $1}" /etc/os-release)" ]]'
+      if: '[[ "$OSTYPE" == "linux-gnu"* ]]'
 - link:
     ~/.zprofile: .zprofile
     ~/.config/zsh:
@@ -51,10 +51,8 @@
     ~/.config/zellij:
         create: true
         path: zellij
-    ~/UbuntuSetup.sh:
-        path: Scripts/UbuntuSetup.sh
-- shell:
-    - ~/UbuntuSetup.sh
+# - shell:
+#     - ~/.dotfiles/Scripts/UbuntuSetup.sh
 
 - defaults:
     link:

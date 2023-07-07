@@ -38,7 +38,7 @@ npm list -g | grep pyright || npm install -g pyright
 
 # Black ()
 echo "  • Black"
-pip list | grep black || pip install git+https://github.com/psf/black
+pip3 list | grep black || pip install git+https://github.com/psf/black
 
 # Clean up.
 popd

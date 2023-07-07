@@ -6,5 +6,5 @@
 # source "$HOME/.sdkman/bin/sdkman-init.sh"
 # ln -s ~/.sdkman ~/sdkman
 
-brew update && brew install git bat zsh helix ripgrep yarn pnpm xplr zellij pyenv nvm zoxide docker rust
-# magic-wormhole jabba
+brew update && brew install git bat zsh helix ripgrep yarn pnpm xplr zellij pyenv nvm zoxide docker docker-compose rust magic-wormhole rclone neovim
+# jabba
