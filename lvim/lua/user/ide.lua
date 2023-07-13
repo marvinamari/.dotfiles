@@ -10,7 +10,7 @@ lvim.plugins = {
   "Wansmer/treesj",
   "folke/flash.nvim",
   "jamestthompson3/nvim-remote-containers",
-
+  "chentoast/marks.nvim",
   ----- python
   "AckslD/swenv.nvim", -- environment picker
   "stevearc/dressing.nvim",
@@ -94,6 +94,7 @@ require('swenv').setup({ -- restart lang server after switching environments
   end,
 })
 
+require("marks").setup({})
 require("nvim-surround").setup({})
 require("treesj").setup({})
 require("aerial").setup({})
@@ -175,6 +176,7 @@ keymap("n", "<", "<<", opts)
 keymap("n", "<LocalLeader>a", "<cmd>AerialToggle!<CR>", opts)
 -- Terminal ctrl+\
 
+keymap("n", "<Space>tb", ":Telescope builtin<cr>", opts)
 -- Visual --
 -- stay in indent mode
 keymap("v", "<", "<gv", opts)
