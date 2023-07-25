@@ -1,0 +1,28 @@
+FROM lunarvim:remote
+
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y default-mysql-client \
+  default-libmysqlclient-dev
+
+ENV PYTHON_VERSION 3.11.4
+ENV NODE_VERSION 18.16.1
+
+RUN bash -c "source /root/.nvm/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default"
+
+RUN pyenv update \
+    && pyenv versions | grep $PYTHON_VERSION || pyenv install $PYTHON_VERSION \
+    && pyenv global $PYTHON_VERSION \
+    && pyenv rehash
+
+WORKDIR /workspace
+
+COPY . .
+
+WORKDIR /workspace/backend/
+
+RUN pip install -e .
+
+

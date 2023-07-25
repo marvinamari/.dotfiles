@@ -115,20 +115,32 @@ dap.configurations.lua = {
 -- Lua one step mankind plugin
 
 --Python
-dap.adapters.python = {
-    type = 'executable';
-    command = '/Users/amari/.local/share/nvim/mason/packages/debugpy/venv/bin/python';
-    args = { '-m', 'debugpy.adapter'};
-}
+dap.adapters.generic_remote = function(callback, config)
+  callback({
+    type = 'server',
+    host = (config.connect or config).host or '127.0.0.1',
+    port = (config.connect or config).port or '5678',
+    options = {
+      source_filetype = 'python'
+    }
+})
+end
 dap.configurations.python = {
   {
-    type = 'python';
-    request = 'launch';
-    name = 'launch file';
-    program = '${file}';
-    pythonPath = function()
-      return '/Users/amari/.pyenv/shims/python3'
-    end
+    type = "generic_remote",
+    name = "Generic remote",
+    request = "attach",
+    justMyCode = false,
+    connect = function()
+      local host = vim.fn.input('Host [127.0.0.1]: ')
+      host = host ~= '' and host or '127.0.0.1'
+      local port = tonumber(vim.fn.input('Port [5678]: ')) or 5678
+      return { host = host, port = port }
+    end,
+    pathMappings = {{
+      localRoot = vim.fn.getcwd();
+      remoteRoot = "/";
+    }};
   }
 }
 --
@@ -151,7 +163,7 @@ dap.configurations.cs = {
 --
 
 require('telescope').load_extension('dap')
-require('nvim-dap-virtual-text').setup()
+require('nvim-dap-virtual-text').setup({})
 require('dapui').setup({
   -- icons = { expanded = '?', collapsed = '?' },
   mappings = {

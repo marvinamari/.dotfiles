@@ -1,31 +1,22 @@
--- Install packer
-require('plugins')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
+
+require('lazy').setup('plugins')
 
 require('utils')
 require('settings')
-require('config.colorscheme')
 require('keymappings')
-require('config.treesitter')
-require('config.telescope')
-require('config.bufferline')
-require('config.nvim-tree')
-require('config.lualine')
-require('config.web_devicons')
-require('config.debugger')
-require('config.ts_rainbow')
-require('config.whichkey')
-require('config.nvim-remote-containers')
-require('config.nvim-autopairs')
-require('config.gitsigns')
-require('config.neotest')
-require('config.toggleterm')
-require('config.harpoon')
-require('config.hlslens')
-require('config.comment')
-require('config.trouble')
-require('config.neoclip')
-require('config.sort')
-require('config.copilot')
-
--- LSP
-require('config.lsp')
+require('config')

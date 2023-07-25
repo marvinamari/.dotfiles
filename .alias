@@ -16,7 +16,7 @@ alias python="python3"
 alias vd="nvim -d"
 alias nv="nvim"
 alias sv="sudo nvim"
-alias v="lvim"
+alias v="nvim"
 
 alias x="xplr"
 alias ze="zellij"

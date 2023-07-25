@@ -1,4 +1,6 @@
 require'nvim-treesitter.configs'.setup {
+    modules = {},
+    ignore_install = {"help"},
   ensure_installed = {
     'bash',
     'c_sharp',

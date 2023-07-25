@@ -1,7 +1,6 @@
 require('config.lsp.nvim-cmp')
 require('config.lsp.null-ls')
 require('config.lsp.mason')
-require('config.lsp.lsp-inlay-hints')
 
 -- local lspconfig = require('lspconfig')
 

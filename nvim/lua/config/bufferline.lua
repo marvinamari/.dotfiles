@@ -23,11 +23,11 @@ require'bufferline'.setup{
 
         highlights = {
             tab_selected = {
-                --guifg = tabline_sel_bg,
-                guibg = '#ffffff'
+                fg = '#FFFFFF',
+                bg = '#000000'
             },
     },
-    numbers = 'both',
+  numbers = 'ordinal'
 }
 }
 

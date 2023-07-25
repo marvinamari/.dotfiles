@@ -6,6 +6,7 @@ end
 local keymap = require 'utils'.keymap
 local opts = { noremap=true, silent=true }
 
+vim.g.maplocalleader = '\\'
 keymap('n', '<Space>', '<NOP>', opts)
 
 -- Remap for dealing with word wrap
@@ -65,12 +66,14 @@ keymap('x', 'K', ':move \'<-2<CR>gv-gv', opts)
 keymap('x', 'J', ':move \'>+1<CR>gv-gv', opts)
 
 -- Tab switch buffer
-keymap('n', '<TAB>', ':bnext<CR>', opts) -- :BufferLineCycleNext
-keymap('n', '<S-TAB>', ':bprevious<CR>', opts) -- :BufferLineCyclePrev
+keymap('n', '<S-l>', ':bnext<CR>', opts) -- :BufferLineCycleNext
+keymap('n', '<S-h>', ':bprevious<CR>', opts) -- :BufferLineCyclePrev
+keymap('n', '<C-w>', ':BufferLinePickClose<CR>', opts)
+keymap('n', '<LocalLeader>b', ':BufferLinePick<CR>', opts)
 
 -- Replace word under cursor and press to repeat operation, n to skip
-keymap('n', 's*', ":let @/='<'.expand('<cword>').'>'<CR>cgn", opts)
-keymap('x', 's*', 'sy:let @/=@s<CR>cgn', opts)
+-- keymap('n', 's*', ":let @/='<'.expand('<cword>').'>'<CR>cgn", opts)
+-- keymap('x', 's*', 'sy:let @/=@s<CR>cgn', opts)
 keymap('n', '<leader>rn', '%s///g<Left><Left>', {noremap = true, silent = false})
 keymap('x', '<leader>rn', '%s///g<Left><Left>', opts)
 
@@ -84,23 +87,40 @@ vim.cmd([[
 ]])
 
 -- LSP
--- Diagnostic keymaps
+
+keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<cr>', opts)
+keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', opts)
+
+keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', opts)
+keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', opts)
+keymap('n', 'gr', ":lua require('telescope.builtin').lsp_references()<cr>", opts )
+keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', opts)
+keymap('n', '<leader>D', ':lua vim.lsp.buf.type_definition()<cr>', opts)
+keymap('n', '<leader>ds', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
+keymap('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", opts)
+
+-- See `:help K` for why this keymap
+keymap('n', '<leader>K', ':lua vim.lsp.buf.hover()<cr>', opts)
+keymap('n', '<C-k>', ':lua vim.lsp.buf.signature_help()<cr>', opts)
+
+-- Lesser used LSP functionality
+keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<cr>', opts)
+keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<cr>', opts)
+-- keymap('n', '<leader>wl', function()
+--   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+-- end, '[W]orkspace [L]ist Folders')
+
+--Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+--vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
--- harpoon
-keymap('n', '<leader>bb', ':lua require("harpoon.mark").add_file()<CR>', opts)
-keymap('n', '<leader>br', ':lua require("harpoon.mark").rm_file()<CR>', opts)
-keymap('n', '<leader>bc', ':lua require("harpoon.mark").clear_all()<CR>', opts)
-keymap('n', '<leader>bl', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
-keymap('n', '<leader>bn', ':lua require("harpoon.ui").nav_next()<CR>', opts)
-keymap('n', '<leader>bp', ':lua require("harpoon.ui").nav_prev()<CR>', opts)
-keymap('n', '<leader>b1', ':lua require("harpoon.ui").nav_file(1)<CR>', opts)
-keymap('n', '<leader>b2', ':lua require("harpoon.ui").nav_file(2)<CR>', opts)
-keymap('n', '<leader>b3', ':lua require("harpoon.ui").nav_file(3)<CR>', opts)
-keymap('n', '<leader>b4', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
+-- Rest
+keymap("n", "<LocalLeader>rr", ":RestNvim<cr>", opts)
+keymap("n", "<LocalLeader>rp", ":RestNvimPreview<cr>", opts)
+keymap("n", "<LocalLeader>rl", ":RestNvimLast<cr>", opts)
+
 
 -- toggleterm
 keymap('n', '<leader>tt', ':ToggleTerm size=20 direction=horizontal<CR>', opts)
@@ -113,33 +133,31 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  --vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  --vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  --vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  --vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead of term://*
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({
-	cmd = "lazygit",
-	dir = "git_dir",
-	direction= "float"
-})
-
-function _lazygit_toggle()
-  lazygit:toggle()
-end
 
 vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 
 -- nv-nvim-tree
 keymap('n', '<leader>nr', ':NvimTreeRefresh<CR>', opts)
-keymap('n', '<leader>nn', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', opts)
 
 -- git
 keymap('n', '<leader>DL', ':diffget local<CR>', opts)
 keymap('n', '<leader>DB', ':diffget base<CR>', opts)
 keymap('n', '<leader>DR', ':diffget remote<CR>', opts)
+
+--comment
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
+keymap('n', '<C-.>', 'gbc', opts)
 
 -- nvim-dap
 map('n', '<F2>', ":lua require('dap').toggle_breakpoint()<CR>")
@@ -176,6 +194,8 @@ map('n', '<leader>duh', "<cmd>lua require'dap.ui.widgets'.hover()<CR>")
 map('n', '<leader>duf', "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>")
 map('n', '<F4>', ":lua require('dapui').toggle()<CR>")
 
+-- symbols
+keymap('n', '<LocalLeader>s', ":SymbolsOutline<cr>", opts)
 
 -- change list
 map('n', '<leader>cl', ":changes<CR>", opts)
@@ -197,15 +217,15 @@ map("n", "<Leader>fm", ":Telescope commands<CR>")
 map("n", "<Leader>fj", ":Telescope jumplist<CR>")
 map("n", "<Leader>fq", ":Telescope quickfix<CR>")
 map("n", "<Leader>fh", ":Telescope quickfixhistory<CR>")
-map("n", "<Leader>gg", ":Telescope live_grep<CR>")
+map("n", "<Leader>fg", ":Telescope live_grep<CR>")
 map("n", "<Leader>go", ":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>")
 map("n", "<Leader>fr", ":Telescope marks<CR>")
 map("n", "<Leader>fp", ":Telescope projects<CR>")
-map("n", "<Leader>fgs", ":Telescope git_status<CR>")
-map("n", "<Leader>fgf", ":Telescope git_files<CR>")
-map("n", "<Leader>fgc", ":Telescope git_commits<CR>")
-map("n", "<Leader>fgt", ":Telescope git_stash<CR>")
-map("n", "<Leader>fgb", ":Telescope git_branches<CR>")
+map("n", "<Leader>gs", ":Telescope git_status<CR>")
+map("n", "<Leader>gf", ":Telescope git_files<CR>")
+map("n", "<Leader>gc", ":Telescope git_commits<CR>")
+map("n", "<Leader>gt", ":Telescope git_stash<CR>")
+map("n", "<Leader>gb", ":Telescope git_branches<CR>")
 
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -240,3 +260,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Register keymaps with which-key
+local wk = require("which-key")
+wk.register({
+  f = {
+    name = "Find Files In Buffer"
+  },
+  r = { name = "Rest Requests",
+    r = {":RestNvim<cr>", "Run request under cursor"},
+    p = {":RestNvimPreview<cr>", "Preview request Curl command"},
+    l = {":RestNvimLast<cr>", "Re-run last request"},
+  },
+}, { prefix = "<LocalLeader>" })

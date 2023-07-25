@@ -3,7 +3,14 @@ local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
 
-vim.cmd[[filetype plugin indent on]]
+-- Colorscheme
+vim.cmd[[colorscheme tokyonight-moon]]
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.cmd[[filetype plugin on]]
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -26,13 +33,13 @@ vim.o.conceallevel = 0 -- So that I can see `` in markdown files
 --vim.o.timeoutlen = 100 -- By default timeoutlen is 1000 ms, this causes leader key not to work
 vim.o.clipboard = 'unnamedplus' -- Copy paste between vim and everything else
 vim.cmd[[ set dir=~/neovim/swaps ]]
-	
+
 vim.opt.tabstop=4
 vim.opt.shiftwidth=4
 vim.opt.softtabstop=4
 vim.opt.expandtab=true
 vim.opt.smarttab=true
-vim.opt.copyindent=true 
+vim.opt.copyindent=true
 
 -- highlight color
 --vim.cmd[[ set nowrap ]]
