@@ -1,0 +1,7 @@
+services:
+  ide:
+    container_name: devide
+    image: ide
+    volumes:
+      - ${PWD}:/home/main/workspace
+    tty: true

@@ -20,7 +20,7 @@ opt.backup = false
 opt.wrap = false
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8' -- The encoding written to file
-opt.termencoding = 'utf-8'
+--opt.termencoding = 'utf-8'
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
 --vim.wo.wrap = false -- Display long lines as just one line
 --vim.cmd('syntax on') -- move to next line with theses keys

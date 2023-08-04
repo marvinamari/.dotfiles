@@ -28,27 +28,6 @@ require("mason").setup({
     }
 })
 
--- Enable the following language servers
--- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local lsp_servers = { 'bashls', 'dockerls', 'jsonls', 'pyright', 'tsserver', 'tailwindcss',
-                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls', 'astro', 'omnisharp_mono' }
-
--- Ensure the servers above are installed
-require('mason-lspconfig').setup {
-  ensure_installed = lsp_servers,
-}
-
--- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-for _, lsp in ipairs(lsp_servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = lsp_status.on_attach,
-    capabilities = lsp_status.capabilities,
-  }
-end
-
 require('mason-tool-installer').setup {
 
   -- a list of all tools you want to ensure are installed upon
@@ -61,7 +40,7 @@ require('mason-tool-installer').setup {
     -- you can turn off/on auto_update per tool
     --{ 'bash-language-server', auto_update = true },
 
-    -- "omnisharp-mono",
+    "omnisharp_mono",
     "black",
     "flake8",
     "debugpy",
@@ -90,6 +69,28 @@ require('mason-tool-installer').setup {
   -- Default: 0
   start_delay = 3000, -- 3 second delay
 }
+
+-- Enable the following language servers
+-- Feel free to add/remove any LSPs that you want here. They will automatically be installed
+local lsp_servers = { 'bashls', 'dockerls', 'jsonls', 'pyright', 'tsserver', 'tailwindcss',
+                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls', 'astro', 'omnisharp' }
+
+-- Ensure the servers above are installed
+-- require('mason-lspconfig').setup {
+--   ensure_installed = lsp_servers,
+-- }
+
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+for _, lsp in ipairs(lsp_servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = lsp_status.on_attach,
+    capabilities = lsp_status.capabilities,
+  }
+end
+
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -164,11 +165,11 @@ require('lspconfig').lua_ls.setup {
 }
 
 local pid = vim.fn.getpid()
-local omnisharp_bin = os.getenv('HOME') .. '/.local/share/nvim/mason/packages/omnisharp/omnisharp'
+local omnisharp_bin = os.getenv('HOME') .. '/.local/share/nvim/mason/packages/omnisharp-mono/run'
 local root_pattern = require('lspconfig.util').root_pattern
 
 require'lspconfig'.omnisharp.setup{
-    cmd = { "dotnet", omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid)}, --, "-s", io.popen"cd":read'*l' },
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid)}, --, "-s", io.popen"cd":read'*l' },
     handlers = {
         ["textDocument/definition"] = require('omnisharp_extended').handler,
     },
@@ -177,12 +178,33 @@ require'lspconfig'.omnisharp.setup{
       return root_pattern('*.sln')(path) or root_pattern('*.csproj')(path)
     end,
     -- Additional configuration can be added here
+    -- Enables support for reading code style, naming convention and analyzer
+    -- settings from .editorconfig.
     enable_editorconfig_support = true,
-    enable_ms_build_load_projects_on_demand = true,
+    -- If true, MSBuild project system will only load projects for files that
+    -- were opened in the editor. This setting is useful for big C# codebases
+    -- and allows for faster initialization of code navigation features only
+    -- for projects that are relevant to code that is being edited. With this
+    -- setting enabled OmniSharp may load fewer projects and may thus display
+    -- incomplete reference lists for symbols.
+    enable_ms_build_load_projects_on_demand = false,
+    -- Enables support for roslyn analyzers, code fixes and rulesets.
     enable_roslyn_analyzers = false,
+    -- Specifies whether 'using' directives should be grouped and sorted during
+    -- document formatting.
     organize_imports_on_format = false,
+    -- Enables support for showing unimported types and unimported extension
+    -- methods in completion lists. When committed, the appropriate using
+    -- directive will be added at the top of the current file. This option can
+    -- have a negative impact on initial completion responsiveness,
+    -- particularly for the first few completion sessions after opening a
+    -- solution.
     enable_import_completion = true,
+    -- Specifies whether to include preview versions of the .NET SDK when
+    -- determining which version to use for project loading.
     sdk_include_prereleases = true,
+    -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+    -- true
     analyze_open_documents_only = false,
     on_attach = on_attach
 }

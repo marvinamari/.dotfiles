@@ -19,14 +19,14 @@ sudo apt upgrade -y
   sudo apt install snapd
 }
 
-sudo snapd install keepassxc dbeaver-ce 
+sudo snapd install keepassxc dbeaver-ce
 sudo snap install alacritty --edge --classic
 sudo snap install code --classic
 
 curl -sSl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -
 flatpak install flathub com.logseq.Logseq
 
-sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard libssl-dev python3-venv kdiff3 nfs-common
+sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard libssl-dev python3-venv kdiff3 nfs-common dotnet-sdk-7.0
 
 echo "Installing Docker docs.docker.com/engine/install/ubuntu"
 sudo apt install ca-certificates curl gnupg

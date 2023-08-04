@@ -58,8 +58,8 @@ keymap('i', t'<C-e>', '<C-o>$', opts)
 keymap('i', t'<C-a>', '<C-o>0', opts)
 
 -- Scroll
-keymap('n', '<S-h>', '20zh', opts)
-keymap('n', '<S-l>', '20zl', opts)
+keymap('n', '<S-left>', '20zh', opts)
+keymap('n', '<S-right>', '20zl', opts)
 
 -- Move selected block in visual mode
 keymap('x', 'K', ':move \'<-2<CR>gv-gv', opts)
@@ -94,6 +94,7 @@ keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', opts)
 keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', opts)
 keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', opts)
 keymap('n', 'gr', ":lua require('telescope.builtin').lsp_references()<cr>", opts )
+keymap('n', 'gR', ":lua vim.lsp.buf.references()<cr>", opts )
 keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', opts)
 keymap('n', '<leader>D', ':lua vim.lsp.buf.type_definition()<cr>', opts)
 keymap('n', '<leader>ds', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)

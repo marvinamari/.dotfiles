@@ -1,0 +1,119 @@
+# syntax=docker/dockerfile:1
+# docker build -t ide -f Dockerfile.ide --target dotnet .
+# docker run -it --user main ide
+# docker exec -it devide --user main /bin/zsh
+FROM ubuntu:22.04 AS base
+
+# Set environment correctly
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/home/main/.local/bin:/home/main/.cargo/bin:/home/main/.npm-global/bin${PATH}"
+ENV CFLAGS=-I/usr/include/openssl
+ENV LDFLAGS=-L/usr/lib
+ENV PYTHON_VERSION 3.11.4
+ENV NVM_DIR /home/main/.nvm
+ENV NODE_VERSION 18.16.1
+SHELL ["/bin/bash", "-c"]
+
+# Let scripts know we're running in Docker (useful for containerised development)
+ENV RUNNING_IN_DOCKER true
+# Use the unprivileged `main` user (created without a password ith `-D`) for safety
+RUN adduser --disabled-password main
+RUN mkdir -p /ide \
+    && chown -R main:main /ide
+
+RUN apt-get update \
+    && apt-get install -y \
+    git curl build-essential \
+    software-properties-common \
+    wget curl zsh git unzip
+
+RUN add-apt-repository -y ppa:neovim-ppa/unstable \
+    && apt-get update \
+    && apt-get install -y neovim
+
+# Zsh plugin Manager
+#RUN mkdir -p /home/main/.antigen
+#RUN curl -L git.io/antigen > /home/main/.antigen/antigen.zsh
+
+# Download dotfiles
+WORKDIR /home/main
+RUN mkdir .nvm
+RUN mkdir .config
+RUN git clone https://github.com/marvinamari/.dotfiles.git
+RUN cp -br .dotfiles/.zprofile .zprofile
+RUN cp -br .dotfiles/.zshenv .zshenv
+RUN cp -br .dotfiles/zsh .config/zsh
+RUN cp -br .dotfiles/.alias .alias
+RUN cp -br .dotfiles/nvim .config/nvim
+
+RUN chown -R main:main /home/main/.dotfiles /home/main/.config
+
+#Set of all dependencies needed for pyenv to work on Ubuntu
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends make libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget ca-certificates \
+        llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev mecab-ipadic-utf8
+
+# Set-up necessary Env vars for PyEnv
+ENV PYENV_ROOT /home/main/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+
+# Install pyenv
+RUN set -ex \
+    && curl https://pyenv.run | bash \
+    && pyenv update \
+    && pyenv install $PYTHON_VERSION \
+    && pyenv global $PYTHON_VERSION \
+    && pyenv rehash
+
+# Install nvm
+RUN set -ex \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+RUN apt-get update && apt-get install python3-pip -y
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly -y
+
+# Set environment variables
+ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN npm install -g yarn
+# Switch back to root for whatever else we're doing
+#USER root
+
+RUN nvim --headless "+Lazy! install" +qa
+
+# Set up ZSH as the unprivileged user (we just need to start it, it'll initialise our setup itself)
+USER main
+RUN /bin/zsh /home/main/.config/zsh/.zshrc
+RUN source /home/main/.config/zsh/.zshrc
+
+# Install plugins as main user
+RUN nvim --headless "+Lazy! install" +qa
+RUN nvim --headless "+TSUpdateSync" +qa
+ENTRYPOINT [ "/bin/zsh" ]
+
+FROM base AS dotnet
+
+USER root
+RUN apt-get install ca-certificates gnupg
+RUN gpg --homedir /tmp --no-default-keyring --keyring /usr/share/keyrings/mono-official-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+RUN echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu nightly-focal main" | tee /etc/apt/sources.list.d/mono-official-nightly.list
+RUN echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu preview-focal main" | tee /etc/apt/sources.list.d/mono-official-preview.list
+
+RUN apt-get update && \
+    apt-get install -y dotnet-sdk-6.0 mono-devel mono-complete mono-dbg referenceassemblies-pcl ca-certificates-mono mono-xsp4
+
+USER main
+# Script install
+#RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+#RUN chmod +x ./dotnet-install.sh
+#RUN ./dotnet-install.sh --version latest
+# OR
+#RUN ./dotnet-install.sh --channel 7.0
+
+ENTRYPOINT [ "/bin/zsh" ]
