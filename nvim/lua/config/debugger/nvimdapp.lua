@@ -1,6 +1,7 @@
 --https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
 require('utils')
 local dap = require('dap')
+local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
 local api = vim.api
 -- local configurations = dap.configurations
 -- configurations.python = {{
@@ -64,21 +65,22 @@ dap.adapters.nlua = function(callback, conf)
   end
 end
 
+local lua_port = 5677
 dap.configurations.lua = {
   {
     type = "nlua",
     request = "attach",
     name = "New instance (current file)",
-    port = free_port,
+    port = lua_port,
     start_neovim = {}
   },
   {
     type = "nlua",
     request = "attach",
     name = "New instance (dotfiles)",
-    port = free_port,
+    port = lua_port,
     start_neovim = {
-      cwd = os.getenv('HOME') .. '/dotfiles',
+      cwd = home .. '/dotfiles',
       fname = 'vim/.config/nvim/init.lua',
     }
   },
@@ -86,9 +88,9 @@ dap.configurations.lua = {
     type = "nlua",
     request = "attach",
     name = "New instance (crate/crate)",
-    port = free_port,
+    port = lua_port,
     start_neovim = {
-      cwd = os.getenv('HOME') .. '/dev/crate/crate',
+      cwd = home .. '/dev/crate/crate',
       fname = 'server/src/test/java/io/crate/planner/PlannerTest.java',
     }
   },
@@ -96,9 +98,9 @@ dap.configurations.lua = {
     type = "nlua",
     request = "attach",
     name = "New instance (neovim/neovim)",
-    port = free_port,
+    port = lua_port,
     start_neovim = {
-      cwd = os.getenv('HOME') .. '/dev/neovim/neovim',
+      cwd = home .. '/dev/neovim/neovim',
       fname = 'src/nvim/main.c',
     }
   },
@@ -147,7 +149,7 @@ dap.configurations.python = {
 -- DotNet
 dap.adapters.coreclr = {
   type = 'executable',
-  command = '/Users/amari/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
+  command = home .. '/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
   args = {'--interpreter=vscode'}
 }
 dap.configurations.cs = {
@@ -156,7 +158,7 @@ dap.configurations.cs = {
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-        return vim.fn.input('/Users/amari/.local/share/nvim/mason/packages/', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        return vim.fn.input(home .. '/.local/share/nvim/mason/packages/', vim.fn.getcwd() .. '/bin/Debug/', 'file')
     end,
   },
 }
@@ -166,6 +168,15 @@ require('telescope').load_extension('dap')
 require('nvim-dap-virtual-text').setup({})
 require('dapui').setup({
   -- icons = { expanded = '?', collapsed = '?' },
+  icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+-- Use this to override mappings for specific elements
+  element_mappings = {
+    -- Example:
+    -- stacks = {
+    --   open = "<CR>",
+    --   expand = "o",
+    -- }
+  },
   mappings = {
     -- Use a table to apply multiple mappings
     expand = { '<CR>', '<2-LeftMouse>' },
@@ -173,7 +184,11 @@ require('dapui').setup({
     remove = 'd',
     edit = 'e',
     repl = 'r',
+    toggle = 't',
   },
+-- Expand lines larger than the window
+  -- Requires >= 0.7
+  expand_lines = vim.fn.has("nvim-0.7") == 1,
   layouts = {
     {
       elements = {
@@ -213,11 +228,16 @@ require('dapui').setup({
   floating = {
     max_height = nil, -- These can be integers or a float between 0 and 1.
     max_width = nil, -- Floats will be treated as percentage of your screen.
+    border = 'single',
     mappings = {
       close = { 'q', '<Esc>' },
     },
   },
   windows = { indent = 1 },
+  render = {
+      max_type_length = nil, -- Can be integer or nil.
+      max_value_lines = 100, -- Can be integer or nil.
+    }
 })
 
 -- nvim-dap-virtual-text. Show virtual text for current frame

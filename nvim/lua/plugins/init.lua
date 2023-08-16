@@ -4,6 +4,12 @@ return {
   'chentoast/marks.nvim',
   'rest-nvim/rest.nvim',
   --'onsails/lspkind.nvim',
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -16,26 +22,26 @@ return {
         'saadparwaiz1/cmp_luasnip',
     },
   },
-{
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
-},
-{
-    "danymat/neogen",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true,
-    -- Uncomment next line if you want to follow only stable versions
-    -- version = "*"
-},
-{
-   "ggandor/leap.nvim"
-},
+  {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+          require("nvim-surround").setup({
+              -- Configuration here, or leave empty to use defaults
+          })
+      end
+  },
+  {
+      "danymat/neogen",
+      dependencies = "nvim-treesitter/nvim-treesitter",
+      config = true,
+      -- Uncomment next line if you want to follow only stable versions
+      -- version = "*"
+  },
+  {
+     "ggandor/leap.nvim"
+  },
 -- Editor
   {
   "folke/tokyonight.nvim",

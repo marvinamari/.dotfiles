@@ -18,6 +18,7 @@ require('config.sort')
 require('config.nvim-tree')
 require('config.symbols-outline')
 require('config.leap')
+require('config.oil')
 -- LSP
 require('config.lsp')
 

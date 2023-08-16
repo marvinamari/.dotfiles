@@ -9,10 +9,15 @@ local opts = { noremap=true, silent=true }
 vim.g.maplocalleader = '\\'
 keymap('n', '<Space>', '<NOP>', opts)
 
+-- Go to previous location Ctrl + o
+-- Go to next location Ctrl + i
+
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- oil
+vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
 -- Allow gf to open non-existent files
 keymap('', 'gf', ':edit <cfile><CR>', {})
@@ -87,6 +92,8 @@ vim.cmd([[
 ]])
 
 -- LSP
+local builtin = require("telescope.builtin")
+local utils = require("telescope.utils")
 
 keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<cr>', opts)
 keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', opts)
@@ -101,8 +108,9 @@ keymap('n', '<leader>ds', ":lua require('telescope.builtin').lsp_document_symbol
 keymap('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", opts)
 
 -- See `:help K` for why this keymap
-keymap('n', '<leader>K', ':lua vim.lsp.buf.hover()<cr>', opts)
-keymap('n', '<C-k>', ':lua vim.lsp.buf.signature_help()<cr>', opts)
+keymap('n', 'gh', ':lua vim.lsp.buf.hover()<cr>', opts)
+keymap('n', 'gs', ':lua vim.lsp.buf.signature_help()<cr>', opts)
+keymap('n', '<leader>F', ':lua vim.lsp.buf.format()<cr>', opts)
 
 -- Lesser used LSP functionality
 keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<cr>', opts)
@@ -201,6 +209,9 @@ keymap('n', '<LocalLeader>s', ":SymbolsOutline<cr>", opts)
 -- change list
 map('n', '<leader>cl', ":changes<CR>", opts)
 
+-- marks
+map('n', 'm<space>', ":MarksListAll<cr>", opts)
+
 -- telescope-dap
 map('n', '<leader>dtf', ":Telescope dap frames<CR>")
 map('n', '<leader>dtc', ":Telescope dap commands<CR>")
@@ -228,6 +239,8 @@ map("n", "<Leader>gc", ":Telescope git_commits<CR>")
 map("n", "<Leader>gt", ":Telescope git_stash<CR>")
 map("n", "<Leader>gb", ":Telescope git_branches<CR>")
 
+vim.keymap.set("n", "<LocalLeader>f", function() builtin.find_files({ cwd = utils.buffer_dir() }) end,
+  {desc = "Find files in cwd"})
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {

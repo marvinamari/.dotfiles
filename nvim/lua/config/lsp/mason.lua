@@ -165,7 +165,8 @@ require('lspconfig').lua_ls.setup {
 }
 
 local pid = vim.fn.getpid()
-local omnisharp_bin = os.getenv('HOME') .. '/.local/share/nvim/mason/packages/omnisharp-mono/run'
+local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
+local omnisharp_bin = home .. '/.local/share/nvim/mason/packages/omnisharp-mono/run'
 local root_pattern = require('lspconfig.util').root_pattern
 
 require'lspconfig'.omnisharp.setup{
