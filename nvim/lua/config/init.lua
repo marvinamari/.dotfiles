@@ -19,6 +19,8 @@ require('config.nvim-tree')
 require('config.symbols-outline')
 require('config.leap')
 require('config.oil')
+require('config.diffview')
+
 -- LSP
 require('config.lsp')
 

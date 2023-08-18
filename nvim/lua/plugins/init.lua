@@ -3,6 +3,7 @@ return {
   'simrat39/symbols-outline.nvim',
   'chentoast/marks.nvim',
   'rest-nvim/rest.nvim',
+  'sindrets/diffview.nvim',
   --'onsails/lspkind.nvim',
   {
     'stevearc/oil.nvim',

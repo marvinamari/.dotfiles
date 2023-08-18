@@ -18,6 +18,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- oil
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+vim.keymap.set("n", "_", require("oil").close, { desc = "Close parent directory" })
 
 -- Allow gf to open non-existent files
 keymap('', 'gf', ':edit <cfile><CR>', {})
