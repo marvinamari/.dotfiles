@@ -20,6 +20,7 @@ require('config.symbols-outline')
 require('config.leap')
 require('config.oil')
 require('config.diffview')
+require('config.bqf')
 
 -- LSP
 require('config.lsp')

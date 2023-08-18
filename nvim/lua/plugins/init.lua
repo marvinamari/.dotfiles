@@ -4,6 +4,7 @@ return {
   'chentoast/marks.nvim',
   'rest-nvim/rest.nvim',
   'sindrets/diffview.nvim',
+  'kevinhwang91/nvim-bqf',
   --'onsails/lspkind.nvim',
   {
     'stevearc/oil.nvim',
