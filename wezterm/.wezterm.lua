@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local act = wezterm.action
 
 -- This table will hold the configuration.
 local config = {}
@@ -12,9 +13,17 @@ end
 
 -- This is where you actually apply your config choices
 
-config.font = wezterm.font 'JetBrains Mono'
-config.font_size = 18
-config.color_scheme = 'DimmedMonokai'
+config.font = wezterm.font_with_fallback {'JetBrains Mono', 'Fira Code'}
+config.font_size = 16
+-- config.default_domain = 'WSL:Ubuntu'
+-- config.default_prog = {'C:\\Program Files\\PowerShell\\7\\pwsh.exe'}
+config.color_scheme = 'MaterialDarker'
+config.keys = {
+  -- paste from clipboard
+  { key = 'V', mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
+  -- paste from primary selection
+  { key = 'V', mods = 'CTRL', action = act.PasteFrom 'PrimarySelection' }
+}
 
 -- and finally, return the configuration to wezterm
 return config

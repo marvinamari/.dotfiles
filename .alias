@@ -1,7 +1,8 @@
 #Linux set sudo path to user path
 #https://stackoverflow.com/questions/12996397/command-not-found-when-using-sudo
 alias mudo='sudo -E env "PATH=$PATH"'
-alias ac='alacritty'
+
+alias wezterm='flatpak run org.wezfurlong.wezterm'
 
 #git
 

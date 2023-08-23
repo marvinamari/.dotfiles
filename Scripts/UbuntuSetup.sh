@@ -20,13 +20,11 @@ sudo apt upgrade -y
 }
 
 sudo snapd install keepassxc dbeaver-ce
-sudo snap install alacritty --edge --classic
 sudo snap install code --classic
 
-curl -sSl https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -
-flatpak install flathub com.logseq.Logseq
 
-sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard libssl-dev python3-venv kdiff3 nfs-common dotnet-sdk-7.0
+sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard libssl-dev python3-venv kdiff3 nfs-common
+#install dotnet with manual script
 
 echo "Installing Docker docs.docker.com/engine/install/ubuntu"
 sudo apt install ca-certificates curl gnupg
@@ -66,6 +64,7 @@ sudo apt update
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update
 
+flatpak install flathub com.logseq.Logseq
 flatpak install -y  com.google.Chrome
 flatpak install -y  flathub com.discordapp.Discord
 flatpak install -y  flathub com.slack.Slack

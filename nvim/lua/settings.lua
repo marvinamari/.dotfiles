@@ -4,7 +4,7 @@ local g = vim.g
 local opt = vim.opt
 
 -- Colorscheme
-vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[colorscheme tokyonight-night]]
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1

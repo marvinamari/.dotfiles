@@ -152,13 +152,28 @@ dap.adapters.coreclr = {
   command = home .. '/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
   args = {'--interpreter=vscode'}
 }
+
+dap.adapters.coreclrattach = {
+  type = 'executable',
+  command = home .. '/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
+  args = {'--interpreter=vscode', '--attach'}
+}
+
 dap.configurations.cs = {
   {
     type = "coreclr",
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-        return vim.fn.input(home .. '/.local/share/nvim/mason/packages/', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        return vim.fn.input('Path to dll:', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
+  {
+    type = "coreclrattach",
+    name = "attach - netcoredbg",
+    request = "attach",
+    program = function()
+        return vim.fn.input('Path to dll:', vim.fn.getcwd() .. '/bin/Debug/', 'file')
     end,
   },
 }
@@ -169,6 +184,7 @@ require('nvim-dap-virtual-text').setup({})
 require('dapui').setup({
   -- icons = { expanded = '?', collapsed = '?' },
   icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+  force_buffers = true,
 -- Use this to override mappings for specific elements
   element_mappings = {
     -- Example:

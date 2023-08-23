@@ -18,7 +18,7 @@ HISTFILE=~/.cache/zsh/history
 # Environment Vars
 #export VIRTUAL_ENV="$HOME/neovim/debug/python/debugpy"
 export E="/Volumes/Nvme SSD"
-export EHOME=$E/$HOME 
+export EHOME=$E/$HOME
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -66,7 +66,7 @@ bindkey "^j" down-line-or-beginning-search # Down
 bindkey -r "^u"
 bindkey -r "^d"
 
-# FZF 
+# FZF
 # TODO update for mac
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
@@ -121,6 +121,10 @@ export NVM_DIR="$HOME/.nvm"
     #export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
     #export PATH="/usr/local/opt/ruby/bin:$PATH"
 #fi
+
+# dotnet
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$PATH:/home/marvin/.dotnet"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

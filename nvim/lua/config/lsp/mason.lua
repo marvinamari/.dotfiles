@@ -48,7 +48,8 @@ require('mason-tool-installer').setup {
     "sqlfluff",
     "stylua",
     --dap
-    "js-debug-adapter"
+    "js-debug-adapter",
+    "netcoredbg"
   },
 
   -- if set to true this will check each tool for updates. If updates
