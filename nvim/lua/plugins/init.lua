@@ -5,6 +5,12 @@ return {
   'rest-nvim/rest.nvim',
   'sindrets/diffview.nvim',
   'kevinhwang91/nvim-bqf',
+  {
+  'kdheepak/lazygit.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    }
+  },
   --'onsails/lspkind.nvim',
   {
     'stevearc/oil.nvim',

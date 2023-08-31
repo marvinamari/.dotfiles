@@ -5,3 +5,4 @@ install
 *.zsh_sessions
 *.zsh_history
 SublimeText/*
+lazy-lock.json

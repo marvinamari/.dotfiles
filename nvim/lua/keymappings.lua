@@ -152,15 +152,14 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead of term://*
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 
-
-vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-
 -- nv-nvim-tree
 keymap('n', '<leader>nr', ':NvimTreeRefresh<CR>', opts)
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', opts)
 
 -- git
+--vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+keymap('n', "<leader>lg", ":LazyGit<CR>", opts)
 keymap('n', '<leader>DL', ':diffget local<CR>', opts)
 keymap('n', '<leader>DB', ':diffget base<CR>', opts)
 keymap('n', '<leader>DR', ':diffget remote<CR>', opts)

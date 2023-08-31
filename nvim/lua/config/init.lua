@@ -21,6 +21,7 @@ require('config.leap')
 require('config.oil')
 require('config.diffview')
 require('config.bqf')
+require('config.lazygit')
 
 -- LSP
 require('config.lsp')
