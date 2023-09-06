@@ -210,7 +210,16 @@ keymap('n', '<LocalLeader>s', ":SymbolsOutline<cr>", opts)
 map('n', '<leader>cl', ":changes<CR>", opts)
 
 -- marks
-map('n', 'm<space>', ":MarksListAll<cr>", opts)
+map('n', 'mm', ':lua require("harpoon.mark").add_file()<cr>', opts)
+map('n', 'ml', ":lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
+map('n', 'm1', ':lua require("harpoon.ui").nav_file(1)<cr>', opts)
+map('n', 'm2', ':lua require("harpoon.ui").nav_file(2)<cr>', opts)
+map('n', 'm3', ':lua require("harpoon.ui").nav_file(3)<cr>', opts)
+map('n', 'm4', ':lua require("harpoon.ui").nav_file(4)<cr>', opts)
+map('n', 'mn', ':lua require("harpoon.ui").nav_next()<cr>', opts)
+map('n', 'mp', ':lua require("harpoon.ui").nav_prev()<cr>', opts)
+map('n', 'mr', ':lua require("harpoon.ui").rm_file()<cr>', opts)
+map('n', 'mc', ':lua require("harpoon.ui").clear_all()<cr>', opts)
 
 -- telescope-dap
 map('n', '<leader>dtf', ":Telescope dap frames<CR>")

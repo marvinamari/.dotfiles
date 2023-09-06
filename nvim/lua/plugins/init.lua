@@ -1,7 +1,9 @@
 return {
   'folke/trouble.nvim',
   'simrat39/symbols-outline.nvim',
-  'chentoast/marks.nvim',
+  {
+  'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }
+  },
   'rest-nvim/rest.nvim',
   'sindrets/diffview.nvim',
   'kevinhwang91/nvim-bqf',
@@ -29,6 +31,9 @@ return {
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
     },
+  },
+  {
+    'mg979/vim-visual-multi', branch = 'master'
   },
   {
       "kylechui/nvim-surround",
