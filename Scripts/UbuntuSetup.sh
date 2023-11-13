@@ -23,7 +23,9 @@ sudo snapd install keepassxc dbeaver-ce
 sudo snap install code --classic
 
 
-sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard libssl-dev python3-venv kdiff3 nfs-common
+sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard kdiff3 nfs-common libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev curl \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 #install dotnet with manual script
 
 echo "Installing Docker docs.docker.com/engine/install/ubuntu"
@@ -42,6 +44,9 @@ echo "========= Downloading Filestash ========="
 mkdir ~/filestash && cd ~/filestash
 curl -O https://downloads.filestash.app/latest/docker-compose.yml
 cd ~
+
+echo "======= Installing SDKMan ======="
+curl -s "https://get.sdkman.io" | bash
 
 # Virtualbox
 # apt-key was deprecated so do this https://askubuntu.com/questions/1286545/what-commands-exactly-should-replace-the-deprecated-apt-key

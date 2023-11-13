@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local icons = require('config.icons')
+require("luasnip.loaders.from_vscode").lazy_load()
 
 local check_backspace = function()
 	local col = vim.fn.col "." - 1

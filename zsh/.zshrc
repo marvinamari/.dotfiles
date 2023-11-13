@@ -5,6 +5,7 @@ source ~/.alias
 
 # Path
 export PATH=/usr/local/sbin:$PATH
+export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
 # Enable colors and change prompt:
 autoload -U colors && colors
@@ -102,40 +103,8 @@ export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 export PATH="$PATH:/home/marvin/.local/share/lvim/distant.nvim/bin"
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export NVM_DIR="$HOME/.nvm"
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-#if [[ "$OSTYPE" == "darwin"* ]]; then
-    # When running MACOS
-    # Kitty Configuration
-    #autoload -Uz compinit
-    #compinit
-    # Completion for kitty
-    #kitty + complete setup zsh | source /dev/stdin
-    #Ruby
-    #export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-    #export PATH="/usr/local/opt/ruby/bin:$PATH"
-#fi
 
 # dotnet
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$PATH:/home/marvin/.dotnet"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init -)"
-fi

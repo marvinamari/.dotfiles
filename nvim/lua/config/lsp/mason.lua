@@ -1,5 +1,9 @@
 -- Mason path ~/.local/share/nvim/mason/bin
 
+local pid = vim.fn.getpid()
+local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
+local root_pattern = require('lspconfig.util').root_pattern
+
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -40,15 +44,20 @@ require('mason-tool-installer').setup {
     -- you can turn off/on auto_update per tool
     --{ 'bash-language-server', auto_update = true },
 
-    "omnisharp_mono",
+    "jdtls",
+    "csharp_ls",
+    "pyright",
+    "tsserver",
+    "gopls",
+    --format
     "black",
     "flake8",
-    "debugpy",
     "prettier",
     "sqlfluff",
     "stylua",
     --dap
     "js-debug-adapter",
+    "debugpy",
     "netcoredbg"
   },
 
@@ -74,7 +83,7 @@ require('mason-tool-installer').setup {
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
 local lsp_servers = { 'bashls', 'dockerls', 'jsonls', 'pyright', 'tsserver', 'tailwindcss',
-                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls', 'astro', 'omnisharp' }
+                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls', 'astro', 'csharp_ls', 'jdtls' }
 
 -- Ensure the servers above are installed
 -- require('mason-lspconfig').setup {
@@ -137,7 +146,7 @@ require('lspconfig').lua_ls.setup {
 -- Example custom configuration for lua
 --
 -- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ';')
+runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
@@ -165,49 +174,9 @@ require('lspconfig').lua_ls.setup {
   },
 }
 
-local pid = vim.fn.getpid()
-local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
-local omnisharp_bin = vim.fn.has('unix') and home .. '/.local/share/nvim/mason/packages/omnisharp-mono/run' or home .. '/AppData/Local/nvim-data/mason/packages/omnisharp/OmniSharp.exe'
-local root_pattern = require('lspconfig.util').root_pattern
-
-require'lspconfig'.omnisharp.setup{
-    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid)}, --, "-s", io.popen"cd":read'*l' },
-    handlers = {
-        ["textDocument/definition"] = require('omnisharp_extended').handler,
-    },
-    root_dir = function(path)
-      -- Make sure an sln doesn't already exist before trying to use nearest csproj
-      return root_pattern('*.sln')(path) or root_pattern('*.csproj')(path)
-    end,
-    -- Additional configuration can be added here
-    -- Enables support for reading code style, naming convention and analyzer
-    -- settings from .editorconfig.
-    enable_editorconfig_support = true,
-    -- If true, MSBuild project system will only load projects for files that
-    -- were opened in the editor. This setting is useful for big C# codebases
-    -- and allows for faster initialization of code navigation features only
-    -- for projects that are relevant to code that is being edited. With this
-    -- setting enabled OmniSharp may load fewer projects and may thus display
-    -- incomplete reference lists for symbols.
-    enable_ms_build_load_projects_on_demand = false,
-    -- Enables support for roslyn analyzers, code fixes and rulesets.
-    enable_roslyn_analyzers = false,
-    -- Specifies whether 'using' directives should be grouped and sorted during
-    -- document formatting.
-    organize_imports_on_format = false,
-    -- Enables support for showing unimported types and unimported extension
-    -- methods in completion lists. When committed, the appropriate using
-    -- directive will be added at the top of the current file. This option can
-    -- have a negative impact on initial completion responsiveness,
-    -- particularly for the first few completion sessions after opening a
-    -- solution.
-    enable_import_completion = true,
-    -- Specifies whether to include preview versions of the .NET SDK when
-    -- determining which version to use for project loading.
-    sdk_include_prereleases = true,
-    -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-    -- true
-    analyze_open_documents_only = false,
-    on_attach = on_attach
+require('lspconfig').tsserver.setup{
+  -- filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+-- root_dir = require('lspconfig.util').root_pattern('package.json')
+  root_dir = vim.loop.cwd
 }
 

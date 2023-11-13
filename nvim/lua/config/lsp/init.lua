@@ -1,6 +1,7 @@
 require('config.lsp.nvim-cmp')
 require('config.lsp.null-ls')
 require('config.lsp.mason')
+vim.api.nvim_exec_autocmds("FileType", {})
 
 -- local lspconfig = require('lspconfig')
 

@@ -3,12 +3,20 @@ local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
 
+-- sqlite
+if vim.fn.has('win32') == 1 then
+  vim.g.sqlite_clib_path = 'C:/sqlite3.dll'
+end
 -- Colorscheme
-vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd("colorscheme tokyonight-moon")
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- disable language provider support for languages (lua and vimscript plugins only)
+-- vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_ruby_provider = 0
 
 vim.cmd[[filetype plugin on]]
 

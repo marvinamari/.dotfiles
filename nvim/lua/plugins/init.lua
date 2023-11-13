@@ -30,6 +30,7 @@ return {
         'hrsh7th/nvim-cmp',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
+        'rafamadriz/friendly-snippets'
     },
   },
   {
@@ -54,6 +55,13 @@ return {
   },
   {
      "ggandor/leap.nvim"
+  },
+-- langs
+  {
+    --'folke/neodev.nvim'
+  },
+  {
+    'mfussenegger/nvim-jdtls'
   },
 -- Editor
   {

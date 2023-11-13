@@ -147,33 +147,35 @@ dap.configurations.python = {
 }
 --
 -- DotNet
-dap.adapters.coreclr = {
+local exe = vim.fn.has('unix') and '/.local/share/nvim/mason/bin/netcoredbg' or '/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe'
+
+dap.adapters.netcoredbg = {
   type = 'executable',
-  command = home .. '/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
+  command = home .. exe,
   args = {'--interpreter=vscode'}
 }
 
-dap.adapters.coreclrattach = {
+dap.adapters.netcoredbgattach = {
   type = 'executable',
-  command = home .. '/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
+  command = home .. exe,
   args = {'--interpreter=vscode', '--attach'}
 }
 
 dap.configurations.cs = {
   {
-    type = "coreclr",
+    type = "netcoredbg",
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-        return vim.fn.input('Path to dll:', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        return vim.fn.input('Path to executable:' .. vim.fn.getcwd() .. '- /bin/Debug/file')
     end,
   },
   {
-    type = "coreclrattach",
+    type = "netcoredbgattach",
     name = "attach - netcoredbg",
     request = "attach",
     program = function()
-        return vim.fn.input('Path to dll:', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+        return vim.fn.input('EnterProcess ID:')
     end,
   },
 }

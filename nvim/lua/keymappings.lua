@@ -127,14 +127,14 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Rest
-keymap("n", "<LocalLeader>rr", ":RestNvim<cr>", opts)
-keymap("n", "<LocalLeader>rp", ":RestNvimPreview<cr>", opts)
-keymap("n", "<LocalLeader>rl", ":RestNvimLast<cr>", opts)
+keymap("n", "<LocalLeader>hr", ":RestNvim<cr>", opts)
+keymap("n", "<LocalLeader>hp", ":RestNvimPreview<cr>", opts)
+keymap("n", "<LocalLeader>hl", ":RestNvimLast<cr>", opts)
 
 
 -- toggleterm
-keymap('n', '<leader>tt', ':ToggleTerm size=20 direction=horizontal<CR>', opts)
-keymap('n', '<leader>tv', ':ToggleTerm size=110 direction=vertical<CR>', opts)
+keymap('n', '<leader>tT', ':ToggleTerm size=20 direction=horizontal<CR>', opts)
+keymap('n', '<leader>tV', ':ToggleTerm size=110 direction=vertical<CR>', opts)
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
@@ -211,15 +211,7 @@ map('n', '<leader>cl', ":changes<CR>", opts)
 
 -- marks
 map('n', 'mm', ':lua require("harpoon.mark").add_file()<cr>', opts)
-map('n', 'ml', ":lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
-map('n', 'm1', ':lua require("harpoon.ui").nav_file(1)<cr>', opts)
-map('n', 'm2', ':lua require("harpoon.ui").nav_file(2)<cr>', opts)
-map('n', 'm3', ':lua require("harpoon.ui").nav_file(3)<cr>', opts)
-map('n', 'm4', ':lua require("harpoon.ui").nav_file(4)<cr>', opts)
-map('n', 'mn', ':lua require("harpoon.ui").nav_next()<cr>', opts)
-map('n', 'mp', ':lua require("harpoon.ui").nav_prev()<cr>', opts)
-map('n', 'mr', ':lua require("harpoon.ui").rm_file()<cr>', opts)
-map('n', 'mc', ':lua require("harpoon.ui").clear_all()<cr>', opts)
+map('n', 'm<space>', ":lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
 
 -- telescope-dap
 map('n', '<leader>dtf', ":Telescope dap frames<CR>")
@@ -264,6 +256,12 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 -- vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 -- vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
+-- Spring
+local spring_run_mvn = 'mvn spring-boot:run -Dspring-boot.run.properties=local'
+local command = ':lua require("toggleterm").exec("' .. spring_run_mvn .. '")<CR>'
+keymap('n', '<leader>sr', command, opts)
+keymap('n', '<leader>oi', ':lua require("jdtls").organize_imports()<CR>', opts)
+keymap('n', '<leader>jc', ':lua require("jdtls").compile("incremental")', opts)
 
 -- neotest
 map("n", "<leader>tr", ':lua require("neotest").run.run()<CR>')
@@ -271,8 +269,10 @@ map("n", "<leader>tf", ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>'
 map("n", "<leader>td", ':lua require("neotest").run.run({strategy = "dap"})<CR>', opts)
 map("n", "<leader>ts", ':lua require("neotest").run.stop()<CR>', opts)
 map("n", "<leader>ta", ':lua require("neotest").run.attach()<CR>', opts)
-map("n", "<leader>tS", ':lua require("neotest").summary.toggle()<CR>', opts)
+map("n", "<leader>tt", ':lua require("neotest").summary.toggle()<CR>', opts)
 map("n", "<leader>to", ':lua require("neotest").summary.output()<CR>', opts)
+map("n", "<leader>tp", ':lua require("neotest").output_panel.toggle()<CR>', opts)
+map("n", "<leader>tw", ':lua require("neotest").watch.toggle()<CR>', opts)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -291,7 +291,7 @@ wk.register({
   f = {
     name = "Find Files In Buffer"
   },
-  r = { name = "Rest Requests",
+  h = { name = "Rest Requests",
     r = {":RestNvim<cr>", "Run request under cursor"},
     p = {":RestNvimPreview<cr>", "Preview request Curl command"},
     l = {":RestNvimLast<cr>", "Re-run last request"},

@@ -1,10 +1,12 @@
 " let mapleader = ","
 let mapleader = " "
-" let maplocalleader = ","
+let localleader = "\\"
 
 set ignorecase
 set smartcase
 set scrolloff=7 " 7 lines above/below cursor when scrolling
+
+set relativenumber number
 
 " Emulated Plugins
 set surround
@@ -18,7 +20,10 @@ set clipboard+=unnamed
 set ideajoin
 
 " Multiple cursors support
-"set multiple-cursors
+set multiple-cursors
+nmap <C-down> :action EditorCloneCaretBelow<cr>
+vmap n :action SelectNextOccurrence<cr>
+vmap N :action UnselectPreviousOccurrence<cr>
 
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
@@ -44,6 +49,13 @@ imap <C-k> <Up>
 imap <C-j> <Down>
 imap <C-l> <Right>
 
+" multi
+" scrolling
+nmap <S-left> 20zh
+nmap <S-right> 20zl
+
+" Symbols
+nmap \s :action ActivateStructureToolWindow<cr>
 
 " Terminal
 nmap <leader>tt :action ActivateTerminalToolWindow<cr>
@@ -76,38 +88,44 @@ nmap <leader>wd :action OpenEditorInOppositeTabGroup<cr>
 " nmap <leader>ww :action JumpToLastWindow<cr>
 
 " NERDTree
-map <leader>co :NERDTree<CR>
-map <leader>nf :NERDTreeFind<CR>
+map <leader>ee :NERDTree<CR>
+nmap <leader>eh :action HideActiveWindow<cr>
 
 " Navigation
 nmap <leader>h :action Back<cr>
 nmap <leader>l :action Forward<cr>
 nmap <leader>rl :action RecentLocations<cr>
-nmap <leader>gr :action FindUsages<cr>
 nmap <leader>C :action CallHierarchy<cr>
 nmap <leader>ff :action GotoFile<cr>
-nmap <leader>gg :action FindInPath<cr>
+nmap <leader>fg :action FindInPath<cr>
 nmap <leader>gc :action GotoClass<cr>
 nmap <leader>gs :action GotoSymbol<cr>
 nmap <leader>; :action FileStructurePopup<cr>
 nmap <leader>M :action ActivateStructureToolWindow<cr>
 nmap <leader>d :action ShowErrorDescription<cr>
-nmap <leader>gi :action GotoImplementation<cr>
-nmap <leader>gd :action GotoDefinition<cr>
-nmap <leader>gD :action GotoDeclaration<cr>
+
+nmap <leader>ns :action SelectInProjectView<cr>
+
+" lsp
+nmap gi :action GotoImplementation<cr>
+nmap gd :action GotoDeclaration<cr>
+nmap gr :action ShowUsages<cr>
+
 nmap <leader>U :action GotoSuperMethod<cr>
 nmap <leader>I :action SelectIn<cr>
-nmap <leader>rf :action RecentFiles<cr>
+nmap <leader>fj :action RecentFiles<cr>
 nmap <leader>cl :action RecentChangedFiles<cr>
-nmap <leader>bb :action ToggleBookmark<cr>
-nmap <leader>bl :action ShowBookmarks<cr>
-nmap <leader>bn :action GotoNextBookmarkInEditor<cr>
-nmap <leader>bp :action GotoPreviousBookmarkInEditor<cr>
+
+nmap mm :action ToggleBookmark<cr>
+nmap ml :action ShowBookmarks<cr>
+nmap mn :action GotoNextBookmarkInEditor<cr>
+nmap mp :action GotoPreviousBookmarkInEditor<cr>
 nmap <leader>jp :action JumpToLastWindow<cr>
 nmap <leader>t :action GotoTest<cr>
 nmap <leader>cc :action JumpToLastChange<cr>
 
 " Useful Git actions
+nmap <leader>gB :action Annotate<cr>
 nmap <leader>gb :action Git.Branches<cr>
 nmap <leader>gp :action Git.Pull<cr>
 nmap <leader>gu :action Git.Push<cr>
@@ -121,6 +139,8 @@ nmap ,a :action GotoAction<cr>
 nmap <leader>x :action GotoNextError<cr>
 nmap <leader>X :action GotoPreviousError<cr>
 
+" Editor
+nmap<leader>F :action ReformatCode<cr>
 " Refactorings
 vmap T :action Refactorings.QuickListPopupAction<cr>
 vmap <leader>rm :action ExtractMethod<cr>
@@ -174,8 +194,8 @@ nnoremap ]m :action MethodDown<cr>
 nnoremap [c :action VcsShowPrevChangeMarker<cr>
 nnoremap ]c :action VcsShowNextChangeMarker<cr>
 " Tabs
-nnoremap [b :action PreviousTab<cr>
-nnoremap ]b :action NextTab<cr>
+nnoremap <S-h> :action PreviousTab<cr>
+nnoremap <S-l> :action NextTab<cr>
 
 " Search
 nmap <leader>/ :action Find<cr>
@@ -197,7 +217,8 @@ nmap ,c :action RunClass<cr>
 nmap ,d :action DebugClass<cr>
 nmap ,t :action RerunTests<cr>
 nmap ,T :action RerunFailedTests<cr>
-nmap ,p :action ToggleLineBreakpoint<cr>
+
+nmap <leader>db :action ToggleLineBreakpoint<cr>
 nmap ,i :action ParameterInfo<cr>
 
 " Useful Quick actions
@@ -208,7 +229,6 @@ nmap ,e :action JumpToLastChange<cr>
 nmap <leader>j :action AceAction<cr>
 nmap ,yy :action CopySourceRootPath<cr>
 nmap ,ya :action CopyAbsolutePath<cr>
-nmap ,l :action RecentLocations<cr>
 nmap ,S :action ShowProjectStructureSettings<cr>
 
 " Pin/Unpin active tab

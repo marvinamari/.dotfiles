@@ -4,7 +4,9 @@ require("neotest").setup({
       dap = { justMyCode = false },
     }),
     require "neotest-rust",
-    require "neotest-dotnet",
+    require("neotest-dotnet")({
+      dap = { justMyCode = false},
+    }),
     require "neotest-scala",
     require "neotest-haskell",
     require "neotest-jest",

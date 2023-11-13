@@ -55,6 +55,8 @@ cmd restore_trash ${{
   trash-restore
 }}
 
+cmd open &start $Env:f
+
 # Bindings
 map d
 map m
