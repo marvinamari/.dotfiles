@@ -2,7 +2,7 @@ return {
   'folke/trouble.nvim',
   'simrat39/symbols-outline.nvim',
   {
-  'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' }
+  'chentoast/marks.nvim' 
   },
   'rest-nvim/rest.nvim',
   'sindrets/diffview.nvim',

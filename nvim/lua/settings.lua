@@ -3,10 +3,6 @@ local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
 
--- sqlite
-if vim.fn.has('win32') == 1 then
-  vim.g.sqlite_clib_path = 'C:/sqlite3.dll'
-end
 -- Colorscheme
 vim.cmd("colorscheme tokyonight-moon")
 
@@ -106,4 +102,24 @@ vim.cmd[["set t_8b=^[[48;2;%lu;%lu;%lum"]]
 
 if vim.fn.has('termguicolors') == 1 then
     vim.api.nvim_command('set termguicolors')
+end
+
+
+-- Windows Settings
+if vim.fn.has('win32') == 1 then
+  vim.g.sqlite_clib_path = 'C:/sqlite3.dll'
+  vim.cmd[[let &shell = executable('pwsh') ? 'pwsh' : 'powershell']]
+
+  local powershell_options = {
+  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+  shellquote = "",
+  shellxquote = "",
+  }
+
+  for option, value in pairs(powershell_options) do
+    vim.opt[option] = value
+  end
 end

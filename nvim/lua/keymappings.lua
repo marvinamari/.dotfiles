@@ -209,9 +209,12 @@ keymap('n', '<LocalLeader>s', ":SymbolsOutline<cr>", opts)
 -- change list
 map('n', '<leader>cl', ":changes<CR>", opts)
 
--- marks
-map('n', 'mm', ':lua require("harpoon.mark").add_file()<cr>', opts)
-map('n', 'm<space>', ":lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
+-- marks https://github.com/chentoast/marks.nvim
+map('n', 'mm', ":lua require('marks').set_next()<CR>", opts)
+map('n', 'mn', ":lua require('marks').next()<CR>", opts)
+map('n', 'ml', ":MarksListAll<CR>", opts)
+map('n', 'm-', ":lua require('marks').delete_buf()<CR>", opts)
+map("n", "<leader>ml", ":Telescope marks<CR>", opts)
 
 -- telescope-dap
 map('n', '<leader>dtf', ":Telescope dap frames<CR>")
@@ -233,7 +236,6 @@ map("n", "<Leader>fh", ":Telescope quickfixhistory<CR>")
 map("n", "<Leader>fg", ":Telescope live_grep<CR>")
 map("n", "<Leader>fr", ":Telescope resume<CR>")
 map("n", "<Leader>go", ":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>")
-map("n", "<Leader>fm", ":Telescope marks<CR>")
 map("n", "<Leader>fp", ":Telescope projects<CR>")
 map("n", "<Leader>gs", ":Telescope git_status<CR>")
 map("n", "<Leader>gf", ":Telescope git_files<CR>")
