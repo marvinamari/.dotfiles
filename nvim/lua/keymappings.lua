@@ -86,8 +86,8 @@ keymap('x', '<leader>rn', '%s///g<Left><Left>', opts)
 -- TODO fix this
 -- resize with arrows
 vim.cmd([[
-  nnoremap <silent> <C-Up>    :resize -2<CR>
-  nnoremap <silent> <C-Down>  :resize +2<CR>
+  nnoremap <silent> <C-Up>    :resize +2<CR>
+  nnoremap <silent> <C-Down>  :resize -2<CR>
   nnoremap <silent> <C-Left>  :vertical resize -2<CR>
   nnoremap <silent> <C-Right> :vertical resize +2<CR>
 ]])
@@ -96,7 +96,8 @@ vim.cmd([[
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
 
-keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<cr>', opts)
+-- Refactor
+keymap('n', 'rn', ':lua vim.lsp.buf.rename()<cr>', opts)
 keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', opts)
 
 keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', opts)
@@ -125,11 +126,13 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 --vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+keymap('n', '<LocalLeader>dh', ':lua vim.diagnostic.hide()<CR>', opts)
+keymap('n', '<LocalLeader>ds', ':lua vim.diagnostic.show()<CR>', opts)
 
 -- Rest
-keymap("n", "<LocalLeader>hr", ":RestNvim<cr>", opts)
-keymap("n", "<LocalLeader>hp", ":RestNvimPreview<cr>", opts)
-keymap("n", "<LocalLeader>hl", ":RestNvimLast<cr>", opts)
+keymap("n", "<LocalLeader>rr", ":RestNvim<cr>", opts)
+keymap("n", "<LocalLeader>rp", ":RestNvimPreview<cr>", opts)
+keymap("n", "<LocalLeader>rl", ":RestNvimLast<cr>", opts)
 
 
 -- toggleterm
@@ -156,13 +159,6 @@ vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 keymap('n', '<leader>nr', ':NvimTreeRefresh<CR>', opts)
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', opts)
-
--- git
---vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-keymap('n', "<leader>lg", ":LazyGit<CR>", opts)
-keymap('n', '<leader>DL', ':diffget local<CR>', opts)
-keymap('n', '<leader>DB', ':diffget base<CR>', opts)
-keymap('n', '<leader>DR', ':diffget remote<CR>', opts)
 
 --comment
 vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
@@ -224,6 +220,7 @@ map('n', '<leader>dlb', ":Telescope dap list_breakpoints<CR>")
 map('n', '<leader>dv', ":Telescope dap variables<CR>")
 
 -- Telescope -- See `:help telescope.builtin`
+-- navigate preview window with ctl-d ctl-u
 vim.keymap.set("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>", { desc = '[f]ind [f]iles' })
 map("n", "<Leader>fb", ':lua require("telescope").extensions.file_browser.file_browser()<CR>')
 map("n", "<Leader>fC", ":lua require('telescope.builtin').colorscheme()<CR>")
@@ -243,6 +240,14 @@ map("n", "<Leader>gc", ":Telescope git_commits<CR>")
 map("n", "<Leader>gt", ":Telescope git_stash<CR>")
 map("n", "<Leader>gb", ":Telescope git_branches<CR>")
 
+-- git
+--vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+keymap('n', "<leader>gl", ":LazyGit<CR>", opts)
+keymap('n', '<leader>DL', ':diffget local<CR>', opts)
+keymap('n', '<leader>DB', ':diffget base<CR>', opts)
+keymap('n', '<leader>DR', ':diffget remote<CR>', opts)
+
+
 vim.keymap.set("n", "<LocalLeader>f", function() builtin.find_files({ cwd = utils.buffer_dir() }) end,
   {desc = "Find files in cwd"})
 vim.keymap.set('n', '<leader>/', function()
@@ -252,7 +257,6 @@ vim.keymap.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
-
 -- vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 -- vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 -- vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
@@ -293,7 +297,7 @@ wk.register({
   f = {
     name = "Find Files In Buffer"
   },
-  h = { name = "Rest Requests",
+  r = { name = "Rest Requests",
     r = {":RestNvim<cr>", "Run request under cursor"},
     p = {":RestNvimPreview<cr>", "Preview request Curl command"},
     l = {":RestNvimLast<cr>", "Re-run last request"},
