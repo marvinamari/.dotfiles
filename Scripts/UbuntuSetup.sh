@@ -4,90 +4,80 @@ cd ~
 sudo apt update -qq #qq will make it quiet no imput on the screen
 sudo apt upgrade -y
 
-# install snapd, flatpak
-{
-  flatpak --version
-} || {
-  echo "Installing flatpak..."
-  sudo apt install flatpak
-}
+# dev dependencies
+sudo apt install -yy bat binutils bison build-essential caffeine \
+    fzf gcc kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
+    libncursesw5-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev make magic-wormhole \
+    nfs-common rclone ripgrep tk-dev tmux virt-manager wget xz-utils zlib1g-dev zsh
 
-{
-  snapd --version
-} || {
-  echo "Installing snapd...."
-  sudo apt install snapd
-}
+# install docker
+sudo apt install -yy ca-certificates curl gnupg lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -yy docker-ce docker-ce-cli containerd.io docker-compose-plugin
+# run docker without sudo
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
-sudo snapd install keepassxc dbeaver-ce
-sudo snap install code --classic
-
-
-sudo apt install -yy curl wget caffeine mercurial make binutils bison gcc build-essential xclip wl-clipboard kdiff3 nfs-common libssl-dev zlib1g-dev \
-libbz2-dev libreadline-dev libsqlite3-dev curl \
-libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-#install dotnet with manual script
-
-echo "Installing Docker docs.docker.com/engine/install/ubuntu"
-sudo apt install ca-certificates curl gnupg
 echo "Set ZSH default============"
 sudo chsh -s $(which zsh)
 
-echo "========= Installing GVM =========="
-zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+echo "========= Installing asdf =========="
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
 
-echo "========= Installing LunarVim ========="
-zsh <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
-# FTP (run with docker-compose up -d)
-echo "========= Downloading Filestash ========="
-mkdir ~/filestash && cd ~/filestash
-curl -O https://downloads.filestash.app/latest/docker-compose.yml
-cd ~
-
-echo "======= Installing SDKMan ======="
-curl -s "https://get.sdkman.io" | bash
-
-# Virtualbox
-# apt-key was deprecated so do this https://askubuntu.com/questions/1286545/what-commands-exactly-should-replace-the-deprecated-apt-key
-wget -qO- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-# download and install the pack
-wget https://download.virtualbox.org/virtualbox/7.0.8/Oracle_VM_VirtualBox_Extension_Pack-7.0.8.vbox-extpack
-VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.8.vbox-extpack
-# virtualbox guest additions
-sudo apt install build-essential dkms linux-headers-$(uname -r)
-
-# Delete Virtualbox
-# sudo apt remove virtualbox virtualbox-*
+echo "====== Downloading fonts ======"
+echo "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip"
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip
+unzip Hack.zip -d ~/.fonts
+fc-cache -fv
 
 #
 # Install Flatpak
+{
+  flatpak --version
+} || {
+  echo "Installing flatpak software..."
+  sudo apt install -yy flatpak
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+}
+
 echo "========= Installing Flatpaks ========="
 # sudo apt --fix-broken install
 sudo apt update
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update
 
-flatpak install flathub com.logseq.Logseq
-flatpak install -y  com.google.Chrome
-flatpak install -y  flathub com.discordapp.Discord
-flatpak install -y  flathub com.slack.Slack
-flatpak install -y  flathub org.flameshot.Flameshot
-flatpak install -y  flathub com.obsproject.Studio
-flatpak install -y  flathub org.videolan.VLC
-flatpak install -y  flathub com.getmailspring.Mailspring
-
-
-# AppImage Launcher
-echo "========= Installing AppImage Launcher ========="
-sudo apt -y install appimagelauncher
+flatpak install -yy flathub \
+    com.usebottles.bottles \
+    com.google.Chrome \
+    com.github.hluk.copyq \
+    com.discordapp.Discord \
+    com.github.tchx84.Flatseal \
+    org.flameshot.Flameshot \
+    org.keepassxc.KeePassXC \
+    org.libreoffice.LibreOffice \
+    com.logseq.Logseq \
+    com.getmailspring.Mailspring \
+    io.neovim.nvim \
+    com.slack.Slack \
+    com.obsproject.Studio \
+    org.videolan.VLC \
+    org.wezfurlong.wezterm \
+    com.jetbrains.DataGrip \
+    com.jetbrains.IntelliJ-IDEA-Ultimate \
+    com.jetbrains.PyCharm-Professional \
+    com.jetbrains.Rider \
+    com.jetbrains.WebStorm
 
 echo "All done! Please reboot the computer"
 echo "Reloud zshrc and set a few things"
-echo "pyenv install -v 3.11-dev
-nvm install 17.8.0
-nvm use 17.8.0
+echo "python, node, jdk, dotnet, go
 pip install bpytop
 sudo usermod -aG docker \${USER}
-newgrp docker"
+newgrp docker
+install these go apps: go
+install github.com/jesseduffield/lazygit@latest
+env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest"
