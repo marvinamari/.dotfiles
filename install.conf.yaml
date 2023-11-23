@@ -41,16 +41,19 @@
     ~/.alias:
         create: true
         path: .alias
-    ~/.config/helix/config.toml:
+    ~/.wezterm.lua:
         create: true
-        path: helix/config.toml
-    ~/.config/helix/languages.toml: helix/languages.toml
-    ~/.config/alacritty/alacritty.yml:
+        path: wezterm/.wezterm.lua
+    ~/.ideavimrc: .ideavimrc
+    ~/.tool-versions:
         create: true
-        path: alacritty/alacritty_ubuntu.yml
-    ~/.config/zellij:
+        path: .tool-versions
+    ~/.tmux.conf:
         create: true
-        path: zellij
+        path: .tmux.conf
+    /etc/docker/.daemon.json:
+        create: true
+        path: .daemon.json
 # - shell:
 #     - ~/.dotfiles/Scripts/UbuntuSetup.sh
 

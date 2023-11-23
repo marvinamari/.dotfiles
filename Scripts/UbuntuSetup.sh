@@ -8,7 +8,7 @@ sudo apt upgrade -y
 sudo apt install -yy bat binutils bison build-essential caffeine \
     fzf gcc kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
     libncursesw5-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev make magic-wormhole \
-    nfs-common rclone ripgrep tk-dev tmux virt-manager wget xz-utils zlib1g-dev zsh
+    nfs-common python3.10-venv rclone ripgrep tk-dev tmux virt-manager wget wl-clipboard xclip xz-utils zlib1g-dev zoxide zsh
 
 # install docker
 sudo apt install -yy ca-certificates curl gnupg lsb-release
@@ -34,6 +34,15 @@ echo "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip
 unzip Hack.zip -d ~/.fonts
 fc-cache -fv
+
+# Install common appimage dependencies
+sudo apt install -yy fuse3 libfuse2
+mkdir ~/Applications
+cd ~/Applications
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+cd ~
+
 
 #
 # Install Flatpak
@@ -61,7 +70,6 @@ flatpak install -yy flathub \
     org.libreoffice.LibreOffice \
     com.logseq.Logseq \
     com.getmailspring.Mailspring \
-    io.neovim.nvim \
     com.slack.Slack \
     com.obsproject.Studio \
     org.videolan.VLC \

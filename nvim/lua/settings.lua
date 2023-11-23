@@ -38,6 +38,8 @@ vim.o.conceallevel = 0 -- So that I can see `` in markdown files
 vim.o.clipboard = 'unnamedplus' -- Copy paste between vim and everything else
 vim.cmd[[ set dir=~/neovim/swaps ]]
 
+--vim.opt.foldmethod="indent"
+
 vim.opt.tabstop=4
 vim.opt.shiftwidth=4
 vim.opt.softtabstop=4

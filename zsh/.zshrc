@@ -6,6 +6,12 @@ source ~/.alias
 # Path
 export PATH=/usr/local/sbin:$PATH
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+export PATH="$HOME/Applications:$PATH"
+
+# Environment variables set everywhere
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+export BROWSER="chrome"
 
 # Enable colors and change prompt:
 autoload -U colors && colors
@@ -82,11 +88,6 @@ compinit
 autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
 
-# Environment variables set everywhere
-export EDITOR="hx"
-export VISUAL="$EDITOR"
-export BROWSER="chrome"
-
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct]]
 
@@ -98,9 +99,9 @@ rmd () {
 ulimit -n 10240
 
 # GO
-export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+#export GOPATH=$HOME/go
+#export GOROOT="$(brew --prefix golang)/libexec"
+#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 export PATH="$PATH:/home/marvin/.local/share/lvim/distant.nvim/bin"
 

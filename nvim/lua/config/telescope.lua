@@ -1,7 +1,16 @@
 -- local builtin = require("telescope.builtin")
+local telescope = require("telescope")
+local actions = require("telescope.actions")
+local builtin = require("telescope.builtin")
 
-require('telescope').setup{
+telescope.setup{
   defaults = {
+		mappings = {
+			i = {
+				["<C-s>"] = actions.cycle_previewers_next,
+				["<C-a>"] = actions.cycle_previewers_prev,
+			},
+		},
     dynamic_preview_title = true,
     vimgrep_arguments = {
       'rg',

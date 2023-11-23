@@ -9,13 +9,20 @@ cp dotbot/tools/git-submodule/install.ps1 .
 
 https://github.com/ms-jpq/coq_nvim
 Requires install
-python virtual env 
+python virtual env
 ```
 # Ubuntu
 apt install --yes python3-venv'
 # Pip
 pip install virtualenv
 ```
+
+Mount external drive:
+`https://www.zdnet.com/article/how-to-permanently-mount-a-drive-in-linux-and-why-you-should/`
+`https://developerinsider.co/auto-mount-drive-in-ubuntu-server-22-04-at-startup/`
+
+Change docker storage location
+`evodify.com/change-docker-storage-location`
 
 universal c tags
 ```

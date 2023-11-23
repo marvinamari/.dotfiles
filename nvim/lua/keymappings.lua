@@ -217,7 +217,7 @@ map("n", "<Leader>go", ":lua require('telescope.builtin').live_grep({grep_open_f
 map("n", "<Leader>fp", ":Telescope projects<CR>", {desc = 'Telescope projects'})
 map("n", "<Leader>gs", ":Telescope git_status<CR>", {desc = 'Telescope git status'})
 map("n", "<Leader>gf", ":Telescope git_files<CR>", {desc = 'Telescope git files'})
-map("n", "<Leader>gc", ":Telescope git_commits<CR>", {desc = 'Telescope git commits'})
+map("n", "<Leader>gc", ":lua require('telescope.builtin').git_commits({ git_command = {'git', 'log', '--pretty=reference'} })<cr>", {desc = 'Telescope git commits'})
 map("n", "<Leader>gt", ":Telescope git_stash<CR>", {desc = 'Telescope git stash'})
 map("n", "<Leader>gb", ":Telescope git_branches<CR>", {desc = 'Telescope git branches'})
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })

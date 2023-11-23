@@ -2,7 +2,7 @@ return {
   'folke/trouble.nvim',
   'simrat39/symbols-outline.nvim',
   {
-  'chentoast/marks.nvim' 
+  'chentoast/marks.nvim'
   },
   'rest-nvim/rest.nvim',
   'sindrets/diffview.nvim',
@@ -104,7 +104,7 @@ return {
   --     require("copilot_cmp").setup()
   --   end
   -- },
-
+  --'https://github.com/pmizio/typescript-tools.nvim'
 -- Debug
   'mfussenegger/nvim-dap',
   'theHamsta/nvim-dap-virtual-text',
