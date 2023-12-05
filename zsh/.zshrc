@@ -7,6 +7,7 @@ source ~/.alias
 export PATH=/usr/local/sbin:$PATH
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 export PATH="$HOME/Applications:$PATH"
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
 # Environment variables set everywhere
 export EDITOR="nvim"
@@ -99,9 +100,9 @@ rmd () {
 ulimit -n 10240
 
 # GO
-#export GOPATH=$HOME/go
-#export GOROOT="$(brew --prefix golang)/libexec"
-#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export GOPATH=$HOME/go
+export GOROOT=$HOME/.asdf/shims
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 export PATH="$PATH:/home/marvin/.local/share/lvim/distant.nvim/bin"
 

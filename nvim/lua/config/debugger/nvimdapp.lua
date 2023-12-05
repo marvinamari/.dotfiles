@@ -3,16 +3,6 @@ require('utils')
 local dap = require('dap')
 local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
 local api = vim.api
--- local configurations = dap.configurations
--- configurations.python = {{
---     type = 'python';
---     request = 'launch';
---     name = 'launch file';
---     program = '${file}';
---     pythonPath = function()
---       return '/Users/amari/.pyenv/shims/python3'
---     end
---   }}
 
 -- Lua one step mankind plugin
 dap.configurations.lua = {
@@ -117,6 +107,22 @@ dap.configurations.lua = {
 -- Lua one step mankind plugin
 
 --Python
+-- local configurations = dap.configurations
+-- configurations.python = {{
+--     type = 'python';
+--     request = 'launch';
+--     name = 'launch file';
+--     program = '${file}';
+--     pythonPath = function()
+--       return '/Users/amari/.pyenv/shims/python3'
+--     end
+--   }}
+dap.adapters.python = {
+    type = 'executable';
+    command = home .. '/.local/share/nvim/mason/packages/debugpy/venv/bin/python';
+    args = { '-m', 'debugpy.adapter' };
+}
+
 dap.adapters.generic_remote = function(callback, config)
   callback({
     type = 'server',
@@ -127,7 +133,27 @@ dap.adapters.generic_remote = function(callback, config)
     }
 })
 end
+
 dap.configurations.python = {
+  {
+     type = 'python',
+     request = 'launch',
+     name = 'launch file',
+     program = '${file}',
+     pythonPath = function()
+      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+      local cwd = vim.fn.getcwd()
+      if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        return cwd .. '/venv/bin/python'
+      elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        return cwd .. '/.venv/bin/python'
+      else
+       return home .. '/.asdf/shims/python3'
+      end
+    end;
+  },
   {
     type = "generic_remote",
     name = "Generic remote",

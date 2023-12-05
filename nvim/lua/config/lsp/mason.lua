@@ -1,7 +1,7 @@
 -- Mason path ~/.local/share/nvim/mason/bin
 
 local pid = vim.fn.getpid()
-local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
+local home = os.getenv('HOME') --vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
 local root_pattern = require('lspconfig.util').root_pattern
 
 -- LSP settings.
@@ -178,3 +178,13 @@ require('lspconfig').gopls.setup{
   }
 
 }
+
+local config = {
+  handlers = {
+    ["textDocument/definition"] = require('csharpls_extended').handler,
+  },
+  cmd = { csharpls },
+  -- rest of your settings
+}
+
+require'lspconfig'.csharp_ls.setup(config)

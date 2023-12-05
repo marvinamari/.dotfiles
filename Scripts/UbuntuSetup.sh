@@ -6,7 +6,7 @@ sudo apt upgrade -y
 
 # dev dependencies
 sudo apt install -yy bat binutils bison build-essential caffeine \
-    fzf gcc kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
+    fzf gcc kdeconnect kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
     libncursesw5-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev make magic-wormhole \
     nfs-common python3.10-venv rclone ripgrep tk-dev tmux virt-manager wget wl-clipboard xclip xz-utils zlib1g-dev zoxide zsh
 
@@ -43,6 +43,11 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 cd ~
 
+echo "Lazygit"
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
 
 #
 # Install Flatpak
@@ -87,5 +92,4 @@ pip install bpytop
 sudo usermod -aG docker \${USER}
 newgrp docker
 install these go apps: go
-install github.com/jesseduffield/lazygit@latest
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest"

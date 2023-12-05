@@ -1,3 +1,6 @@
+#### Nvim logs
+~/.cache/nvim/
+
 # setup
 To install activate dotbot by running:
 `git submodule update --init`
@@ -20,9 +23,34 @@ pip install virtualenv
 Mount external drive:
 `https://www.zdnet.com/article/how-to-permanently-mount-a-drive-in-linux-and-why-you-should/`
 `https://developerinsider.co/auto-mount-drive-in-ubuntu-server-22-04-at-startup/`
+1. Make directory which will be the mount point for drive
+`mkdir /mnt/name`
+> change ownership of directory to user `sudo chown -R $USER:$USER /mnt/name`
+2. Locate the name of your drive
+`lsblk -o NAME,FSTYPE,UUID,MOUNTPOINTS`
+3. Copy the UUID and file system type
+4. Edit fstab
+`sudo vim /etc/fstab`
+5. Add a new entry of the following format
+```
+<file system> <mount point>   <type>  <options>       <dump>  <pass>
+UUID=<UUID> <PATH_TO_MOUNT> <DRIVE_TYPE>  defaults        0       0
+
+# Example entry for USB1
+UUID=632D-7154 /media/USB1   exfat    defaults        0       0
+```
+6. Before rebooting verify fstab is valid, if not disk may become unbootable
+`sudo findmnt --verify`
+> If any errors or warnings occur something may be wrong.
+7. Reboot and test drive
+`lsblk -o NAME,FSTYPE,UUID,MOUNTPOINTS`
+
 
 Change docker storage location
 `evodify.com/change-docker-storage-location`
+1. create file `/etc/docker/daemon.json`
+2. `sudo systemctl restart docker`
+3. `docker system prune -a`
 
 universal c tags
 ```
@@ -65,3 +93,6 @@ command -v zsh | sudo tee -a /etc/shells
 
 # now we have told terminal zsh is valid shell login, set as default
 sudo chsh -s $(which zsh) $USER
+
+
+Use asdf to install php which comes with composer

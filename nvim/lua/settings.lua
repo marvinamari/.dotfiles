@@ -3,6 +3,7 @@ local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
 
+vim.cmd("set modifiable")
 -- Colorscheme
 vim.cmd("colorscheme tokyonight-moon")
 

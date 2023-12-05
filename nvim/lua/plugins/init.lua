@@ -34,9 +34,6 @@ return {
     },
   },
   {
-    'mg979/vim-visual-multi', branch = 'master'
-  },
-  {
       "kylechui/nvim-surround",
       version = "*", -- Use for stability; omit to use `main` branch for the latest features
       event = "VeryLazy",
@@ -77,8 +74,6 @@ return {
   {'akinsho/nvim-bufferline.lua', dependencies = 'nvim-tree/nvim-web-devicons'},
   {"akinsho/toggleterm.nvim", tag = 'v2.2.1'},
   'kevinhwang91/nvim-hlslens',
-  'numToStr/Comment.nvim',
-  'sQVe/sort.nvim',
   { "AckslD/nvim-neoclip.lua",
     dependencies = {
         {'kkharji/sqlite.lua', module = 'sqlite'},
@@ -123,6 +118,7 @@ return {
       "nvim-neotest/neotest-go",
       "haydenmeade/neotest-jest",
       "Issafalcon/neotest-dotnet",
+      "Decodetalkers/csharpls-extended-lsp.nvim",
       "stevanmilic/neotest-scala",
       "rouge8/neotest-rust",
       "mrcjkb/neotest-haskell",

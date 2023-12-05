@@ -1,3 +1,9 @@
+-- Go to previous location Ctrl + o
+-- Go to next location Ctrl + i
+-- Go to next method, change, diagnostic [] m|c|d
+-- Increment Decrement number Ctrl-A Ctrl-X
+-- substitue in block <,>s/old/new/g
+
 -- Escape termcodes
 local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -8,8 +14,6 @@ local keymap = require 'utils'.keymap
 vim.g.maplocalleader = '\\'
 keymap('n', '<Space>', '<NOP>')
 
--- Go to previous location Ctrl + o
--- Go to next location Ctrl + i
 
 keymap('n', '<leader>W', ':WhichKey<cr>')
 
@@ -89,13 +93,14 @@ keymap('n', '<C-Right>', ':vertical resize +2<cr>')
 keymap('n', 'rn', ':lua vim.lsp.buf.rename()<cr>', {desc = 'Refactor rename variable'})
 keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', {desc = "Refactor code action"})
 
+keymap('n', 'gt', ":lua require('csharp_ls_extended').lsp_definitions()<cr>", {desc = 'Go to C# definition'})
 keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', {desc = 'LSP go to definition'})
 keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', {desc = 'LSP go to declaration'})
 keymap('n', 'gr', ":lua require('telescope.builtin').lsp_references()<cr>", {desc = 'LSP telescope find references'})
 keymap('n', 'gR', ":lua vim.lsp.buf.references()<cr>", {desc = 'LSP find references'})
 keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', {desc = 'LSP go to implementation'})
 keymap('n', '<leader>D', ':lua vim.lsp.buf.type_definition()<cr>', {desc = 'LSP type definition'})
-keymap('n', '<leader>ds', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", {desc = 'LSP document symbol'})
+keymap('n', '<leader>ls', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", {desc = 'LSP document symbol'})
 keymap('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", {desc = 'LSP workspace symbol'})
 
 -- See `:help K` for why this keymap
@@ -123,7 +128,8 @@ keymap("n", "<LocalLeader>rl", ":RestNvimLast<cr>", {desc = 'Rest run last'})
 
 -- toggleterm
 keymap('n', '<LocalLeader>th', ':ToggleTerm size=20 direction=horizontal<CR>', {desc = 'Terminal horizontal'})
-keymap('n', '<leader>tV', ':ToggleTerm size=110 direction=vertical<CR>', {desc = 'Terminal vertical'})
+keymap('n', '<LocalLeader>tV', ':ToggleTerm size=110 direction=vertical<CR>', {desc = 'Terminal vertical'})
+
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
@@ -142,25 +148,24 @@ keymap('n', '<leader>nr', ':NvimTreeRefresh<CR>', {desc = 'Tree refresh'})
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', {desc = 'Tree togle'})
 keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', {desc = 'Tree find file'})
 
---comment
-vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Comment line'})
-keymap('n', '<C-.>', 'gbc', {desc = 'Comment block'})
-
 -- dap debugging
 map('n', '<F5>', ":lua require('dap').continue()<CR>", {desc = 'Debug continue'})
 
-map('n', '<F10>', ":lua require('dap').step_over()<CR>", {desc = 'Debug step over'})
 map('n', '<F11>', ":lua require('dap').step_into()<CR>", {desc = 'Debug step into'})
+map('n', '<F10>', ":lua require('dap').step_over()<CR>", {desc = 'Debug step over'})
 map('n', '<S-F12>', ":lua require('dap').step_out()<CR>", {desc = 'Debug step out'})
 
 map('n',  '<leader>db', ":lua require'dap'.toggle_breakpoint()<CR>", {desc = 'Debug toggle breakpoint'})
+map('n', '<leader>dr', ":lua require'dap'.restart()<cr>", {desc = 'Debug restart'})
+map('n', '<leader>ds', ":lua require'dap'.stop()<cr>", {desc = 'Debug stop'})
+map('n', '<leader>dt', ":lua require'dap'.terminate()<cr>", {desc = 'Debug terminate'})
 map('n',  '<leader>dC', ":lua require'dap'.close()<CR>", {desc = 'Debug close'})
 map('n',  '<leader>dc', ":lua require'dap'.continue()<CR>", {desc = 'Debug continue'})
 map('n',  '<leader>dU', ":lua require'dap'.up()<CR>", {desc = 'Debug up'})
 map('n',  '<leader>dD', ":lua require'dap'.down()<CR>", {desc = 'Debug down'})
 map('n',  '<leader>d_', ":lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>", {desc = 'Debug stop run last'})
 
-map('n',  '<leader>dr', ":lua require'dap'.repl.toggle({}, 'vsplit')<CR><C-w>l", {desc = 'Debug toggle REPL'})
+map('n',  '<leader>dR', ":lua require'dap'.repl.toggle({}, 'vsplit')<CR><C-w>l", {desc = 'Debug toggle REPL'})
 map('n', '<Leader>dro', ":lua require('dap').repl.open()<CR>", {desc = 'Debug open REPL'})
 map('n', '<Leader>drl', ":lua require('dap').repl.run_last()<CR>", {desc = 'Debug run last REPL'})
 
@@ -260,6 +265,14 @@ map("n", "<leader>tt", ':lua require("neotest").summary.toggle()<CR>', {desc = '
 map("n", "<leader>to", ':lua require("neotest").summary.output()<CR>', {desc = 'Test toggle summary output'})
 map("n", "<leader>tp", ':lua require("neotest").output_panel.toggle()<CR>', {desc = 'Test toggle output panel'})
 map("n", "<leader>tw", ':lua require("neotest").watch.toggle()<CR>', {desc = 'Test toggle watch'})
+
+-- trouble
+map("n", "<leader>xx", ":lua require('trouble').toggle()<cr>", {desc = 'Toggle trouble'})
+map("n", "<leader>xw", ":lua require('trouble').toggle('workspace_diagnostics')<cr>", {desc = 'Trouble toggle workspace'})
+map("n", "<leader>xd", ":lua require('trouble').toggle('document_diagnostics')<cr>", {desc = 'Trouble toggle document'})
+map("n", "<leader>xq", ":lua require('trouble').toggle('quickfix')<cr>", {desc = 'Trouble toggle quickfix'})
+map("n", "<leader>xl", ":lua require('trouble').toggle('loclist')<cr>", {desc = 'Trouble toggle loclist'})
+map("n", "<leader>xr", ":lua require('trouble').toggle('lsp_references')<cr>", {desc = 'Trouble toggle references'})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

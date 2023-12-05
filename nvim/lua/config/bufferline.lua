@@ -1,7 +1,7 @@
 require'bufferline'.setup{
   options = {
     view =  'default',
-    buffer_close_icon= '',
+    buffer_close_icon= '󱄊',
     close_icon = '',
     modified_icon = '●',
     left_trunc_marker = '',
@@ -19,7 +19,7 @@ require'bufferline'.setup{
     separator_style = 'thin',
     enforce_regular_tabs = false,
     always_show_bufferline = true,
-    sort_by = 'directory',
+    sort_by = 'id',
 
         highlights = {
             tab_selected = {
