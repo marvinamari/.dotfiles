@@ -6,6 +6,7 @@ alias wezterm='flatpak run org.wezfurlong.wezterm'
 alias copyq='flatpak run com.github.hluk.copyq'
 alias flatseal='flatpak run com.github.tchx84.Flatseal'
 alias bat='batcat'
+alias flameshot='env QT_SCREEN_SCALE_FACTORS="1;1.5;" flatpak run org.flameshot.Flameshot gui'
 
 #git
 

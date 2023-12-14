@@ -3,11 +3,16 @@
 local pid = vim.fn.getpid()
 local home = os.getenv('HOME') --vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
 local root_pattern = require('lspconfig.util').root_pattern
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig.configs'
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(server_name)
+  return function(_, bufnr)
   -- Create a command `:Format` local to the LSP buffer
+  -- Set keymaps here so they only pertain to buffers that a lang server attaches too
+  -- buffer=0 means only set for current buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     if vim.lsp.buf.format then
       vim.lsp.buf.format()
@@ -15,6 +20,32 @@ local on_attach = function(_, bufnr)
       vim.lsp.buf.formatting()
     end
   end, { desc = 'Format current buffer with LSP' })
+
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})
+  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})
+  vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer=0})
+  vim.keymap.set('n', 'rn', ':lua vim.lsp.buf.rename()<cr>', {buffer=0, desc = 'Refactor rename variable'})
+  vim.keymap.set('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', {buffer=0, desc = "Refactor code action"})
+  vim.keymap.set('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', {buffer=0, desc = 'LSP go to declaration'})
+  vim.keymap.set('n', 'gr', ":lua require('telescope.builtin').lsp_references()<cr>", {buffer=0, desc = 'LSP telescope find references'})
+  vim.keymap.set('n', 'gR', ":lua vim.lsp.buf.references()<cr>", {buffer=0, desc = 'LSP find references'})
+  vim.keymap.set('n', 'gs', ':lua vim.lsp.buf.signature_help()<cr>', {buffer=0, desc = 'LSP Signature'})
+  -- Lesser used LSP functionality
+  vim.keymap.set('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<cr>')
+  vim.keymap.set('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<cr>')
+  --Diagnostic keymaps
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {buffer=0, desc = 'Go to prev diagnostic'})
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {buffer=0, desc = 'Go to next diagnostic'})
+  vim.keymap.set('n', '<LocalLeader>do', vim.diagnostic.open_float, {buffer=0, desc = 'Diagnostics open float'})
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {buffer=0, desc = 'Set loc list'})
+  vim.keymap.set('n', '<LocalLeader>dh', ':lua vim.diagnostic.hide()<CR>', {buffer=0, desc = 'Hide diagnostics'})
+  vim.keymap.set('n', '<LocalLeader>ds', ':lua vim.diagnostic.show()<CR>', {buffer=0, desc = 'Show diagnostics'})
+  vim.keymap.set('n', '<leader>F', ':lua vim.lsp.buf.format()<cr>', {buffer=0, desc = 'LSP Format'})
+  vim.keymap.set('n', '<leader>ls', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", {buffer=0, desc = 'LSP document symbol'})
+  vim.keymap.set('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", {buffer=0, desc = 'LSP workspace symbol'})
+  end
 end
 
 
@@ -46,7 +77,6 @@ require('mason-tool-installer').setup {
 
     "astro-language-server",
     --"biome",
-    "csharp_ls",
     "gopls",
     "java-debug-adapter",
     "jdtls",
@@ -91,25 +121,32 @@ require('mason-tool-installer').setup {
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local lsp_servers = { 'astro', 'bashls', 'dockerls', 'jsonls', 'kotlin_language_server', 'pyright', 'tsserver', 'tailwindcss',
-                      'lua_ls', 'sqlls', 'svelte', 'gopls', 'yamlls', 'csharp_ls',
-                      'jdtls', 'yamlls' }
+local lsp_servers = { 'astro', 'bashls', 'dockerls','jdtls', 'jsonls',
+  'kotlin_language_server','pyright','sqlls', 'svelte', 'tailwindcss','yamlls' }
 
 -- Ensure the servers above are installed
 -- require('mason-lspconfig').setup {
 --   ensure_installed = lsp_servers,
 -- }
 
--- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- nvim-cmp supports additional completion capabilities, broadcast that to servers
+local capabilities = vim.tbl_deep_extend("force",
+vim.lsp.protocol.make_client_capabilities(),
+  require('cmp_nvim_lsp').default_capabilities()
+)
+capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 for _, lsp in ipairs(lsp_servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = lsp_status.on_attach,
-    capabilities = lsp_status.capabilities,
+  lspconfig[lsp].setup {
+    on_attach = on_attach(lsp),
+    capabilities = capabilities,
   }
 end
+
+require("roslyn").setup({
+  on_attach = on_attach(lsp),
+  capabilities = capabilities,
+})
 
 
 -- Turn on lsp status information
@@ -130,8 +167,8 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').lua_ls.setup {
-  on_attach = on_attach,
+lspconfig.lua_ls.setup {
+  on_attach = on_attach("lua_ls"),
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -154,15 +191,15 @@ require('lspconfig').lua_ls.setup {
   },
 }
 
-require('lspconfig').tsserver.setup{
+lspconfig.tsserver.setup{
   -- filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
 -- root_dir = require('lspconfig.util').root_pattern('package.json')
   root_dir = vim.loop.cwd
 }
 
 -- For debugging you must install delve https://www.youtube.com/watch?v=i04sSQjd-qo
-require('lspconfig').gopls.setup{
-  on_attach = on_attach,
+lspconfig.gopls.setup{
+  on_attach = on_attach("gopls"),
   capabilities = capabilities,
   cmd = {'gopls'},
   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
@@ -179,12 +216,3 @@ require('lspconfig').gopls.setup{
 
 }
 
-local config = {
-  handlers = {
-    ["textDocument/definition"] = require('csharpls_extended').handler,
-  },
-  cmd = { csharpls },
-  -- rest of your settings
-}
-
-require'lspconfig'.csharp_ls.setup(config)

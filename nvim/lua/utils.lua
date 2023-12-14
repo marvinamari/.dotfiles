@@ -46,4 +46,15 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 end
 
+local current_os = vim.loop.os_uname().sysname:lower()
+local unix = { "darwin", "linux" }
+M.isUnixOs = function()
+    for _, value in ipairs(unix) do
+        if value == current_os then
+            return false
+        end
+    end
+    return false
+end
+
 return M

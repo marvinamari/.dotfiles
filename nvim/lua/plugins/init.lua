@@ -4,8 +4,10 @@ return {
   {
   'chentoast/marks.nvim'
   },
-  'rest-nvim/rest.nvim',
-  'sindrets/diffview.nvim',
+  {
+    'rest-nvim/rest.nvim',
+    event = "VeryLazy"
+  },
   'kevinhwang91/nvim-bqf',
   {
   'kdheepak/lazygit.nvim',
@@ -44,21 +46,24 @@ return {
       end
   },
   {
-      "danymat/neogen",
-      dependencies = "nvim-treesitter/nvim-treesitter",
-      config = true,
-      -- Uncomment next line if you want to follow only stable versions
-      -- version = "*"
-  },
-  {
      "ggandor/leap.nvim"
   },
--- langs
   {
-    --'folke/neodev.nvim'
+    'numToStr/Comment.nvim',
+    opts = {
+        -- add any options here
+    },
+    lazy = false,
+  },
+-- lsp
+  {
+    dir = '~/projects/roslyn.nvim'
   },
   {
     'mfussenegger/nvim-jdtls'
+  },
+  {
+    --'folke/neodev.nvim'
   },
 -- Editor
   {
@@ -67,14 +72,13 @@ return {
   priority = 1000,
   opts = {},
   },
-  'Hoffs/omnisharp-extended-lsp.nvim',
   'windwp/nvim-autopairs',
   'p00f/nvim-ts-rainbow',
   { 'hoob3rt/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons', opt = true} },
   {'akinsho/nvim-bufferline.lua', dependencies = 'nvim-tree/nvim-web-devicons'},
   {"akinsho/toggleterm.nvim", tag = 'v2.2.1'},
   'kevinhwang91/nvim-hlslens',
-  { "AckslD/nvim-neoclip.lua",
+  { "AckslD/nvim-neoclip.lua", --TODO fix
     dependencies = {
         {'kkharji/sqlite.lua', module = 'sqlite'},
       },
@@ -129,8 +133,6 @@ return {
 -- Utility
   'BurntSushi/ripgrep',
   --use 'vijaymarupudi/nvim-fzf'
-  'nvim-lua/popup.nvim',
-  'nvim-lua/plenary.nvim',
   'folke/which-key.nvim',
   'kdheepak/lazygit.nvim',
   -- Fuzzy Finder (files, lsp, etc)
@@ -138,13 +140,6 @@ return {
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = vim.fn.executable 'make' == 1 },
-
-  {
-  'nvim-tree/nvim-tree.lua',
-  dependencies = {
-    'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-  },
 
   { -- Highlight, edit, and navigate code --
     'nvim-treesitter/nvim-treesitter',
@@ -161,11 +156,13 @@ return {
   -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
   },
 
+    -- Useful status updates for LSP
   {
     'j-hui/fidget.nvim',
     tag = 'legacy',
     event = 'LspAttach'
-    }
+  },
+    'nvim-lua/lsp-status.nvim',
 
 }
 
