@@ -3,66 +3,52 @@ require('utils')
 local dap = require('dap')
 local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
 local api = vim.api
+local isUnixOs = require 'utils'.isUnixOs
+local configurations = dap.configurations
+local adapters = dap.adapters
 
 -- Lua one step mankind plugin
-dap.configurations.lua = {
-  {
-    type = 'nlua',
-    request = 'attach',
-    name = "Attach to running Neovim instance",
-  }
-}
-
-dap.adapters.nlua = function(callback, conf)
-  local adapter = {
-    type = 'server',
-    host = '127.0.0.1',
-    port = conf.port
-  }
-  if conf.start_neovim then
-    local start_opts = conf.start_neovim
-    conf.start_neovim = nil
-    local handle
-    local pid_or_err
-    local opts = {
-      args = {
-        '-e',
-        vim.v.progpath,
-        '-c',
-        string.format("lua require('osv').launch({ port = %s })", conf.port),
-        start_opts.fname or api.nvim_buf_get_name(0),
-      },
-      cwd = start_opts.cwd or vim.fn.getcwd(),
-      detached = true,
-    }
-    handle, pid_or_err = vim.loop.spawn('/usr/bin/alacritty', opts, function(code)
-      handle:close()
-      assert(code == 0, "Exit code must be 0, not " .. tostring(code))
-    end)
-    if not handle then
-      error(pid_or_err)
-    end
-    local timer = vim.loop.new_timer()
-    timer:start(1000, 0, function()
-      timer:stop()
-      timer:close()
-      vim.schedule(function()
-        callback(adapter)
-      end)
-    end)
-  else
-    callback(adapter)
-  end
+adapters.nlua = function(callback, config)
+  callback({type = "server", host = config.host or "127.0.0.1", port = 5677}) --8086
 end
 
+adapters.local_lua = {
+  type = "executable",
+  command = "node",
+  args = {
+    home .. '/projects/local-lua-debugger-vscode/extension/debugAdapter.js'
+  },
+  enrich_config = function(config, on_config)
+    if not config["extensionPath"] then
+      local c = vim.deepcopy(config)
+      -- 💀 If this is missing or wrong you'll see
+      -- "module 'lldebugger' not found" errors in the dap-repl when trying to launch a debug session
+      c.extensionPath = home .. "/projects/local-lua-debugger-vscode/"
+      on_config(c)
+    else
+      on_config(config)
+    end
+  end,
+}
+
 local lua_port = 5677
-dap.configurations.lua = {
+configurations.lua = {
+ {
+    name = 'Current file (local-lua-dbg, lua)',
+    type = 'local_lua',
+    request = 'launch',
+    cwd = '${workspaceFolder}',
+    program = {
+      lua = 'lua5.1',
+      file = '${file}',
+    },
+    args = {},
+  },
   {
     type = "nlua",
     request = "attach",
-    name = "New instance (current file)",
     port = lua_port,
-    start_neovim = {}
+    name = "Attach to running Neovim instance"
   },
   {
     type = "nlua",
@@ -104,26 +90,14 @@ dap.configurations.lua = {
   },
 }
 
--- Lua one step mankind plugin
-
---Python
--- local configurations = dap.configurations
--- configurations.python = {{
---     type = 'python';
---     request = 'launch';
---     name = 'launch file';
---     program = '${file}';
---     pythonPath = function()
---       return '/Users/amari/.pyenv/shims/python3'
---     end
---   }}
-dap.adapters.python = {
+-- Python
+adapters.python = {
     type = 'executable';
     command = home .. '/.local/share/nvim/mason/packages/debugpy/venv/bin/python';
     args = { '-m', 'debugpy.adapter' };
 }
 
-dap.adapters.generic_remote = function(callback, config)
+adapters.generic_remote = function(callback, config)
   callback({
     type = 'server',
     host = (config.connect or config).host or '127.0.0.1',
@@ -134,7 +108,7 @@ dap.adapters.generic_remote = function(callback, config)
 })
 end
 
-dap.configurations.python = {
+configurations.python = {
   {
      type = 'python',
      request = 'launch',
@@ -173,21 +147,21 @@ dap.configurations.python = {
 }
 --
 -- DotNet
-local exe = vim.fn.has('unix') and '/.local/share/nvim/mason/bin/netcoredbg' or '/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe'
+local exe = '/.local/share/nvim/mason/bin/netcoredbg' or '/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe'
 
-dap.adapters.netcoredbg = {
+adapters.netcoredbg = {
   type = 'executable',
   command = home .. exe,
   args = {'--interpreter=vscode'}
 }
 
-dap.adapters.netcoredbgattach = {
+adapters.netcoredbgattach = {
   type = 'executable',
   command = home .. exe,
   args = {'--interpreter=vscode', '--attach'}
 }
 
-dap.configurations.cs = {
+configurations.cs = {
   {
     type = "netcoredbg",
     name = "launch - netcoredbg",

@@ -89,14 +89,9 @@ vim.wo.signcolumn = 'yes'
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+-- Identify white space
 vim.cmd([[
-" Deal with unwanted white spaces (show them in red)
-	highlight ExtraWhitespace ctermbg=red guibg=red
-	match ExtraWhitespace /\s\+$/
-	autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-	autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-	autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-	autocmd BufWinLeave * call clearmatches()
+set list listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
 ]])
 
 -- set Vim-specific sequences for RGB colors

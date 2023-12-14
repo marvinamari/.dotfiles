@@ -1,8 +1,11 @@
+-- echo v:lua.vim.uv.os_name().sysname -- lua print(vim.uv.os_uname().sysname)
 -- Go to previous location Ctrl + o
 -- Go to next location Ctrl + i
 -- Go to next method, change, diagnostic [] m|c|d
 -- Increment Decrement number Ctrl-A Ctrl-X
 -- substitue in block <,>s/old/new/g
+-- jump to matching brace %
+--
 
 -- Escape termcodes
 local function t(str)
@@ -13,6 +16,13 @@ local keymap = require 'utils'.keymap
 
 vim.g.maplocalleader = '\\'
 keymap('n', '<Space>', '<NOP>')
+
+-- * then cgn multi-cursor (TODO Remap not working)
+local function customAsterisk()
+  vim.api.nvim_command([[keepjumps normal! mi*`i]])
+  print('asterisk remapped')
+end
+vim.api.nvim_set_keymap('n', '*', ':keepjumps normal! mi*`i<CR>' ,{noremap = true, silent = true, desc= "Use start without jumping to next word or adding to jump list"})
 
 
 keymap('n', '<leader>W', ':WhichKey<cr>')
@@ -42,6 +52,9 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
+
+-- Commenting code
+-- Vgc and gci{
 
 -- Copy and paste
 keymap('v', '<C-c>', '"+yi', { silent = true })
@@ -80,45 +93,15 @@ keymap('x', 'J', ':move \'>+1<CR>gv-gv')
 keymap('n', '<S-l>', ':bnext<CR>') -- :BufferLineCycleNext
 keymap('n', '<S-h>', ':bprevious<CR>') -- :BufferLineCyclePrev
 keymap('n', '<C-w>', ':BufferLinePickClose<CR>')
-keymap('n', '<LocalLeader>b', ':BufferLinePick<CR>', {desc = 'Buffer pick'})
+keymap('n', '<C-p>', ':BufferLinePick<CR>', {desc = 'Buffer pick'})
+map('n', '<leader>Bl', ':BufferLineCloseLeft<CR>', {desc = 'Buffer close left'})
+map('n', '<leader>Br', ':BufferLineCloseRight<CR>', {desc = 'Buffer close right'})
 
 -- resize with arrows
 keymap('n', '<C-Up>', ':resize +2<cr>')
 keymap('n', '<C-Down>', ':resize -2<cr>')
 keymap('n', '<C-Left>', ':vertical resize -2<cr>')
 keymap('n', '<C-Right>', ':vertical resize +2<cr>')
-
--- LSP
--- Refactor
-keymap('n', 'rn', ':lua vim.lsp.buf.rename()<cr>', {desc = 'Refactor rename variable'})
-keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', {desc = "Refactor code action"})
-
-keymap('n', 'gt', ":lua require('csharp_ls_extended').lsp_definitions()<cr>", {desc = 'Go to C# definition'})
-keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', {desc = 'LSP go to definition'})
-keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', {desc = 'LSP go to declaration'})
-keymap('n', 'gr', ":lua require('telescope.builtin').lsp_references()<cr>", {desc = 'LSP telescope find references'})
-keymap('n', 'gR', ":lua vim.lsp.buf.references()<cr>", {desc = 'LSP find references'})
-keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', {desc = 'LSP go to implementation'})
-keymap('n', '<leader>D', ':lua vim.lsp.buf.type_definition()<cr>', {desc = 'LSP type definition'})
-keymap('n', '<leader>ls', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", {desc = 'LSP document symbol'})
-keymap('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", {desc = 'LSP workspace symbol'})
-
--- See `:help K` for why this keymap
-keymap('n', 'gh', ':lua vim.lsp.buf.hover()<cr>', {desc = 'LSP hover'})
-keymap('n', 'gs', ':lua vim.lsp.buf.signature_help()<cr>', {desc = 'LSP Signature'})
-keymap('n', '<leader>F', ':lua vim.lsp.buf.format()<cr>', {desc = 'LSP Format'})
-
--- Lesser used LSP functionality
-keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<cr>')
-keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<cr>')
-
---Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {desc = 'Go to prev diagnostic'})
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {desc = 'Go to next diagnostic'})
-vim.keymap.set('n', '<leader>Do', vim.diagnostic.open_float, {desc = 'Diagnostics open float'})
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {desc = 'Set loc list'})
-keymap('n', '<LocalLeader>dh', ':lua vim.diagnostic.hide()<CR>', {desc = 'Hide diagnostics'})
-keymap('n', '<LocalLeader>ds', ':lua vim.diagnostic.show()<CR>', {desc = 'Show diagnostics'})
 
 -- Rest
 keymap("n", "<LocalLeader>rr", ":RestNvim<cr>", {desc = 'Rest run'})
@@ -149,6 +132,7 @@ keymap('n', '<leader>e', ':NvimTreeToggle<CR>', {desc = 'Tree togle'})
 keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', {desc = 'Tree find file'})
 
 -- dap debugging
+map('n', '<leader>dn', ":lua require('osv').launch({port = 5677})<CR>", {desc = "Debug Neovim-kind"})
 map('n', '<F5>', ":lua require('dap').continue()<CR>", {desc = 'Debug continue'})
 
 map('n', '<F11>', ":lua require('dap').step_into()<CR>", {desc = 'Debug step into'})
@@ -158,7 +142,7 @@ map('n', '<S-F12>', ":lua require('dap').step_out()<CR>", {desc = 'Debug step ou
 map('n',  '<leader>db', ":lua require'dap'.toggle_breakpoint()<CR>", {desc = 'Debug toggle breakpoint'})
 map('n', '<leader>dr', ":lua require'dap'.restart()<cr>", {desc = 'Debug restart'})
 map('n', '<leader>ds', ":lua require'dap'.stop()<cr>", {desc = 'Debug stop'})
-map('n', '<leader>dt', ":lua require'dap'.terminate()<cr>", {desc = 'Debug terminate'})
+map('n', '<leader>dT', ":lua require'dap'.terminate()<cr>", {desc = 'Debug terminate'})
 map('n',  '<leader>dC', ":lua require'dap'.close()<CR>", {desc = 'Debug close'})
 map('n',  '<leader>dc', ":lua require'dap'.continue()<CR>", {desc = 'Debug continue'})
 map('n',  '<leader>dU', ":lua require'dap'.up()<CR>", {desc = 'Debug up'})
@@ -238,9 +222,9 @@ keymap('n', '<leader>DR', ':diffget remote<CR>', {desc = 'Git diffget remote'})
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
 
-vim.keymap.set("n", "<LocalLeader>f", function() builtin.find_files({ cwd = utils.buffer_dir() }) end,
+vim.keymap.set("n", "<LocalLeader>ff", function() builtin.find_files({ cwd = utils.buffer_dir() }) end,
   {desc = "Find files in cwd"})
-vim.keymap.set('n', '<leader>/', function()
+vim.keymap.set('n', '<LocalLeader>fu', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
