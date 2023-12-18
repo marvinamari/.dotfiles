@@ -7,22 +7,25 @@
 -- jump to matching brace %
 --
 
+-- variables
+vim.g.maplocalleader = '\\'
+
+local keymap = require 'utils'.keymap
+
 -- Escape termcodes
 local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local keymap = require 'utils'.keymap
 
-vim.g.maplocalleader = '\\'
 keymap('n', '<Space>', '<NOP>')
 
 -- * then cgn multi-cursor (TODO Remap not working)
-local function customAsterisk()
-  vim.api.nvim_command([[keepjumps normal! mi*`i]])
-  print('asterisk remapped')
-end
-vim.api.nvim_set_keymap('n', '*', ':keepjumps normal! mi*`i<CR>' ,{noremap = true, silent = true, desc= "Use start without jumping to next word or adding to jump list"})
+-- local function customAsterisk()
+--   vim.api.nvim_command([[keepjumps normal! mi*`i]])
+--   print('asterisk remapped')
+-- end
+-- vim.api.nvim_set_keymap('n', '*', ':keepjumps normal! mi*`i<CR>' ,{noremap = true, silent = true, desc= "Use start without jumping to next word or adding to jump list"})
 
 
 keymap('n', '<leader>W', ':WhichKey<cr>')
@@ -211,6 +214,7 @@ map("n", "<Leader>gt", ":Telescope git_stash<CR>", {desc = 'Telescope git stash'
 map("n", "<Leader>gb", ":Telescope git_branches<CR>", {desc = 'Telescope git branches'})
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+
 
 -- git
 --vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})

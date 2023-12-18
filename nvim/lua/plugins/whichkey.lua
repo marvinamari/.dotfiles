@@ -1,3 +1,6 @@
+return {
+  'folke/which-key.nvim',
+  config = function()
 require('which-key').setup {
     plugins = {
         marks = true, -- shows a list of your marks on ' and `
@@ -62,3 +65,5 @@ require('which-key').setup {
   -- refer to the configuration section below
 }
 
+  end
+}

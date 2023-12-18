@@ -1,3 +1,7 @@
+return {
+  'windwp/nvim-autopairs',
+  config = function()
+
 -- configure with completion nvim
 local Rule = require('nvim-autopairs.rule')
 local remap = vim.api.nvim_set_keymap
@@ -41,3 +45,6 @@ npairs.add_rules({
   Rule('$', '$', 'lua')
     :with_pair(ts_conds.is_not_ts_node({'function'}))
 })
+
+  end
+}

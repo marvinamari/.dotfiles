@@ -1,4 +1,22 @@
-require'bufferline'.setup{
+return {
+  'akinsho/nvim-bufferline.lua', dependencies = {'nvim-tree/nvim-web-devicons'},
+  config = function()
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- DevIcon will be appended to `name`
+-- override = {
+--  zsh = {
+--    icon = '',
+--    color = '#428850',
+--    name = 'Zsh'
+--  }
+-- };
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+};
+
+  require'bufferline'.setup{
   options = {
     view =  'default',
     buffer_close_icon= '󱄊',
@@ -30,4 +48,5 @@ require'bufferline'.setup{
   numbers = 'ordinal'
 }
 }
-
+  end
+}

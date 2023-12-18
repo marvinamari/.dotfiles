@@ -1,3 +1,6 @@
+return {
+  "akinsho/toggleterm.nvim", tag = 'v2.2.1',
+config = function()
 require("toggleterm").setup({
     size = 20,
     open_mapping = [[<c-\>]],
@@ -30,3 +33,6 @@ local lazygit = Terminal:new({
 function _lazygit_toggle()
   lazygit:toggle()
 end
+
+end
+}
