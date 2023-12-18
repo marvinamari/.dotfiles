@@ -1,3 +1,8 @@
+return {
+  'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = {
+    'nvim-lua/plenary.nvim',
+  },
+config = function()
 -- local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 local actions = require("telescope.actions")
@@ -79,3 +84,5 @@ pcall(require('telescope').load_extension, 'fzf')
 --   path_display = { "absolute" },
 --         wrap_results = true
 -- })
+end
+}

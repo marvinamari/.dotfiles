@@ -1,3 +1,10 @@
+return {
+  'mfussenegger/nvim-dap',
+  dependencies = {'theHamsta/nvim-dap-virtual-text',
+  'nvim-telescope/telescope-dap.nvim',
+  'jbyuki/one-small-step-for-vimkind',
+  'rcarriga/nvim-dap-ui' },
+  config = function()
 --https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
 require('utils')
 local dap = require('dap')
@@ -7,6 +14,8 @@ local isUnixOs = require 'utils'.isUnixOs
 local configurations = dap.configurations
 local adapters = dap.adapters
 
+-- Debug js/ts
+--https://www.youtube.com/watch?v=Ul_WPhS2bis&ab_channel=LazarNikolov
 -- Lua one step mankind plugin
 adapters.nlua = function(callback, config)
   callback({type = "server", host = config.host or "127.0.0.1", port = 5677}) --8086
@@ -267,3 +276,5 @@ vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''
 vim.fn.sign_define('DapBreakpointRejected', {text='🟦', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 
+  end
+}

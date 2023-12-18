@@ -1,3 +1,6 @@
+return {
+  'hoob3rt/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons', opt = true},
+config = function()
 local lualine = require("lualine")
 local icons = require("config.icons")
 
@@ -81,7 +84,7 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
-lualine.setup({
+    require('lualine').setup({
 	options = {
 		icons_enabled = true,
 		theme = "tokyonight",  --"catppuccin", -- "solarized_dark",
@@ -109,4 +112,6 @@ lualine.setup({
 	},
 	tabline = {},
 	extensions = {},
-})
+    })
+end
+}

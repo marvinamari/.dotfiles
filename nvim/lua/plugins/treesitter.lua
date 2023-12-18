@@ -1,4 +1,13 @@
+return {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+  config = function()
 require'nvim-treesitter.configs'.setup {
+    configs = {
+            ignore_install = {"help", "vimdoc"}
+        },
     modules = {},
     ignore_install = {"help"},
   ensure_installed = {
@@ -117,4 +126,6 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
+}
+  end
 }
