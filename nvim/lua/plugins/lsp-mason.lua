@@ -57,6 +57,12 @@ _G.on_attach = function(server_name)
   vim.keymap.set('n', '<leader>F', ':lua vim.lsp.buf.format()<cr>', {buffer=0, desc = 'LSP Format'})
   vim.keymap.set('n', '<leader>ls', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", {buffer=0, desc = 'LSP document symbol'})
   vim.keymap.set('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", {buffer=0, desc = 'LSP workspace symbol'})
+
+  if server_name == 'jdtls' then
+    vim.keymap.set('n', "<leader>dvc", "<cmd>lua require('jdtls').test_class()<cr>", {buffer=0, desc = "Java Test Class"})
+    vim.keymap.set('n', "<leader>dvm", "<cmd>lua require('jdtls').test_nearest_method()<cr>", {buffer=0, desc = "Java Test Nearest Method"})
+  end
+
   end
 end
  -- Mason path ~/.local/share/nvim/mason/bin
@@ -98,6 +104,7 @@ end
      --"biome",
      "gopls",
      "java-debug-adapter",
+      "java-test",
      "jdtls",
      "lua-language-server",
      "kotlin-language-server",
