@@ -58,7 +58,16 @@ local filename = {
 		readonly = " ",
 		unnamed = icons.kind.Unnamed,
 		modified = " ",
-	}
+	},
+	-- fix lualine error in java https://github.com/nvim-lualine/lualine.nvim/issues/820
+	fmt = function(str)
+    --- @type string
+    local fn = vim.fn.expand("%:~:.")
+    if vim.startswith(fn, "jdt://") then
+        return fn:gsub("?.*$", "")
+    end
+        return str
+    end
 }
 
 local fileformat = {

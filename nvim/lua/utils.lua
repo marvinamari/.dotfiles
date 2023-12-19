@@ -22,32 +22,33 @@ function map(mode, lhs, rhs, opts)
 end
 
 -- nvim-dap
-function attach()
-  print('attaching')
-  dap.run({
-      type = 'node2',
-      request = 'attach',
-      cwd = vim.fn.getcwd(),
-      sourceMaps = true,
-      protocol = 'inspector',
-      skipFiles = {'<node_internals>/**/*.js'},
-      })
-end
+-- function attach()
+--   print('attaching')
+--   dap.run({
+--       type = 'node2',
+--       request = 'attach',
+--       cwd = vim.fn.getcwd(),
+--       sourceMaps = true,
+--       protocol = 'inspector',
+--       skipFiles = {'<node_internals>/**/*.js'},
+--       })
+-- end
 
-local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-end
+-- local function lsp_keymaps(bufnr)
+--   local opts = { noremap = true, silent = true }
+--   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+-- end
 
-M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
-  end
-  lsp_keymaps(bufnr)
-end
+-- M.on_attach = function(client, bufnr)
+--   if client.name == "tsserver" then
+--     client.resolved_capabilities.document_formatting = false
+--   end
+--   lsp_keymaps(bufnr)
+-- end
 
 local current_os = vim.loop.os_uname().sysname:lower()
 local unix = { "darwin", "linux" }
+M.home = os.getenv('HOME')
 M.isUnixOs = function()
     for _, value in ipairs(unix) do
         if value == current_os then
