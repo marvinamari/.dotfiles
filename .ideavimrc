@@ -31,6 +31,8 @@ vmap N :action UnselectPreviousOccurrence<cr>
 " Create new vertical splits on right and horizontals on below
 " set splitright
 " set splitbelow
+"
+nmap <S-k> :action ShowErrorDescription<cr>
 
 
 " Use Q for formatting the current paragraph (or visual selection)

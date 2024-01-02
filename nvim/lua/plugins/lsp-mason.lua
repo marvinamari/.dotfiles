@@ -99,7 +99,7 @@ end
 
      -- you can turn off/on auto_update per tool
      --{ 'bash-language-server', auto_update = true },
-
+     "angular-language-server",
      "astro-language-server",
      --"biome",
      "gopls",
@@ -147,7 +147,7 @@ end
 
  -- Enable the following language servers
  -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
- local lsp_servers = { 'astro', 'bashls', 'dockerls', 'jsonls',
+ local lsp_servers = { 'angularls', 'astro', 'bashls', 'dockerls', 'jsonls',
    'kotlin_language_server','pyright','sqlls', 'svelte', 'tailwindcss','yamlls' }
 
  -- Ensure the servers above are installed
@@ -221,6 +221,8 @@ end
  lspconfig.tsserver.setup{
    -- filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
  -- root_dir = require('lspconfig.util').root_pattern('package.json')
+   on_attach = _G.on_attach(lsp),
+   capabilities = capabilities,
    root_dir = vim.loop.cwd
  }
 

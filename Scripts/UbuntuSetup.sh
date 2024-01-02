@@ -5,7 +5,7 @@ sudo apt update -qq #qq will make it quiet no imput on the screen
 sudo apt upgrade -y
 
 # dev dependencies
-sudo apt install -yy bat binutils bison build-essential caffeine \
+sudo apt install -yy bat binutils bison build-essential caffeine dnsutils \
     fzf gcc kdeconnect kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
     libncursesw5-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev make magic-wormhole \
     nfs-common python3.10-venv rclone ripgrep tk-dev tmux virt-manager wget wl-clipboard xclip xz-utils zlib1g-dev zoxide zsh
