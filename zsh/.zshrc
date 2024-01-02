@@ -110,3 +110,11 @@ export PATH="$PATH:/home/marvin/.local/share/lvim/distant.nvim/bin"
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$PATH:/home/marvin/.dotnet"
 
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

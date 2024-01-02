@@ -85,8 +85,8 @@ keymap('i', t'<C-e>', '<C-o>$')
 keymap('i', t'<C-a>', '<C-o>0')
 
 -- Scroll
-keymap('n', '<S-left>', '20zh')
-keymap('n', '<S-right>', '20zl')
+keymap('n', '<S-left>', '10zh')
+keymap('n', '<S-right>', '10zl')
 
 -- Move selected block in visual mode
 keymap('x', 'K', ':move \'<-2<CR>gv-gv')
@@ -95,7 +95,7 @@ keymap('x', 'J', ':move \'>+1<CR>gv-gv')
 -- Tab switch buffer
 keymap('n', '<S-l>', ':bnext<CR>') -- :BufferLineCycleNext
 keymap('n', '<S-h>', ':bprevious<CR>') -- :BufferLineCyclePrev
-keymap('n', '<C-w>', ':BufferLinePickClose<CR>')
+keymap('n', '<C-w>', ':BufferLineCloseOthers<CR>')
 keymap('n', '<C-p>', ':BufferLinePick<CR>', {desc = 'Buffer pick'})
 map('n', '<leader>Bl', ':BufferLineCloseLeft<CR>', {desc = 'Buffer close left'})
 map('n', '<leader>Br', ':BufferLineCloseRight<CR>', {desc = 'Buffer close right'})
@@ -195,12 +195,13 @@ map('n', '<leader>dv', ":Telescope dap variables<CR>", {desc = 'Telescope dap va
 -- Telescope -- See `:help telescope.builtin`
 -- navigate preview window with ctl-d ctl-u
 vim.keymap.set("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>", { desc = '[f]ind [f]iles' })
+--vim.keymap.set("n", "<Leader>fF", ":lua require('telescope.builtin').find_files({})<CR>", { desc = '[f]ind [f]iles Exact Name' })
 map("n", "<Leader>fb", ':lua require("telescope").extensions.file_browser.file_browser()<CR>', {desc = 'Telescope extensions file browse'})
 map("n", "<Leader>fC", ":lua require('telescope.builtin').colorscheme()<CR>")
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 map("n", "<Leader>fc", ":Telescope commands<CR>", {desc = 'Telescope commands'})
-map("n", "<Leader>fj", ":Telescope jumplist<CR>", {desc = 'Telescope jumplist'})
+map("n", "<Leader>jl", ":Telescope jumplist<CR>", {desc = 'Telescope jumplist'})
 map("n", "<Leader>fq", ":Telescope quickfix<CR>", {desc = 'Telescope quickfix'})
 map("n", "<Leader>fh", ":Telescope quickfixhistory<CR>", {desc = 'Telescope quick history'})
 map("n", "<Leader>fg", ":Telescope live_grep<CR>", {desc = 'Telescope live grep'})
@@ -222,6 +223,7 @@ keymap('n', "<leader>gl", ":LazyGit<CR>", {desc = 'Lazy git'})
 keymap('n', '<leader>DL', ':diffget local<CR>', {desc = 'Git diffget local'})
 keymap('n', '<leader>DB', ':diffget base<CR>', {desc = 'Git diffget base'})
 keymap('n', '<leader>DR', ':diffget remote<CR>', {desc = 'Git diffget remote'})
+map("n", "<LocalLeader>gb", ":GitSigns blame_line<cr>", {desc = "Git Blame"})
 
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
@@ -250,7 +252,7 @@ map("n", "<leader>td", ':lua require("neotest").run.run({strategy = "dap"})<CR>'
 map("n", "<leader>ts", ':lua require("neotest").run.stop()<CR>', {desc = 'Test stop'})
 map("n", "<leader>ta", ':lua require("neotest").run.attach()<CR>', {desc = 'Test attach'})
 map("n", "<leader>tt", ':lua require("neotest").summary.toggle()<CR>', {desc = 'Test toggle summary'})
-map("n", "<leader>to", ':lua require("neotest").summary.output()<CR>', {desc = 'Test toggle summary output'})
+map("n", "<leader>to", ':lua require("neotest").output.open()<CR>', {desc = 'Test toggle summary output'})
 map("n", "<leader>tp", ':lua require("neotest").output_panel.toggle()<CR>', {desc = 'Test toggle output panel'})
 map("n", "<leader>tw", ':lua require("neotest").watch.toggle()<CR>', {desc = 'Test toggle watch'})
 

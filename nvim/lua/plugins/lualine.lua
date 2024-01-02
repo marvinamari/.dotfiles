@@ -96,7 +96,7 @@ end
     require('lualine').setup({
 	options = {
 		icons_enabled = true,
-		theme = "tokyonight",  --"catppuccin", -- "solarized_dark",
+		theme = "onedark",--"tokyonight",  --"catppuccin", -- "solarized_dark",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "dashboard", "NvimTree", "Outline" },

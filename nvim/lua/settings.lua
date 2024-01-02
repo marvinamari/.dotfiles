@@ -5,7 +5,8 @@ local opt = vim.opt
 
 vim.cmd("set modifiable")
 -- Colorscheme
-vim.cmd("colorscheme tokyonight-moon")
+vim.cmd("colorscheme onedark")
+--vim.cmd("colorscheme tokyonight-moon")
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1

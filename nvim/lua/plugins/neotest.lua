@@ -7,7 +7,7 @@ return {
       "nvim-neotest/neotest-go",
       "haydenmeade/neotest-jest",
       "Issafalcon/neotest-dotnet",
-      "Decodetalkers/csharpls-extended-lsp.nvim",
+      -- "Decodetalkers/csharpls-extended-lsp.nvim",
       "stevanmilic/neotest-scala",
       "rouge8/neotest-rust",
       "mrcjkb/neotest-haskell",
