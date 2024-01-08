@@ -68,10 +68,6 @@ require'nvim-treesitter.configs'.setup {
   }, -- one of 'all', 'maintained' (parsers with maintainers), or a list of languages
   sync_install = false,
   auto_install = true,
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { 'c', 'rust' },  -- list of language that will be disabled
-  },
   indent = { enable = true },
   incremental_selection = {
     enable = true,

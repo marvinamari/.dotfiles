@@ -1,4 +1,4 @@
-require('after.ftplugin.all')
+vim.cmd.runtime({'after/ftplugin/all', bang = true})
 
 vim.bo.expandtab=true
 vim.bo.tabstop=2

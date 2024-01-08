@@ -12,8 +12,10 @@ telescope.setup{
   defaults = {
 		mappings = {
 			i = {
-				["<C-s>"] = actions.cycle_previewers_next,
-				["<C-a>"] = actions.cycle_previewers_prev,
+				["<C-l>"] = actions.cycle_previewers_next,
+				["<C-h>"] = actions.cycle_previewers_prev,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
 			},
 		},
     dynamic_preview_title = true,

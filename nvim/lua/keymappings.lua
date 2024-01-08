@@ -130,9 +130,14 @@ end
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 
 -- nv-nvim-tree
-keymap('n', '<leader>nr', ':NvimTreeRefresh<CR>', {desc = 'Tree refresh'})
+keymap('n', '<leader>nR', ':NvimTreeRefresh<CR>', {desc = 'Tree refresh'})
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', {desc = 'Tree togle'})
-keymap('n', '<leader>nf', ':NvimTreeFindFile<CR>', {desc = 'Tree find file'})
+keymap('n', '<leader>nF', ':NvimTreeFindFile<CR>', {desc = 'Tree find file'})
+
+-- neogen
+map('n', "<leader>nc", ":lua require('neogen').generate({type = 'class'})<CR>", {desc = "Neogen Generate Class"})
+map('n', "<leader>nf", ":lua require('neogen').generate({type = 'func'})<CR>", {desc = "Neogen Generate Func"})
+map('n', "<leader>nt", ":lua require('neogen').generate({type = 'type'})<CR>", {desc = "Neogen Generate Type"})
 
 -- dap debugging
 map('n', '<leader>dn', ":lua require('osv').launch({port = 5677})<CR>", {desc = "Debug Neovim-kind"})
@@ -173,7 +178,7 @@ map('n', '<leader>duf', "<cmd>lua local widgets=require'dap.ui.widgets';widgets.
 map('n', '<F4>', ":lua require('dapui').toggle()<CR>", {desc = 'Debug ui toggle'})
 
 -- symbols
-keymap('n', '<LocalLeader>s', ":SymbolsOutline<cr>", {desc = 'Symbols outline'})
+keymap('n', '<LocalLeader>s', ":Outline<cr>", {desc = 'Symbols outline'})
 
 -- change list
 map('n', '<leader>cl', ":changes<CR>", {desc = 'Change list'})
@@ -184,6 +189,15 @@ map('n', 'mn', ":lua require('marks').next()<CR>", {desc = 'Marks next'})
 map('n', 'ml', ":MarksListAll<CR>", {desc = 'Marks list'})
 map('n', 'm-', ":lua require('marks').delete_buf()<CR>", {desc = 'Marks delete buffer'})
 map("n", "<leader>ml", ":Telescope marks<CR>", {desc = 'Marks telescope'})
+
+-- fzf-lua
+map('n', "<LocalLeader>ff", ":lua require('fzf-lua').files()<CR>", {desc = "Fzf Files"})
+map('n', "<LocalLeader>fr", ":lua require('fzf-lua').resume()<CR>", {desc = "Fzf Resume"})
+map('n', "<LocalLeader>fg", ":lua require('fzf-lua').grep_project()<CR>", {desc = "Fzf Grep"})
+map('n', "<LocalLeader>fG", ":lua require('fzf-lua').live_grep_glob()<CR>", {desc = "Fzf rg --glob"})
+map('n', "<LocalLeader>fl", ":lua require('fzf-lua').live_grep()<CR>", {desc = "Fzf Live Grep Current Project"})
+map('n', "<LocalLeader>fc", ":lua require('fzf-lua').lgrep_curbuf()<CR>", {desc = "Fzf Live Grep Current Buffer"})
+map('n', "<LocalLeader>fu", ":lua require('fzf-lua').grep_cword()<CR>", {desc = "Fzf Grep Word Under Cursor"})
 
 -- telescope-dap
 map('n', '<leader>dtf', ":Telescope dap frames<CR>", {desc = 'Telescope dap frames'})
@@ -219,16 +233,16 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 
 -- git
 --vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-keymap('n', "<leader>gl", ":LazyGit<CR>", {desc = 'Lazy git'})
-keymap('n', '<leader>DL', ':diffget local<CR>', {desc = 'Git diffget local'})
-keymap('n', '<leader>DB', ':diffget base<CR>', {desc = 'Git diffget base'})
-keymap('n', '<leader>DR', ':diffget remote<CR>', {desc = 'Git diffget remote'})
+map('n', "<leader>lg", ":LazyGit<CR>", {desc = 'Lazy git'})
+map('n', '<leader>DL', ':diffget local<CR>', {desc = 'Git diffget local'})
+map('n', '<leader>DB', ':diffget base<CR>', {desc = 'Git diffget base'})
+map('n', '<leader>DR', ':diffget remote<CR>', {desc = 'Git diffget remote'})
 map("n", "<LocalLeader>gb", ":GitSigns blame_line<cr>", {desc = "Git Blame"})
 
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
 
-vim.keymap.set("n", "<LocalLeader>ff", function() builtin.find_files({ cwd = utils.buffer_dir() }) end,
+vim.keymap.set("n", "<LocalLeader>fh", function() builtin.find_files({ cwd = utils.buffer_dir() }) end,
   {desc = "Find files in cwd"})
 vim.keymap.set('n', '<LocalLeader>fu', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.

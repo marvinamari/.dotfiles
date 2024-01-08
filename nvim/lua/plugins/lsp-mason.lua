@@ -58,6 +58,14 @@ _G.on_attach = function(server_name)
   vim.keymap.set('n', '<leader>ls', ":lua require('telescope.builtin').lsp_document_symbols()<cr>", {buffer=0, desc = 'LSP document symbol'})
   vim.keymap.set('n', '<leader>ws', ":lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>", {buffer=0, desc = 'LSP workspace symbol'})
 
+  -- Goto Preview
+  vim.keymap.set('n', "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {buffer=0, desc = "Goto preview Definition"})
+  vim.keymap.set('n', "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", {buffer=0, desc = "Goto preview Type"})
+  vim.keymap.set('n', "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", {buffer=0, desc = "Goto preview Implementation"})
+  vim.keymap.set('n', "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", {buffer=0, desc = "Goto preview Declaration"})
+  vim.keymap.set('n', "gpc", "<cmd>lua require('goto-preview').close_all_win()<CR>", {buffer=0, desc = "Goto Clode previews"})
+  vim.keymap.set('n', "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", {buffer=0, desc = "Goto preview References"})
+
   if server_name == 'jdtls' then
     vim.keymap.set('n', "<leader>dvc", "<cmd>lua require('jdtls').test_class()<cr>", {buffer=0, desc = "Java Test Class"})
     vim.keymap.set('n', "<leader>dvm", "<cmd>lua require('jdtls').test_nearest_method()<cr>", {buffer=0, desc = "Java Test Nearest Method"})
