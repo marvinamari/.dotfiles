@@ -191,26 +191,26 @@ configurations.cs = {
 
 --
 -- Java
-configurations.java = {
-  {
-    type = 'java';
-      request = 'attach';
-      name = 'Remote Attach';
-      hostName = function()
-        return vim.fn.input('Enter host (127.0.0.1):')
-      end;
-      port = 5005;
-      },
-  {
-      type = 'java';
-        request = 'launch';
-        name = 'Run Main';
-      javaExec = home .. "/.asdf/shims/java",
-      mainClass = function()
-        return vim.fn.input('Enter Main class (your.package.name.MainClassName): ')
-      end
-      }
-    }
+-- configurations.java = {
+--   {
+--     type = 'java';
+--       request = 'attach';
+--       name = 'Remote Attach';
+--       hostName = function()
+--         return vim.fn.input('Enter host (127.0.0.1):')
+--       end;
+--       port = 5005;
+--       },
+--   {
+--       type = 'java';
+--         request = 'launch';
+--         name = 'Run Main';
+--       javaExec = home .. "/.asdf/shims/java",
+--       mainClass = function()
+--         return vim.fn.input('Enter Main class (your.package.name.MainClassName): ')
+--       end
+--       }
+--     }
 
 
 

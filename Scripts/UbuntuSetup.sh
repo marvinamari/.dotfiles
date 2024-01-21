@@ -10,6 +10,10 @@ sudo apt install -yy bat binutils bison build-essential caffeine dnsutils \
     libncursesw5-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev make magic-wormhole \
     nfs-common python3.10-venv rclone ripgrep tk-dev tmux virt-manager wget wl-clipboard xclip xz-utils zlib1g-dev zoxide zsh
 
+# Droid cam (https://www.dev47apps.com/droidcam/linux/)
+sudo apt install -y v4l2loopback-dkms v4l2loopback-utils libappindicator3-1 linux-headers-$(uname -r)
+
+
 # install docker
 sudo apt install -yy ca-certificates curl gnupg lsb-release
 sudo mkdir -p /etc/apt/keyrings
@@ -49,6 +53,7 @@ curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/lates
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 
+
 #
 # Install Flatpak
 {
@@ -83,7 +88,8 @@ flatpak install -yy flathub \
     com.jetbrains.IntelliJ-IDEA-Ultimate \
     com.jetbrains.PyCharm-Professional \
     com.jetbrains.Rider \
-    com.jetbrains.WebStorm
+    com.jetbrains.WebStorm \
+    com.obsproject.Studio.Plugin.DroidCam
 
 echo "All done! Please reboot the computer"
 echo "Reloud zshrc and set a few things"

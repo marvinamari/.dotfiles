@@ -7,7 +7,6 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- LSP
     'jmederosalvarado/roslyn.nvim',
-    'mfussenegger/nvim-jdtls',
     'nvim-lua/lsp-status.nvim',
     {
       'j-hui/fidget.nvim',
@@ -17,6 +16,22 @@ return { -- LSP Configuration & Plugins
 
   },
    config = function()
+    local home = require('utils').home
+
+    -- lsp_signature
+    local on_attach_lsp_signature = function(client, bufnr)
+      -- https://github.com/ray-x/lsp_signature.nvim#full-configuration-with-default-values
+      require('lsp_signature').on_attach({
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        floating_window = true,
+        handler_opts = {
+          border = "single"
+        },
+        zindex = 99, -- <100 so that it does not hide completion popup.
+        fix_pos = false, -- Let signature window change its position when needed, see GH-53
+        toggle_key = '<M-x>', -- Press <Alt-x> to toggle signature on and off.
+      })
+    end
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -32,6 +47,9 @@ _G.on_attach = function(server_name)
       vim.lsp.buf.formatting()
     end
   end, { desc = 'Format current buffer with LSP' })
+
+
+  on_attach_lsp_signature(_, bufnr)
 
   vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0, desc="LSP Go To Definition"})
@@ -168,7 +186,7 @@ end
  vim.lsp.protocol.make_client_capabilities(),
    require('cmp_nvim_lsp').default_capabilities()
  )
- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+ --capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
  for _, lsp in ipairs(lsp_servers) do
    lspconfig[lsp].setup {
@@ -177,6 +195,21 @@ end
    }
  end
 
+require('lspconfig').jdtls.setup({
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-21",
+            path = home .. "/.asdf/installs/java/openjdk-21",
+            default = true,
+          }
+        }
+      }
+    }
+  }
+})
 
  require("roslyn").setup({
    on_attach = _G.on_attach(lsp),

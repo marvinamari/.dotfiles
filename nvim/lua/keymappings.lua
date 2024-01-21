@@ -65,8 +65,33 @@ keymap('v', '<C-x>', '"+c', { silent = true })
 keymap('v', '<C-v>', 'c<ESC>"+p', { silent = true })
 keymap('v', '<C-V>', '<ESC>"+pa', { silent = true })
 
--- Neoclip
-keymap('n', '<leader>cm', ':Telescope neoclip<CR>', {desc = 'Telescope neoclip'})
+-- Chat normal mode
+map('n', "<leader>cc", "<cmd>ChatGPT<CR>", {desc = "ChatGPT Toggle"})
+map('n', "<leader>CC", "<cmd>ChatGPTCompleteCode<CR>", {desc = "ChatGPT Complete Code"})
+map('n', "<leader>cg", "<cmd>ChatGPTRun grammar_correction<CR>", {desc = "Chat grammer correction"})
+map('n', "<leader>ct", "<cmd>ChatGPTRun translate<CR>", {desc = "Chat translate"})
+map('n', "<leader>ck", "<cmd>ChatGPTRun keywords<CR>", {desc = "Chat keywords"})
+map('n', "<leader>cd", "<cmd>ChatGPTRun docstring<CR>", {desc = "Chat docstring"})
+map('n', "<leader>ca", "<cmd>ChatGPTRun add_tests<CR>", {desc = "Chat add tests"})
+map('n', "<leader>co", "<cmd>ChatGPTRun optimize_code<CR>", {desc = "Chat optimize code"})
+map('n', "<leader>cs", "<cmd>ChatGPTRun summarize<CR>", {desc = "Chat summarize"})
+map('n', "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {desc = "Chat fix bugs"})
+map('n', "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {desc = "Chat explain code"})
+map('n', "<leader>cr", "<cmd>ChatGPTRun roxygen_edit<CR>", {desc = "Chat roxygen_edit"})
+map('n', "<leader>cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", {desc = "Chat code readability analysis"})
+
+-- Chat visual mode
+map('v', "<leader>ce", "<cmd>ChatGPTEditWithInstruction<CR>", {desc = "Chat Edit with instruction"})
+map('v', "<leader>ct", "<cmd>ChatGPTRun translate<CR>", {desc = "Chat translate"})
+map('v', "<leader>ck", "<cmd>ChatGPTRun keywords<CR>", {desc = "Chat keywords"})
+map('v', "<leader>cd", "<cmd>ChatGPTRun docstring<CR>", {desc = "Chat docstring"})
+map('v', "<leader>ca", "<cmd>ChatGPTRun add_tests<CR>", {desc = "Chat add tests"})
+map('v', "<leader>co", "<cmd>ChatGPTRun optimize_code<CR>", {desc = "Chat optimize code"})
+map('v', "<leader>cs", "<cmd>ChatGPTRun summarize<CR>", {desc = "Chat summarize"})
+map('v', "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {desc = "Chat fix bugs"})
+map('v', "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {desc = "Chat explain code"})
+map('v', "<leader>cr", "<cmd>ChatGPTRun roxygen_edit<CR>", {desc = "Chat roxygen_edit"})
+map('v', "<leader>cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", {desc = "Chat code readability analysis"})
 
 -- Better indenting
 keymap('v', '<', '<gv')
@@ -181,7 +206,7 @@ map('n', '<F4>', ":lua require('dapui').toggle()<CR>", {desc = 'Debug ui toggle'
 keymap('n', '<LocalLeader>s', ":Outline<cr>", {desc = 'Symbols outline'})
 
 -- change list
-map('n', '<leader>cl', ":changes<CR>", {desc = 'Change list'})
+map('n', '<leader>Cl', ":changes<CR>", {desc = 'Change list'})
 
 -- marks https://github.com/chentoast/marks.nvim
 map('n', 'mm', ":lua require('marks').set_next()<CR>", {desc = 'Marks set'})
@@ -255,9 +280,11 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 -- Spring
 local spring_run_mvn = 'mvn spring-boot:run -Dspring-boot.run.properties=local'
 local command = ':lua require("toggleterm").exec("' .. spring_run_mvn .. '")<CR>'
-keymap('n', '<leader>sr', command)
-keymap('n', '<leader>oi', ':lua require("jdtls").organize_imports()<CR>')
-keymap('n', '<leader>jc', ':lua require("jdtls").compile("incremental")')
+map('n', '<leader>sr', command)
+map('n', '<leader>jtc', ':lua require("java").test.run_current_class()<CR>', {desc = "Java test class"})
+map('n', '<leader>jtd', ':lua require("java").test.debug_current_class()<CR>', {desc = "Java Debug Test Class"})
+map('n', '<leader>jtm', ':lua require("java").test.run_current_method()<CR>', {desc = "Java Test Method"})
+map('n', "<leader>jtv", ":lua require('java').test.view_last_report()<CR>", {desc = "Java Test View"})
 
 -- neotest
 map("n", "<leader>tr", ':lua require("neotest").run.run()<CR>', {desc = 'Test run under cursor'})
