@@ -6,7 +6,7 @@ return {
   config = function()
     require("chatgpt").setup(
       {
-        api_key_cmd = "gpg -d " .. home .. "/chat.gpg",
+--        api_key_cmd = "gpg -d " .. home .. "/chat.gpg",
         yank_register = "+",
         edit_with_instructions = {
           diff = false,

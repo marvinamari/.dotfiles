@@ -8,7 +8,7 @@ return {
 --https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
 require('utils')
 local dap = require('dap')
-local home = vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
+local home = vim.fn.has('unix') == 1 and os.getenv('HOME') or os.getenv('USERPROFILE')
 local api = vim.api
 local isUnixOs = require 'utils'.isUnixOs
 local configurations = dap.configurations
@@ -156,17 +156,17 @@ configurations.python = {
 }
 --
 -- DotNet
-local exe = '/.local/share/nvim/mason/bin/netcoredbg' or '/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe'
+local exe = vim.fn.has('unix') == 1 and home .. '/.local/share/nvim/mason/bin/netcoredbg' or home .. '/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe'
 
 adapters.netcoredbg = {
   type = 'executable',
-  command = home .. exe,
+  command = exe,
   args = {'--interpreter=vscode'}
 }
 
 adapters.netcoredbgattach = {
   type = 'executable',
-  command = home .. exe,
+  command = exe,
   args = {'--interpreter=vscode', '--attach'}
 }
 
@@ -183,9 +183,7 @@ configurations.cs = {
     type = "netcoredbgattach",
     name = "attach - netcoredbg",
     request = "attach",
-    program = function()
-        return vim.fn.input('EnterProcess ID:')
-    end,
+    program = require('dap.utils').pick_process,
   },
 }
 

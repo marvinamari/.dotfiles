@@ -19,7 +19,9 @@ config.font_size = 14
 config.initial_rows = 500
 config.initial_cols = 500
 -- config.default_domain = 'WSL:Ubuntu'
--- config.default_prog = {'C:\\Program Files\\PowerShell\\7\\pwsh.exe'}
+if os.getenv("OS") == "Windows_NT" then
+  config.default_prog = {'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'}
+end
 config.color_scheme = 'MaterialDarker'
 config.keys = {
   -- paste from clipboard

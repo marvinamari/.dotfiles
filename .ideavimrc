@@ -60,7 +60,7 @@ nmap <S-right> 20zl
 nmap \s :action ActivateStructureToolWindow<cr>
 
 " Terminal
-nmap <leader>tt :action ActivateTerminalToolWindow<cr>
+nmap <C-\> :action ActivateTerminalToolWindow<cr>
 
 " Closing tabs
 nmap <leader>q :action CloseContent<cr>
@@ -109,6 +109,8 @@ nmap <leader>d :action ShowErrorDescription<cr>
 nmap <leader>ns :action SelectInProjectView<cr>
 
 " lsp
+nmap gpd :action QuickImplementations<cr>
+nmap gpt :action QuickTypeDefinition<cr>
 nmap gi :action GotoImplementation<cr>
 nmap gd :action GotoDeclaration<cr>
 nmap gr :action ShowUsages<cr>
@@ -204,8 +206,9 @@ nmap <leader>/ :action Find<cr>
 nmap <leader>\ :action FindInPath<cr>
 
 " Moving lines
-nmap K :action MoveLineUp<cr>
-nmap J :action MoveLineDown<cr>
+nmap K :action QuickJavaDoc<cr>
+"nmap J :action MoveLineDown<cr>
+
 " Moving statements
 nmap KK :action MoveElementRight<cr>
 nmap JJ :action MoveElementLeft<cr>

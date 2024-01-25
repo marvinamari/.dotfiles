@@ -16,7 +16,15 @@ telescope.setup{
 				["<C-h>"] = actions.cycle_previewers_prev,
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
+        ["<C-w>"] = actions.send_selected_to_qflist,
+        ["<C-q>"] = actions.send_to_qflist,
 			},
+			n = {
+        ["<tab>"] = actions.toggle_selection + actions.move_selection_next,
+        ["<s-tab>"] = actions.toggle_selection + actions.move_selection_previous,
+        ["<C-w>"] = actions.send_selected_to_qflist,
+        ["<C-q>"] = actions.send_to_qflist,
+      }
 		},
     dynamic_preview_title = true,
     vimgrep_arguments = {

@@ -6,7 +6,7 @@ local opt = vim.opt
 vim.cmd("set autoread")
 vim.cmd("set modifiable")
 -- Colorscheme
-vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme catppuccin")
 --vim.cmd("colorscheme tokyonight-moon")
 
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -104,6 +104,7 @@ if vim.fn.has('termguicolors') == 1 then
     vim.api.nvim_command('set termguicolors')
 end
 
+-- vim.opt.guicursor = "a:block"
 
 -- Windows Settings
 if vim.fn.has('win32') == 1 then

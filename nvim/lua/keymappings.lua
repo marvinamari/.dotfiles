@@ -208,6 +208,11 @@ keymap('n', '<LocalLeader>s', ":Outline<cr>", {desc = 'Symbols outline'})
 -- change list
 map('n', '<leader>Cl', ":changes<CR>", {desc = 'Change list'})
 
+-- quickfix list
+map('n', "<leader>qfo", "<cmd>copen<CR>", {desc = "Quickfix open"} )
+map('n', "<leader>qfc", "<cmd>cclose<CR>", {desc = "Quickfix close"} )
+map('n', "<leader>qfd", "<cmd>cexpr []<CR>", {desc = "Quickfix delete"})
+
 -- marks https://github.com/chentoast/marks.nvim
 map('n', 'mm', ":lua require('marks').set_next()<CR>", {desc = 'Marks set'})
 map('n', 'mn', ":lua require('marks').next()<CR>", {desc = 'Marks next'})
@@ -263,6 +268,10 @@ map('n', '<leader>DL', ':diffget local<CR>', {desc = 'Git diffget local'})
 map('n', '<leader>DB', ':diffget base<CR>', {desc = 'Git diffget base'})
 map('n', '<leader>DR', ':diffget remote<CR>', {desc = 'Git diffget remote'})
 map("n", "<LocalLeader>gb", ":GitSigns blame_line<cr>", {desc = "Git Blame"})
+-- Merge conflicts
+vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>",  { desc = "mergetool mapping" })
+vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>",   { desc = "mergetool mapping" })
+vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", { desc = "mergetool mapping" })
 
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
