@@ -17,6 +17,15 @@ local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+-- set pwd with cd %%
+vim.keymap.set('c', '%%', function()
+  if (vim.fn.getcmdtype() == ':') then
+    return vim.fn.expand('%:h')..'/'
+  else
+    return '%%'
+  end
+end
+, {expr = true})
 
 keymap('n', '<Space>', '<NOP>')
 

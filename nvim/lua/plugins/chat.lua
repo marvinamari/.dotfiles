@@ -1,12 +1,12 @@
 local home = require('utils').home
-
+-- <C-n> starts new session
 return {
   "jackMort/ChatGPT.nvim",
   event = "VeryLazy",
   config = function()
     require("chatgpt").setup(
       {
---        api_key_cmd = "gpg -d " .. home .. "/chat.gpg",
+--        api_key_cmd = "bw get notes ChatGPTKey 2>/dev/null",
         yank_register = "+",
         edit_with_instructions = {
           diff = false,

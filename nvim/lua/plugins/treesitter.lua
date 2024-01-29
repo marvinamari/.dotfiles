@@ -3,6 +3,7 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     require 'nvim-treesitter.configs'.setup {
       configs = {
@@ -68,7 +69,7 @@ return {
       sync_install = false,
       auto_install = true,
       highlight = {
-        enable = true,         -- false will disable the whole extension
+        enable = true,             -- false will disable the whole extension
         disable = { 'c', 'rust' }, -- list of language that will be disabled
       },
       indent = { enable = true },

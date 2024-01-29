@@ -96,3 +96,8 @@ sudo chsh -s $(which zsh) $USER
 
 
 Use asdf to install php which comes with composer
+
+# Install Bitwarden
+https://github.com/bitwarden/clients/tree/main/apps/cli
+
+# Download httpie to Applications

@@ -2,11 +2,12 @@
 #ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 
 source ~/.alias
+source ~/.secrets
 
 # Path
 export PATH=/usr/local/sbin:$PATH
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
-export PATH="$HOME/Applications:$PATH"
+export PATH="$HOME/.applications:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
 # Environment variables set everywhere

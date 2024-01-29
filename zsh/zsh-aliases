@@ -15,7 +15,6 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
-alias mach_java_mode="export SDKMAN_DIR="$HOME/.sdkman" && [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh""
 
 case "$(uname -s)" in
 

@@ -1,5 +1,8 @@
 return {
     "nvim-neotest/neotest",
+    keys = {
+    {"<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "Toggle Neotest"}
+  },
     dependencies = {
       "antoinemadec/FixCursorHold.nvim",
       "nvim-neotest/neotest-python",

@@ -39,7 +39,12 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip
 unzip Hack.zip -d ~/.fonts
 fc-cache -fv
 
-# Install common appimage dependencies
+# Install AppimageLauncher and common appimage dependencies
+sudo apt install -y software-properties-common
+sudo add-apt-repository ppa:appimagelauncher-team/stable
+sudo apt update
+sudo apt install -y appimagelauncher
+
 sudo apt install -yy fuse3 libfuse2
 mkdir ~/Applications
 cd ~/Applications

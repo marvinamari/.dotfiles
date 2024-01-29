@@ -1,5 +1,6 @@
 return {
   'hedyhli/outline.nvim',
+  event = "VeryLazy",
   -- lazy = true,
   config = function()
     require("outline").setup({
