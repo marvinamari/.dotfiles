@@ -185,6 +185,7 @@ return {
         type = "netcoredbgattach",
         name = "attach - netcoredbg",
         request = "attach",
+        justMyCode = false,
         program = require('dap.utils').pick_process,
       },
     }

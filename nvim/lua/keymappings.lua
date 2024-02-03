@@ -59,12 +59,6 @@ keymap('n', '<C-l>', '<C-w>l', {desc = 'Switch window right'})
 -- Clear search
 vim.api.nvim_create_user_command('C', 'let @/=""', {})
 
--- Delte white space
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
-
 -- Commenting code
 -- Vgc and gci{
 
@@ -129,8 +123,9 @@ keymap('x', 'J', ':move \'>+1<CR>gv-gv')
 -- Tab switch buffer
 keymap('n', '<S-l>', ':bnext<CR>') -- :BufferLineCycleNext
 keymap('n', '<S-h>', ':bprevious<CR>') -- :BufferLineCyclePrev
-keymap('n', '<C-w>', ':BufferLineCloseOthers<CR>')
-keymap('n', '<C-p>', ':BufferLinePick<CR>', {desc = 'Buffer pick'})
+keymap('n', '<leader>Bq', ':BufferLineCloseOthers<CR>')
+keymap('n', '<leader>Bp', ':BufferLinePick<CR>', {desc = 'Buffer pick'})
+map('n', '<leader>Bc', ':BufferLinePickClose<CR>', {desc = 'Buffer Pick close'})
 map('n', '<leader>Bl', ':BufferLineCloseLeft<CR>', {desc = 'Buffer close left'})
 map('n', '<leader>Br', ':BufferLineCloseRight<CR>', {desc = 'Buffer close right'})
 
