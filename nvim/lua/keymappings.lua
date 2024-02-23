@@ -243,6 +243,7 @@ map('n', '<leader>dv', ":Telescope dap variables<CR>", {desc = 'Telescope dap va
 -- Telescope -- See `:help telescope.builtin`
 -- navigate preview window with ctl-d ctl-u
 vim.keymap.set("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>", { desc = '[f]ind [f]iles' })
+map('n', "<Leader>fi", "require('telescope.builtin').find_files({find_command= {'rg','--no-ignore','--hidden','--files','-g','!**/node_modules/*','-g','!**/.git/*'},})", { desc = "Find ignored files"})
 --vim.keymap.set("n", "<Leader>fF", ":lua require('telescope.builtin').find_files({})<CR>", { desc = '[f]ind [f]iles Exact Name' })
 map("n", "<Leader>fb", ':lua require("telescope").extensions.file_browser.file_browser()<CR>', {desc = 'Telescope extensions file browse'})
 map("n", "<Leader>fC", ":lua require('telescope.builtin').colorscheme()<CR>")

@@ -9,7 +9,9 @@ return {
     --https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
     require('utils')
     local dap = require('dap')
-    local home = vim.fn.has('unix') == 1 and os.getenv('HOME') or os.getenv('USERPROFILE')
+    local home = require('utils').home
+    local neovim_home = require('utils').neovim_home
+    local isWindows = require('utils').isWindows
     local api = vim.api
     local isUnixOs = require 'utils'.isUnixOs
     local configurations = dap.configurations
@@ -157,8 +159,7 @@ return {
     }
     --
     -- DotNet
-    local exe = vim.fn.has('unix') == 1 and home .. '/.local/share/nvim/mason/bin/netcoredbg' or
-    home .. '/AppData/Local/nvim-data/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe'
+    local exe = isWindows and home .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe' or home .. '/mason/bin/netcoredbg'
 
     adapters.netcoredbg = {
       type = 'executable',
@@ -178,7 +179,10 @@ return {
         name = "launch - netcoredbg",
         request = "launch",
         program = function()
-          return vim.fn.input('Path to executable:' .. vim.fn.getcwd() .. '- /bin/Debug/file')
+          -- Use telescope to select the DLL file
+          local selected_file = require('telescope.builtin').find_files({find_command= {"rg","--no-ignore","--hidden","--files","-g","!**/node_modules/*","-g","!**/.git/*"},
+          })[1]
+          return selected_file
         end,
       },
       {

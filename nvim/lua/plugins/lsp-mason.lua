@@ -21,6 +21,7 @@ return { -- LSP Configuration & Plugins
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local home = require('utils').home
+    local utils = require('utils')
 
     -- lsp_signature
     local on_attach_lsp_signature = function(client, bufnr)
@@ -112,7 +113,6 @@ return { -- LSP Configuration & Plugins
     -- Mason path ~/.local/share/nvim/mason/bin
 
     local pid = vim.fn.getpid()
-    local home = os.getenv('HOME') --vim.fn.has('unix') and os.getenv('HOME') or os.getenv('USERPROFILE')
     local root_pattern = require('lspconfig.util').root_pattern
     local lspconfig = require 'lspconfig'
     local configs = require 'lspconfig.configs'
@@ -156,6 +156,7 @@ return { -- LSP Configuration & Plugins
         --"phpactor",
         --"php-debug-adapter",
         "pyright",
+        "sqls",
         "typescript-language-server",
         "yaml-language-server",
         --format
@@ -192,7 +193,7 @@ return { -- LSP Configuration & Plugins
     -- Enable the following language servers
     -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
     local lsp_servers = { 'angularls', 'astro', 'bashls', 'dockerls', 'jsonls',
-      'kotlin_language_server', 'pyright', 'sqlls', 'svelte', 'tailwindcss', 'yamlls' }
+      'kotlin_language_server', 'pyright', 'svelte', 'tailwindcss', 'yamlls' }
 
     -- Ensure the servers above are installed
     -- require('mason-lspconfig').setup {
@@ -277,10 +278,19 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+    lspconfig.sqls.setup({
+      on_attach = _G.on_attach("sqls"),
+      capabilities = capabilities,
+      cmd = {utils.isWindows and utils.neovim_home .. "/mason/packages/sqls/sqls.exe" or utils.neovim_home .. "/mason/bin/sqls", "--config", utils.home .. "/.config/sqls.yml"},
+      -- root_dir = function(fname)
+      --   return root_pattern(fname) or vim.loop_os_homedir()
+      -- end
+    })
+
     lspconfig.tsserver.setup {
       -- filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
       -- root_dir = require('lspconfig.util').root_pattern('package.json')
-      on_attach = _G.on_attach(lsp),
+      on_attach = _G.on_attach("tsserver"),
       capabilities = capabilities,
       root_dir = vim.loop.cwd
     }

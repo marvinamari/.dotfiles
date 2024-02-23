@@ -48,7 +48,9 @@ end
 
 local current_os = vim.loop.os_uname().sysname:lower()
 local unix = { "darwin", "linux" }
-M.home = os.getenv('HOME')
+M.isWindows = vim.fn.has('win32') == 1
+M.home = M.isWindows and os.getenv("USERPROFILE") or os.getenv('HOME')
+M.neovim_home = M.isWindows and M.home .. '/AppData/Local/nvim-data' or M.home .. '/.local/share/nvim'
 M.isUnixOs = function()
     for _, value in ipairs(unix) do
         if value == current_os then

@@ -14,6 +14,7 @@ return {
     --require'telescope'.load_extension('project')
 
     telescope.setup {
+
       defaults = {
         mappings = {
           i = {
