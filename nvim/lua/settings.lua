@@ -8,7 +8,6 @@ vim.cmd("set modifiable")
 -- Colorscheme
 vim.cmd("colorscheme catppuccin")
 --vim.cmd("colorscheme tokyonight-moon")
-
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
@@ -90,6 +89,9 @@ vim.wo.signcolumn = 'yes'
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- Copilot
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
 -- Identify white space
 vim.cmd([[

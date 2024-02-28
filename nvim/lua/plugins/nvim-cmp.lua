@@ -97,15 +97,17 @@ return {
             treesitter = "[Treesitter]",
             zsh = "[Zsh]",
             spell = "[Spell]",
+            codeium = "[Codeium]"
           })[entry.source.name]
           return vim_item
         end,
       },
       sources = {
-        { name = "luasnip" },
-        { name = "nvim_lsp" },
-        { name = "buffer" },
-        { name = "path" },
+        { name = "codeium", group_index = 2},
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "buffer", group_index = 2 },
+        { name = "luasnip", group_index = 2 },
+        { name = "path", group_index = 2 },
       },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,

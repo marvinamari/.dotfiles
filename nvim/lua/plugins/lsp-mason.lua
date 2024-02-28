@@ -150,6 +150,7 @@ return { -- LSP Configuration & Plugins
         "java-debug-adapter",
         "java-test",
         "jdtls",
+        "lemminx",
         "lua-language-server",
         "kotlin-language-server",
         "kotlin-debug-adapter",
@@ -192,7 +193,7 @@ return { -- LSP Configuration & Plugins
 
     -- Enable the following language servers
     -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-    local lsp_servers = { 'angularls', 'astro', 'bashls', 'dockerls', 'jsonls',
+    local lsp_servers = { 'angularls', 'astro', 'bashls', 'dockerls', 'jsonls', 'lemminx',
       'kotlin_language_server', 'pyright', 'svelte', 'tailwindcss', 'yamlls' }
 
     -- Ensure the servers above are installed

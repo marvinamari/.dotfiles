@@ -12,6 +12,7 @@ return {
 		Container = " ",
 		Continue = '→ ',
 		Copilot = ' ',
+		Codeium = "";
 		Declaration = " ",
 		Delete = "󰚃 ",
 		Enum = " ",

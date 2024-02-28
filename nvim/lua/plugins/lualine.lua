@@ -1,6 +1,7 @@
 return {
   'hoob3rt/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+  event = "VeryLazy",
   config = function()
     local lualine = require("lualine")
     local icons = require("config.icons")
@@ -84,10 +85,9 @@ return {
     local progress = function()
       local current_line = vim.fn.line(".")
       local total_lines = vim.fn.line("$")
-      local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
       local line_ratio = current_line / total_lines
-      local index = math.ceil(line_ratio * #chars)
-      return chars[index]
+      local index = math.ceil(line_ratio * 100)
+      return index .. "%%"
     end
 
     local spaces = function()
