@@ -13,7 +13,13 @@ return {
   config = function()
     local cmp = require("cmp")
     local icons = require('config.icons')
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     require("luasnip.loaders.from_vscode").lazy_load()
+
+    cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done()
+    )
 
     local check_backspace = function()
       local col = vim.fn.col "." - 1
