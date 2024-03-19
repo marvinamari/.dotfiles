@@ -8,8 +8,6 @@
 --
 
 -- variables
-vim.g.maplocalleader = '\\'
-
 local keymap = require 'utils'.keymap
 
 -- Escape termcodes

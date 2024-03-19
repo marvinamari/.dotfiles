@@ -18,9 +18,6 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.cmd[[filetype plugin on]]
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 --Editor
 opt.backup = false
 opt.wrap = false
