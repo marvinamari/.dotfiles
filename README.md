@@ -19,6 +19,18 @@ apt install --yes python3-venv'
 # Pip
 pip install virtualenv
 ```
+### TMUX
+In copy mode Y will yank the current line:
+Once you’ve copied some stuff, you can do more than just paste the last thing:
+
+           #           List all paste buffers.
+           -           Delete the most recently copied buffer of text.
+           =           Choose which buffer to paste interactively from a list.
+           [           Enter copy mode to copy text or view the history.
+           ]           Paste the most recently copied buffer of text. 
+(I have [ remapped to Escape and ] remapped to p. I use - for split-window -v, so I moved delete-buffer to +.)
+
+tmux remembers old buffers and prefix + = lets you paste them arbitrarily!
 
 Mount external drive:
 `https://www.zdnet.com/article/how-to-permanently-mount-a-drive-in-linux-and-why-you-should/`

@@ -1,3 +1,10 @@
+local js_based_languages = {
+  "typescript",
+  "javascript",
+  "typescriptreact",
+  "javascriptreact",
+}
+
 return {
   'mfussenegger/nvim-dap',
   event = "VeryLazy",
@@ -159,7 +166,8 @@ return {
     }
     --
     -- DotNet
-    local exe = isWindows and home .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe' or home .. '/mason/bin/netcoredbg'
+    local exe = isWindows and home .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe' or
+    home .. '/mason/bin/netcoredbg'
 
     adapters.netcoredbg = {
       type = 'executable',
@@ -180,7 +188,7 @@ return {
         request = "launch",
         program = function()
           -- Use telescope to select the DLL file
-          local selected_file = require('telescope.builtin').find_files({find_command= {"rg","--no-ignore","--hidden","--files","-g","!**/node_modules/*","-g","!**/.git/*"},
+          local selected_file = require('telescope.builtin').find_files({ find_command = { "rg", "--no-ignore", "--hidden", "--files", "-g", "!**/node_modules/*", "-g", "!**/.git/*" },
           })[1]
           return selected_file
         end,
@@ -217,7 +225,76 @@ return {
     --       }
     --     }
 
+    --
+    -- Typescript
+    --
+    local jsexe = isWindows and neovim_home .. '/mason/packages/netcoredbg/js-debug-adapter' or neovim_home .. '/mason/bin/js-debug-adapter'
+    for _, language in ipairs(js_based_languages) do
+      configurations[language] = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "$file",
+          cwd = "${workspaceFolder}",
+          sourceMaps = true,
+        }, -- To debug a nodejs process you need to add --inspect when you run the process
+        {
+          type = "pwa-node",
+          request = "attach",
+          name = "Attach",
+          processId = require("dap.utils").pick_process,
+          cwd = "${workspaceFolder}",
+          sourceMaps = true
+        },
+        -- Debug web application client side
+        {
+          type = "pwa-chrome",
+          request = "launch",
+          name = "Launch & Debug Chrome",
+          url = function()
+            local co = coroutine.running()
+            return coroutine.create(function()
+              vim.ui.input({
+                prompt = "Enter URL: ",
+                default = "http://localhost:3000",
+              }, function(url)
+                if url == nil or url == "" then
+                  return
+                else
+                  coroutine.resume(co, url)
+                end
+              end)
+            end)
+          end,
+          webRoot = "${workspaceFolder}",
+          skipFiles = { "<node_internals>/**/*.js" },
+          protocol = "inspector",
+          sourceMaps = true,
+          useDataDir = false,
+        },
+        -- Divider for launch.json derived congigs
+        {
+          name = "--- launch.json configs below ---",
+          type = "",
+          request = "launch"
+        }
+      }
+    end
 
+    adapters["pwa-node"] = {
+      type = "server",
+      host = "127.0.0.1",
+      port = 3000,
+      command = jsexe,
+      -- args = {}
+    }
+
+    adapters["pwa-chrome"] = {
+      type = "executable",
+      command = jsexe,
+      args = {}
+    }
 
     require('telescope').load_extension('dap')
     require('nvim-dap-virtual-text').setup({})
@@ -283,7 +360,7 @@ return {
       },
       floating = {
         max_height = nil, -- These can be integers or a float between 0 and 1.
-        max_width = nil, -- Floats will be treated as percentage of your screen.
+        max_width = nil,  -- Floats will be treated as percentage of your screen.
         border = 'single',
         mappings = {
           close = { 'q', '<Esc>' },
@@ -304,5 +381,36 @@ return {
     vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
     vim.fn.sign_define('DapBreakpointRejected', { text = '🟦', texthl = '', linehl = '', numhl = '' })
     vim.fn.sign_define('DapStopped', { text = '⭐️', texthl = '', linehl = '', numhl = '' })
-  end
+  end,
+  keys = {
+    {
+      "<leader>dO",
+      function()
+        require("dap").step_out()
+      end,
+      desc = "Step Out",
+    },
+    {
+      "<leader>do",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "Step Over",
+    },
+    {
+      "<leader>da",
+      function()
+        if vim.fn.filereadable(".vscode/launch.json") then
+          local dap_vscode = require("dap.ext.vscode")
+          dap_vscode.load_launchjs(nil, {
+            ["pwa-node"] = js_based_languages,
+            ["chrome"] = js_based_languages,
+            ["pwa-chrome"] = js_based_languages,
+          })
+        end
+        require("dap").continue()
+      end,
+      desc = "Run with Args",
+    },
+  },
 }
