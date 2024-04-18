@@ -14,6 +14,9 @@
 [interactive]
     diffFilter = delta --color-only
 
+[alias]
+  differ = "!nvim -c DiffviewOpen"
+
 [delta]
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
@@ -29,8 +32,41 @@
     cmd = nvim -d -c "\"wincmd l\" -c\"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 [diff]
-    colorMoved = default
-
+    tool = nvimdiff
+[difftool]
+    prompt = false
 [difftool "nvimdiff"]
-    trustExitCode = false
+	cmd = nvim "$LOCAL" "$REMOTE"
+	; trustExitCode = false
+; [color "diff"]
+;     meta = blue
+;     old = black red strike
+;     new = black green italic
+;     context = yellow bold # context (ie: unchanged lines) text
+[mergetool "nvimdiff"]
+    cmd = nvim -d -c "\"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+    ; #tool = meld
+[mergetool]
+# Gives you meld, with three comparison tabs. Assuming you're merging others changes into
+# your branch, this shows you:
+# - 1st tab: yours|merged result|theirs (do the merge here into the middle pane)
+# - 2nd tab: base vs your changes (look at just your changes)
+# - 3rd tab: base vs their changes (look at just their changes)
+    #cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    ; cmd = nvim -d -c "\"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+    ;  cmd = nvim -f -c "Gdiffsplit!" "$MERGED"
+   keepBackup = false
+   prompt = false
+; [merge]
+; 	tool = nvim
+;
+; [mergetool]
+; 	keepBackup = false
+; 	prompt = false
+;
+; [mergetool "nvim"]
+;     cmd = nvim -d -c "\"wincmd l\"" -c "\"norm ]c\"" $LOCAL $MERGED $REMOTE
 

@@ -6,7 +6,10 @@ local opt = vim.opt
 vim.cmd("set autoread")
 vim.cmd("set modifiable")
 -- Colorscheme
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme material")
+vim.cmd("hi Cursor guibg=green")
+--vim.cmd[[set guicursor=n-v-c-i:block]]
+--Lua:
 --vim.cmd("colorscheme tokyonight-moon")
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1

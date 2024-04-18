@@ -2,7 +2,7 @@ local home = require('utils').home
 -- <C-n> starts new session
 return {
   "jackMort/ChatGPT.nvim",
-  event = "VeryLazy",
+  cmd = "ChatGPT",
   config = function()
     require("chatgpt").setup(
       {

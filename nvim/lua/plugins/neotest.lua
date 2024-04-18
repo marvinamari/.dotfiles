@@ -1,22 +1,23 @@
 return {
-    "nvim-neotest/neotest",
-    keys = {
-    {"<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "Toggle Neotest"}
+  "nvim-neotest/neotest",
+  keys = {
+    { "<leader>tt", "<cmd>lua require('neotest').summary.toggle()<CR>", desc = "Toggle Neotest" }
   },
-    dependencies = {
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-plenary",
-      "nvim-neotest/neotest-go",
-      "haydenmeade/neotest-jest",
-      "Issafalcon/neotest-dotnet",
-      -- "Decodetalkers/csharpls-extended-lsp.nvim",
-      "stevanmilic/neotest-scala",
-      "rouge8/neotest-rust",
-      "mrcjkb/neotest-haskell",
-      "nvim-neotest/neotest-vim-test",
-      'vim-test/vim-test',
-    },
+  dependencies = {
+    "nvim-neotest/nvim-nio",
+    "antoinemadec/FixCursorHold.nvim",
+    "nvim-neotest/neotest-python",
+    "nvim-neotest/neotest-plenary",
+    "nvim-neotest/neotest-go",
+    "haydenmeade/neotest-jest",
+    "Issafalcon/neotest-dotnet",
+    -- "Decodetalkers/csharpls-extended-lsp.nvim",
+    "stevanmilic/neotest-scala",
+    "rouge8/neotest-rust",
+    "mrcjkb/neotest-haskell",
+    "nvim-neotest/neotest-vim-test",
+    'vim-test/vim-test',
+  },
 
   config = function()
     require("neotest").setup({
@@ -26,7 +27,7 @@ return {
         }),
         require "neotest-rust",
         require("neotest-dotnet")({
-          dap = { justMyCode = false},
+          dap = { justMyCode = false },
         }),
         require "neotest-scala",
         require "neotest-haskell",
