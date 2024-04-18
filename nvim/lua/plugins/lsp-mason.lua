@@ -288,13 +288,13 @@ return { -- LSP Configuration & Plugins
       -- end
     })
 
-    lspconfig.tsserver.setup {
-      -- filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
-      -- root_dir = require('lspconfig.util').root_pattern('package.json')
-      on_attach = _G.on_attach("tsserver"),
-      capabilities = capabilities,
-      root_dir = vim.loop.cwd
-    }
+    -- lspconfig.tsserver.setup {
+    --   -- filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+    --   -- root_dir = require('lspconfig.util').root_pattern('package.json')
+    --   on_attach = _G.on_attach("tsserver"),
+    --   capabilities = capabilities,
+    --   root_dir = vim.loop.cwd
+    -- }
 
     -- For debugging you must install delve https://www.youtube.com/watch?v=i04sSQjd-qo
     lspconfig.gopls.setup {
