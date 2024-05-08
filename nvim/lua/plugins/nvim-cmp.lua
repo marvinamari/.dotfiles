@@ -103,7 +103,7 @@ return {
             treesitter = "[Treesitter]",
             zsh = "[Zsh]",
             spell = "[Spell]",
-            codeium = "[Codeium]",
+            genai = "[Codeium]",
             copilot = "[Copilot]"
           })[entry.source.name]
           return vim_item
@@ -114,7 +114,7 @@ return {
         { name = "buffer",   group_index = 2 },
         { name = "luasnip",  group_index = 2 },
         { name = "path",     group_index = 2 },
-        { name = "codeium",  group_index = 3 },
+        { name = "genai", group_index = 3},
         { name = "copilot",  group_index = 3 },
       },
       confirm_opts = {

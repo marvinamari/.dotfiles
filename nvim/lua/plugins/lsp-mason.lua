@@ -54,7 +54,7 @@ return { -- LSP Configuration & Plugins
         end, { desc = 'Format current buffer with LSP' })
 
         if _.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(bufnr, true)
+          vim.lsp.inlay_hint.enable(true)
         end
 
         on_attach_lsp_signature(_, bufnr)

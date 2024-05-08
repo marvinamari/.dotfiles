@@ -6,7 +6,7 @@ sudo apt upgrade -y
 
 # dev dependencies
 sudo apt install -yy bat binutils bison build-essential caffeine dnsutils \
-    fzf gcc kdeconnect kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
+    fzf gcc gnupg kdeconnect kdiff3 libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
     libncursesw5-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev make magic-wormhole \
     nfs-common python3.10-venv rclone ripgrep tk-dev tmux virt-manager wget wl-clipboard xclip xz-utils zlib1g-dev zoxide zsh
 
@@ -58,7 +58,13 @@ curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/lates
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 
+echo "Mongodb"
+wget https://downloads.mongodb.com/compass/mongodb-compass_1.42.5_amd64.deb
+sudo dpkg -i mongodb-compass_1.42.5_amd64.deb
 
+wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-7.0.asc
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+sudo apt install -y mongodb-mongosh
 #
 # Install Flatpak
 {
