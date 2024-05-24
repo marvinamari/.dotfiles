@@ -19,7 +19,7 @@ local prompts = {
 
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
-  cmd = "CopilotChatOpen",
+  cmd = "CopilotChatToggle",
   branch = "canary",
   -- tag = "v2.6.2",
   -- cmd = "CopilotChat",
