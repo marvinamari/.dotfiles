@@ -60,6 +60,7 @@
 - defaults:
     link:
       if: '[[Get-CimInstance Win32_OperatingSystem | Select-Object "Caption" | Format-Table -AutoSize]]'
+     #  if: python -c "import pathlib, sys; sys.exit(0) if pathlib.Path(r'C:\Windows\System32').is_dir() else sys.exit(1)"
 - link:
     ~/AppData/Roaming/helix/config.toml:
         create: true

@@ -150,6 +150,7 @@ return { -- LSP Configuration & Plugins
         "java-debug-adapter",
         "java-test",
         "jdtls",
+        "json-lsp",
         "lemminx",
         "lua-language-server",
         "kotlin-language-server",
@@ -197,9 +198,9 @@ return { -- LSP Configuration & Plugins
       'kotlin_language_server', 'pyright', 'svelte', 'tailwindcss', 'yamlls' }
 
     -- Ensure the servers above are installed
-    -- require('mason-lspconfig').setup {
-    --   ensure_installed = lsp_servers,
-    -- }
+    require('mason-lspconfig').setup {
+      ensure_installed = lsp_servers,
+    }
 
     -- nvim-cmp supports additional completion capabilities, broadcast that to servers
     local capabilities = vim.tbl_deep_extend("force",

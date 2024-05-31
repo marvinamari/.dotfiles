@@ -94,6 +94,7 @@ keymap('v', '<C-V>', '<ESC>"+pa', { silent = true })
 -- map('v', "<leader>cr", "<cmd>ChatGPTRun roxygen_edit<CR>", {desc = "Chat roxygen_edit"})
 -- map('v', "<leader>cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", {desc = "Chat code readability analysis"})
 
+-- Copilot
 map('n', "<leader>cc", "<cmd>CopilotChatToggle<CR>", {desc = "Copilot Chat Toggle"})
 map('v', "<leader>cf", "<cmd>CopilotChatFix<CR>", {desc = "Copilot Chat Fix"})
 map('v', "<leader>co", "<cmd>CopilotChatOptimize<CR>", {desc = "Copilot Chat Optimize"})
@@ -102,6 +103,12 @@ map('v', "<leader>ct", "<cmd>CopilotChatTests<CR>", {desc = "Copilot Chat Tests"
 map('v', "<leader>cr", "<cmd>CopilotChatReview<CR>", {desc = "Copilot Chat Review"})
 
 map('n', "<leader>ca", "<cmd>Copilot auth<CR>", {desc = "Copilot auth"})
+
+-- Dbee 
+map('n', "<LocalLeader>do", "<cmd>lua require('dbee').open()<CR>", {desc = "Dbee Open"})
+map('n', "<LocalLeader>dc", "<cmd>lua require('dbee').close()<CR>", {desc = "Dbee Close"})
+map('n', "<LocalLeader>dd", "<cmd>lua require('dbee').toggle()<CR>", {desc = "Dbee Toggle"})
+
 map('n', "<leader>cs", "<cmd>Copilot suggestions<CR>", {desc = "Copilot suggestions"})
 
 -- Better indenting
