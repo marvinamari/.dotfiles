@@ -5,7 +5,10 @@
 -- Increment Decrement number Ctrl-A Ctrl-X
 -- substitue in block <,>s/old/new/g
 -- jump to matching brace %
---
+
+-- Marks
+-- create mark m<register>
+-- go to mark '<register>
 
 -- variables
 local keymap = require 'utils'.keymap
@@ -104,10 +107,18 @@ map('v', "<leader>cr", "<cmd>CopilotChatReview<CR>", {desc = "Copilot Chat Revie
 
 map('n', "<leader>ca", "<cmd>Copilot auth<CR>", {desc = "Copilot auth"})
 
+-- Gen ai
+map('n', "<LocalLeader>cc", "<cmd>Gen Chat<CR>", {desc = "Gen-ai chat"})
+map('n', "<LocalLeader>cC", "<cmd>Gen Change_Code<cr>", {desc = "Gen-ai change code"})
+map('n', "<LocalLeader>ca", "<cmd>Gen Ask<cr>", {desc = "Gen-ai ask"})
+map('n', "<LocalLeader>cR", "<cmd>Gen Review_Code<cr>", {desc = "Gen-ai review code"})
+map('n', "<LocalLeader>cs", "<cmd>Gen Summarize<cr>", {desc = "Gen-ai summarize"})
+map('n', "<LocalLeader>cS", "<cmd>lua require('gen').select_model()<cr>", {desc = "Gen-ai select model"})
+
 -- Dbee 
 map('n', "<LocalLeader>do", "<cmd>lua require('dbee').open()<CR>", {desc = "Dbee Open"})
 map('n', "<LocalLeader>dc", "<cmd>lua require('dbee').close()<CR>", {desc = "Dbee Close"})
-map('n', "<LocalLeader>dd", "<cmd>lua require('dbee').toggle()<CR>", {desc = "Dbee Toggle"})
+map('n', "<LocalLeader>D", "<cmd>lua require('dbee').toggle()<CR>", {desc = "Dbee Toggle"})
 
 map('n', "<leader>cs", "<cmd>Copilot suggestions<CR>", {desc = "Copilot suggestions"})
 
@@ -232,6 +243,16 @@ map('n', "<leader>qfo", "<cmd>copen<CR>", {desc = "Quickfix open"} )
 map('n', "<leader>qfc", "<cmd>cclose<CR>", {desc = "Quickfix close"} )
 map('n', "<leader>qfd", "<cmd>cexpr []<CR>", {desc = "Quickfix delete"})
 
+-- harpoon
+local harpoon = require("harpoon")
+map('n', "<leader>hl", ":Telescope harpoon marks<CR>", {desc = "Harpoon list marks"})
+vim.keymap.set('n', "<leader>hm", function() harpoon:list():add() end, {desc = "Harpoon add mark file"})
+vim.keymap.set('n', "<leader>ht", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "Harpoon toggle menu"})
+vim.keymap.set('n', ";1", function() harpoon:list():select(1) end, {desc = "Harpoon select file 1"})
+vim.keymap.set('n', ";2", function() harpoon:list():select(2) end, {desc = "Harpoon select file 2"})
+vim.keymap.set('n', ";3", function() harpoon:list():select(3) end, {desc = "Harpoon select file 3"})
+vim.keymap.set('n', ";4", function() harpoon:list():select(4) end, {desc = "Harpoon select file 4"})
+
 -- marks https://github.com/chentoast/marks.nvim
 map('n', 'mm', ":lua require('marks').set_next()<CR>", {desc = 'Marks set'})
 map('n', 'mn', ":lua require('marks').next()<CR>", {desc = 'Marks next'})
@@ -327,12 +348,10 @@ map("n", "<leader>tp", ':lua require("neotest").output_panel.toggle()<CR>', {des
 map("n", "<leader>tw", ':lua require("neotest").watch.toggle()<CR>', {desc = 'Test toggle watch'})
 
 -- trouble
-map("n", "<leader>xx", ":lua require('trouble').toggle()<cr>", {desc = 'Toggle trouble'})
-map("n", "<leader>xw", ":lua require('trouble').toggle('workspace_diagnostics')<cr>", {desc = 'Trouble toggle workspace'})
-map("n", "<leader>xd", ":lua require('trouble').toggle('document_diagnostics')<cr>", {desc = 'Trouble toggle document'})
-map("n", "<leader>xq", ":lua require('trouble').toggle('quickfix')<cr>", {desc = 'Trouble toggle quickfix'})
-map("n", "<leader>xl", ":lua require('trouble').toggle('loclist')<cr>", {desc = 'Trouble toggle loclist'})
-map("n", "<leader>xr", ":lua require('trouble').toggle('lsp_references')<cr>", {desc = 'Trouble toggle references'})
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", {desc = 'Toggle trouble'})
+map("n", "<leader>xq", "<cmd>Trouble qflist toggle<CR>", {desc = 'Trouble toggle quickfix'})
+map("n", "<leader>xl", "<cmd>Trouble loclist toggle<CR>", {desc = 'Trouble toggle loclist'})
+map("n", "<leader>xr", "<cmd>Trouble lsp_references toggle<CR>", {desc = 'Trouble toggle references'})
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

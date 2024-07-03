@@ -1,10 +1,10 @@
 return {
+  {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    'nvim-lua/plenary.nvim'
   },
-  dependencies = { "nvim-telescope/telescope-project.nvim" },
   config = function()
     -- local builtin = require("telescope.builtin")
     local telescope = require("telescope")
@@ -101,4 +101,16 @@ return {
     --         wrap_results = true
     -- })
   end
+},
+  {
+    "nvim-telescope/telescope-project.nvim",
+    dependencies = "nvim-telescope/telescope.nvim"
+  },
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+    dependencies = "nvim-telescope/telescope.nvim",
+    config = function()
+      require("telescope").load_extension("ui-select")
+    end
+  }
 }

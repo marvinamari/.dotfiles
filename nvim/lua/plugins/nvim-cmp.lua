@@ -45,6 +45,10 @@ return {
           require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
       mapping = {
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
@@ -121,15 +125,15 @@ return {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
       },
-      window = {
-        completion = cmp.config.window.bordered({
-          border = border("CmpBorder"),
-          winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
-        }),
-        documentation = cmp.config.window.bordered({
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        }),
-      },
+      -- window = {
+      --   completion = cmp.config.window.bordered({
+      --     border = border("CmpBorder"),
+      --     winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+      --   }),
+      --   documentation = cmp.config.window.bordered({
+      --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      --   }),
+      -- },
       experimental = {
         ghost_text = {
           hl_group = "Comment",

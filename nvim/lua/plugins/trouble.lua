@@ -1,8 +1,7 @@
 return {
   'folke/trouble.nvim',
-  keys = {
-    { "n", "<leader>xx", { desc = "Toggle Trouble" } }
-  },
+  event = "VeryLazy",
   config = function()
+    require("trouble").setup()
   end
 }

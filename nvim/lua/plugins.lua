@@ -16,25 +16,7 @@ return {
     end
   },
   -- Editor
-  -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     require('catppuccin').setup({
-  --       flavour = "mocha",
-  --       -- highlight_overrides = {
-  --       --   mocha = function(colors)
-  --       --     return {
-  --       --       Visual = { bg = colors.sapphire }
-  --       --     }
-  --       --   end
-  --       -- }
-  --
-  --     })
-  --   end
-  -- },
-  {
+{
     'marko-cerovac/material.nvim',
     config = function()
       local material = require 'material'
@@ -43,11 +25,11 @@ return {
       material.setup({
 
         contrast = {
-          terminal = false,          -- Enable contrast for the built-in terminal
+          terminal = true,          -- Enable contrast for the built-in terminal
           sidebars = false,          -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-          floating_windows = false,  -- Enable contrast for floating windows
+          floating_windows = true,  -- Enable contrast for floating windows
           cursor_line = false,       -- Enable darker background for the cursor line
-          lsp_virtual_text = false,  -- Enable contrasted background for lsp virtual text
+          lsp_virtual_text = true,  -- Enable contrasted background for lsp virtual text
           non_current_windows = false, -- Enable contrasted background for non-current windows
           filetypes = {},            -- Specify which filetypes get the contrasted (darker) background
         },
@@ -104,7 +86,7 @@ return {
 
         high_visibility = {
           lighter = false, -- Enable higher contrast text for lighter style
-          darker = false -- Enable higher contrast text for darker style
+          darker = true -- Enable higher contrast text for darker style
         },
 
         lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
