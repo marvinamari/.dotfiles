@@ -118,7 +118,7 @@ map('n', "<LocalLeader>cS", "<cmd>lua require('gen').select_model()<cr>", {desc 
 -- Dbee 
 map('n', "<LocalLeader>do", "<cmd>lua require('dbee').open()<CR>", {desc = "Dbee Open"})
 map('n', "<LocalLeader>dc", "<cmd>lua require('dbee').close()<CR>", {desc = "Dbee Close"})
-map('n', "<LocalLeader>D", "<cmd>lua require('dbee').toggle()<CR>", {desc = "Dbee Toggle"})
+map('n', "<LocalLeader>db", "<cmd>lua require('dbee').toggle()<CR>", {desc = "Dbee Toggle"})
 
 map('n', "<leader>cs", "<cmd>Copilot suggestions<CR>", {desc = "Copilot suggestions"})
 

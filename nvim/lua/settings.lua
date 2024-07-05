@@ -94,9 +94,9 @@ vim.o.completeopt = 'menuone,noselect'
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
 -- Identify white space
-vim.cmd([[
-set list listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
-]])
+-- vim.cmd([[
+-- set list listchars=tab:»\ ,trail:·,nbsp:⎵,precedes:<,extends:>
+-- ]])
 
 -- Delte white space
 -- vim.api.nvim_create_autocmd({ "BufWritePre" }, {

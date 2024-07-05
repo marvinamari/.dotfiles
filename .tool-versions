@@ -3,6 +3,6 @@ java openjdk-21
 spring-boot 3.1.5
 nodejs 21.2.0
 golang 1.21.4
-dotnet 7.0.404
+dotnet 8.0.100
 pnpm 8.13.1
 gradle 8.5
