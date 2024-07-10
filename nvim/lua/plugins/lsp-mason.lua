@@ -235,7 +235,7 @@ return { -- LSP Configuration & Plugins
           vim.keymap.set(
             "n",
             "gd",
-            "<cmd>lua require('csharp_ls_extended').lsp_definitions()<cr>",
+            "<cmd>lua require('csharpls_extended').lsp_definitions()<cr>",
             { buffer = 0, desc = "LSP Go To Definition" }
           )
         end
@@ -376,7 +376,12 @@ return { -- LSP Configuration & Plugins
         ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
       },
       capabilities = capabilities,
-      root_dir = util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git')
+      root_dir = function(startPath)
+        return util.root_pattern("*.sln")(startPath)
+          or util.root_pattern("*.csproj")(startPath)
+          or util.root_pattern("*.fsproj")(startPath)
+          or util.root_pattern(".git")(startPath)
+      end
     })
 
     -- Register linters and formatters per language
