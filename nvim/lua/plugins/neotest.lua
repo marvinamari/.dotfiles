@@ -14,7 +14,7 @@ return {
     -- "Decodetalkers/csharpls-extended-lsp.nvim",
     "stevanmilic/neotest-scala",
     "rouge8/neotest-rust",
-    "mrcjkb/neotest-haskell",
+    -- "mrcjkb/neotest-haskell",
     "nvim-neotest/neotest-vim-test",
     'vim-test/vim-test',
   },
@@ -30,12 +30,12 @@ return {
           dap = { justMyCode = false },
         }),
         require "neotest-scala",
-        require "neotest-haskell",
+        -- require "neotest-haskell",
         require "neotest-jest",
         require "neotest-go",
         require "neotest-plenary",
         require("neotest-vim-test")({
-          ignore_file_types = { "python", "vim", "lua", "cs", "rust", "scala", "haskell" },
+          ignore_file_types = { "python", "vim", "lua", "cs", "rust", "scala" }, --, "haskell"
         }),
       },
     })

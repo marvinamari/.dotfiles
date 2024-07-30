@@ -8,7 +8,7 @@ return { -- LSP Configuration & Plugins
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     -- LSP
-    "chen244/csharpls-extended-lsp.nvim",
+    "seblj/roslyn.nvim",
     "nvim-lua/lsp-status.nvim",
     {
       "j-hui/fidget.nvim",
@@ -32,8 +32,8 @@ return { -- LSP Configuration & Plugins
         handler_opts = {
           border = "single",
         },
-        zindex = 99,      -- <100 so that it does not hide completion popup.
-        fix_pos = false,  -- Let signature window change its position when needed, see GH-53
+        zindex = 99,          -- <100 so that it does not hide completion popup.
+        fix_pos = false,      -- Let signature window change its position when needed, see GH-53
         toggle_key = "<M-x>", -- Press <Alt-x> to toggle signature on and off.
       })
     end
@@ -231,13 +231,7 @@ return { -- LSP Configuration & Plugins
           { buffer = 0, desc = "References - Goto preview " }
         )
 
-        if server_name == "csharp_ls" then
-          vim.keymap.set(
-            "n",
-            "gd",
-            "<cmd>lua require('csharpls_extended').lsp_definitions()<cr>",
-            { buffer = 0, desc = "LSP Go To Definition" }
-          )
+        if server_name == "roslyn" then
         end
 
         if server_name == "jdtls" then
@@ -286,7 +280,6 @@ return { -- LSP Configuration & Plugins
       "astro",
       "bashls",
       "biome",
-      "csharp_ls",
       "dockerls",
       --'gopls',
       "jdtls",
@@ -366,84 +359,6 @@ return { -- LSP Configuration & Plugins
       })
     end
 
-
-    lspconfig.csharp_ls.setup({
-      on_attach = _G.on_attach("csharp_ls"),
-      handlers = {
-        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }), -- taken from handlers above
-        ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-        ["textDocument/definition"] = require('csharpls_extended').handler,
-        ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
-      },
-      capabilities = capabilities,
-      root_dir = function(startPath)
-        return util.root_pattern("*.sln")(startPath)
-          or util.root_pattern("*.csproj")(startPath)
-          or util.root_pattern("*.fsproj")(startPath)
-          or util.root_pattern(".git")(startPath)
-      end
-    })
-
-    -- Register linters and formatters per language
-    local eslint = require("efmls-configs.linters.eslint")
-    local prettier = require("efmls-configs.formatters.prettier")
-    local stylua = require("efmls-configs.formatters.stylua")
-    local languages = {
-      typescript = { eslint, prettier },
-      typescriptreact = { eslint, prettier },
-      javascript = { eslint, prettier },
-      javascriptreact = { eslint, prettier },
-      lua = { stylua },
-    }
-
-    -- Or use the defaults provided by this plugin
-    -- check doc/SUPPORTED_LIST.md for the supported languages
-    --
-    -- local languages = require('efmls-configs.defaults').languages()
-
-    local efmls_config = {
-      filetypes = vim.tbl_keys(languages),
-      settings = {
-        rootMarkers = { ".git/" },
-        languages = languages,
-      },
-      init_options = {
-        documentFormatting = true,
-        documentRangeFormatting = true,
-      },
-    }
-
-    lspconfig.efm.setup(vim.tbl_extend("force", efmls_config, {
-      -- Pass your custom lsp config below like on_attach and capabilities
-      --
-      -- on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    }))
-
-    local languages = require("efmls-configs.defaults").languages()
-    languages = vim.tbl_extend("force", languages, {
-      -- Custom languages, or override existing ones
-      html = {
-        require("efmls-configs.formatters.prettier"),
-      },
-
-      javascript = {
-        require("efmls-configs.formatters.prettier"),
-        require("efmls-configs.linters.eslint"),
-      },
-
-      typescript = {
-        require("efmls-configs.formatters.prettier"),
-        require("efmls-configs.linters.eslint"),
-      },
-
-      typescriptreact = {
-        linter = require("efmls-configs.linters.eslint_d"),
-        formatter = require("efmls-configs.formatters.prettier_d"),
-      },
-    })
-
     lspconfig.jdtls.setup({
       settings = {
         java = {
@@ -498,6 +413,34 @@ return { -- LSP Configuration & Plugins
           },
           -- Do not send telemetry data containing a randomized but unique identifier
           telemetry = { enable = false },
+        },
+      },
+    })
+
+    require("roslyn").setup({
+      config = {
+        on_attach = _G.on_attach("roslyn"),
+        handlers = handlers,
+        capabilities = capabilities,
+        cmd = {
+          "dotnet",
+          vim.fs.joinpath(vim.fn.stdpath("data"), "roslyn", "Microsoft.CodeAnalysis.LanguageServer.dll"),
+        },
+        settings = {
+          ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true,
+            csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+            csharp_enable_inlay_hints_for_types = true,
+            dotnet_enable_inlay_hints_for_indexer_parameters = true,
+            dotnet_enable_inlay_hints_for_literal_parameters = true,
+            dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+            dotnet_enable_inlay_hints_for_other_parameters = true,
+            dotnet_enable_inlay_hints_for_parameters = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+            dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+          },
         },
       },
     })
