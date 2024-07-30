@@ -25,6 +25,7 @@ nmap <C-down> :action EditorCloneCaretBelow<cr>
 vmap n :action SelectNextOccurrence<cr>
 vmap N :action UnselectPreviousOccurrence<cr>
 
+vmap <C-d> :action SelectNextOccurrence<cr>
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
 
@@ -93,7 +94,7 @@ nmap <leader>wd :action OpenEditorInOppositeTabGroup<cr>
 map <leader>ee :NERDTree<CR>
 nmap <leader>eh :action HideActiveWindow<cr>
 
-" Navigation
+" Navigation / Movements
 nmap <leader>h :action Back<cr>
 nmap <leader>l :action Forward<cr>
 nmap <leader>rl :action RecentLocations<cr>
@@ -105,7 +106,8 @@ nmap <leader>gs :action GotoSymbol<cr>
 nmap <leader>; :action FileStructurePopup<cr>
 nmap <leader>M :action ActivateStructureToolWindow<cr>
 nmap <leader>d :action ShowErrorDescription<cr>
-
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
 nmap <leader>ns :action SelectInProjectView<cr>
 
 " lsp
