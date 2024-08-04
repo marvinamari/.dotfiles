@@ -197,11 +197,13 @@ map('n', "<leader>nt", ":lua require('neogen').generate({type = 'type'})<CR>", {
 -- dap debugging
 map('n', '<leader>dn', ":lua require('osv').launch({port = 5677})<CR>", {desc = "Debug Neovim-kind"})
 map('n', '<F5>', ":lua require('dap').continue()<CR>", {desc = 'Debug continue'})
+map('n', '<S-F5>', ":lua require'dap'.close()<cr>", {desc = 'Debug stop'})
 
 map('n', '<F11>', ":lua require('dap').step_into()<CR>", {desc = 'Debug step into'})
 map('n', '<F10>', ":lua require('dap').step_over()<CR>", {desc = 'Debug step over'})
 map('n', '<S-F12>', ":lua require('dap').step_out()<CR>", {desc = 'Debug step out'})
 
+map('n', '<leader>dw', ":lua require('dapui').float_element('watches')<CR>", {desc = "Dap float watch"})
 map('n',  '<leader>db', ":lua require'dap'.toggle_breakpoint()<CR>", {desc = 'Debug toggle breakpoint'})
 map('n', '<leader>dr', ":lua require'dap'.restart()<cr>", {desc = 'Debug restart'})
 map('n', '<leader>ds', ":lua require'dap'.stop()<cr>", {desc = 'Debug stop'})

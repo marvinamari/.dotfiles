@@ -179,7 +179,9 @@ return { -- LSP Configuration & Plugins
           ":lua vim.diagnostic.show()<CR>",
           { buffer = 0, desc = "Show diagnostics" }
         )
-        vim.keymap.set("n", "<leader>F", ":lua vim.lsp.buf.format()<CR>", { buffer = 0, desc = "LSP Format" })
+        vim.keymap.set("n", "<leader>F",
+          ":lua require('conform').format({ lsp_fallback = true, async = false, timeout_ms= 500,})<CR>",
+          { buffer = 0, desc = "Format" })
         vim.keymap.set(
           "n",
           "<leader>ls",
