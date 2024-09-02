@@ -179,9 +179,6 @@ return { -- LSP Configuration & Plugins
           ":lua vim.diagnostic.show()<CR>",
           { buffer = 0, desc = "Show diagnostics" }
         )
-        vim.keymap.set("n", "<leader>F",
-          ":lua require('conform').format({ lsp_fallback = true, async = false, timeout_ms= 500,})<CR>",
-          { buffer = 0, desc = "Format" })
         vim.keymap.set(
           "n",
           "<leader>ls",
@@ -257,7 +254,11 @@ return { -- LSP Configuration & Plugins
       end
     end
     -- Mason path ~/.local/share/nvim/mason/bin
-
+    -- Keymaps to work outside of LSP
+        vim.keymap.set("n", "<leader>F",
+          ":lua require('conform').format({ lsp_fallback = true, async = false, timeout_ms= 500,})<CR>",
+          { buffer = 0, desc = "Format" })
+    -- END Keymaps to work outside of LSP
     local pid = vim.fn.getpid()
     local root_pattern = require("lspconfig.util").root_pattern
     local lspconfig = require("lspconfig")
