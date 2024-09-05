@@ -18,7 +18,7 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 -- This is where you actually apply your config choices
-
+config.default_cursor_style = 'BlinkingBar'
 config.font = wezterm.font_with_fallback {'JetBrains Mono', 'Fira Code'}
 config.warn_about_missing_glyphs = false
 config.font_size = 13

@@ -5,6 +5,7 @@ return {
   config = function()
     require("conform").setup({
       formatters_by_ft = {
+        cs = { "csharpier" },
         html = { "prettierd", "prettier", stop_after_first = true },
         lua = { "stylua" },
         -- Conform will run multiple formatters sequentially

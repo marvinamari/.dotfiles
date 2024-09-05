@@ -7,6 +7,7 @@ return { -- LSP Configuration & Plugins
     -- Automatically install LSPs to stdpath for neovim
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     -- LSP
     "seblj/roslyn.nvim",
     "nvim-lua/lsp-status.nvim",
@@ -282,41 +283,33 @@ return { -- LSP Configuration & Plugins
       "angularls",
       "astro",
       "bashls",
+      "black",
+      "csharpier",
       "biome",
+      "debugpy",
       "dockerls",
+      "eslint",
+      "flake8",
       --'gopls',
+      "java-debug-adapter",
+      "java-test",
       "jdtls",
+      "js-debug-adapter",
       "jsonls",
       "lemminx",
       "lua_ls",
+      "netcoredbg",
+      "prettier",
       "pyright",
-      "svelte",
       "tailwindcss",
       "yamlls",
       --"phpactor",
       --"php-debug-adapter",
       "pyright",
       "sqlls",
+      "stylua",
       "yamlls",
       "vtsls"
-    }
-
-    local mason_non_lsps = {
-
-      "kotlin-language-server",
-      "kotlin-debug-adapter",
-      "java-debug-adapter",
-      "java-test",
-      "eslint_lsp",
-      --format
-      "black",
-      "flake8",
-      "prettier",
-      "stylua",
-      --dap
-      "js-debug-adapter",
-      "debugpy",
-      "netcoredbg",
     }
 
     -- Enable the following language servers
@@ -333,17 +326,21 @@ return { -- LSP Configuration & Plugins
       "jsonls",
       "lemminx",
       "lua_ls",
-      "kotlin_language_server",
       "pyright",
       "sqlls",
-      "svelte",
       "tailwindcss",
       "yamlls",
     }
 
+    require("mason-tool-installer").setup({
+      ensure_installed = ensure_installed,
+      auto_update = false,
+      run_on_start = false,
+    })
+
     -- Ensure the servers above are installed
     require("mason-lspconfig").setup({
-      ensure_installed = ensure_installed,
+      ensure_installed = lsp_servers,
     })
 
     -- nvim-cmp supports additional completion capabilities, broadcast that to servers
