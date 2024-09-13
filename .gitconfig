@@ -15,19 +15,23 @@
     diffFilter = delta --color-only
 
 [alias]
+  dft = difftool
   differ = "!nvim -c DiffviewOpen"
+
+[diff]
+    tool = difftastic
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+    difftool = true
 
 [delta]
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     side-by-side = true
 
-[diff]
-    tool = nvimdiff
-[difftool]
-    prompt = false
-[difftool "nvimdiff"]
-	cmd = nvim "$LOCAL" "$REMOTE"
 [mergetool "nvimdiff"]
     cmd = nvim -f -d -c "\"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\""
    keepBackup = false

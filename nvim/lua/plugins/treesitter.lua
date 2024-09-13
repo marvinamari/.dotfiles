@@ -4,6 +4,7 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   event = { "BufReadPost", "BufNewFile" },
+  opts = { highlight = { enable = true } },
   config = function()
     require 'nvim-treesitter.configs'.setup {
       configs = {
@@ -47,6 +48,7 @@ return {
         'php',
         'phpdoc',
         'python',
+        'query',
         'tlaplus',
         'regex',
         'rust',
@@ -62,6 +64,7 @@ return {
         'tsx',
         'typescript',
         'vim',
+        'vimdoc',
         'vue',
         'yaml',
         --'zig'

@@ -6,9 +6,9 @@ local js_based_languages = {
 	"vue",
 }
 
-		local home = require("utils").home
-		local neovim_home = require("utils").neovim_home
-		local isWindows = require("utils").isWindows
+local home = require("utils").home
+local neovim_home = require("utils").neovim_home
+local isWindows = require("utils").isWindows
 
 return {
 	"mfussenegger/nvim-dap",
@@ -18,26 +18,26 @@ return {
 		"nvim-telescope/telescope-dap.nvim",
 		"jbyuki/one-small-step-for-vimkind",
 		"rcarriga/nvim-dap-ui",
-    {
-      "microsoft/vscode-js-debug",
-      build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-    },
-    {
-      "mxsdev/nvim-dap-vscode-js",
-      config = function()
-        require('dap-vscode-js').setup({
-          debugger_path = vim.fn.resolve(neovim_home .. "/lazy/vscode-js-debug"),
-          adapters = {
-            "chrome",
-            "pwa-node",
-            "pwa-chrome",
-            "pwa-extensionHost",
-            "node-terminal",
-            "node",
-          }
-        })
-      end
-    }
+		{
+			"microsoft/vscode-js-debug",
+			build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+		},
+		{
+			"mxsdev/nvim-dap-vscode-js",
+			config = function()
+				require("dap-vscode-js").setup({
+					debugger_path = vim.fn.resolve(neovim_home .. "/lazy/vscode-js-debug"),
+					adapters = {
+						"chrome",
+						"pwa-node",
+						"pwa-chrome",
+						"pwa-extensionHost",
+						"node-terminal",
+						"node",
+					},
+				})
+			end,
+		},
 	},
 	config = function()
 		--https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b
@@ -188,7 +188,7 @@ return {
 		}
 		--
 		-- DotNet
-		local exe = isWindows and home .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe"
+		local exe = isWindows and neovim_home .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe"
 			or home .. "/mason/bin/netcoredbg"
 
 		adapters.netcoredbg = {
@@ -206,22 +206,47 @@ return {
 		configurations.cs = {
 			{
 				type = "netcoredbg",
-				name = "launch - netcoredbg",
+				name = "launch dll - netcoredbg",
 				request = "launch",
 				program = function()
 					-- Use telescope to select the DLL file
-					local selected_file = require("telescope.builtin").find_files({
-						find_command = {
-							"rg",
-							"--no-ignore",
-							"--hidden",
-							"--files",
-							"-g",
-							"!**/node_modules/*",
-							"-g",
-							"!**/.git/*",
-						},
-					})[1]
+					local pickers = require("telescope.pickers")
+					local finders = require("telescope.finders")
+					local sorters = require("telescope.sorters")
+					local actions = require("telescope.actions")
+					local action_state = require("telescope.actions.state")
+
+					local selected_file = nil
+
+					local co = coroutine.running()
+					pickers
+						.new({}, {
+							prompt_title = "Select DLL",
+							finder = finders.new_oneshot_job({
+								"rg",
+								"--no-ignore",
+								"--hidden",
+								"--files",
+								"-g",
+								"*.dll",
+								"-g",
+								"!**/node_modules/*",
+								"-g",
+								"!**/.git/*",
+							}),
+							sorter = sorters.get_fuzzy_file(),
+							attach_mappings = function(prompt_bufnr, map)
+								actions.select_default:replace(function()
+									actions.close(prompt_bufnr)
+									selected_file = action_state.get_selected_entry()[1]
+									coroutine.resume(co)
+								end)
+								return true
+							end,
+						})
+						:find()
+
+					coroutine.yield()
 					return selected_file
 				end,
 			},
@@ -272,25 +297,25 @@ return {
 					cwd = "${workspaceFolder}",
 					sourceMaps = true,
 				}, -- To debug a nodejs process you need to add --inspect when you run the process
-        { -- auto attach to node process running with --inspect
-          type = "pwa-node",
-          request = "launch",
-          name = "PNPM",
-          cwd = "${workspaceFolder}",
-          runtimeExecutable = "pnpm",
-          runtimeArgs = {
-            "debug",
-          }
-        },
-        {
-          type = "pwa-node",
-          request = "attach",
-          name = "Attach to 3000",
-          address = "localhost",
-          port = 3000,
-          cwd = "${workspaceFolder}",
-          restart = true,
-        },
+				{ -- auto attach to node process running with --inspect
+					type = "pwa-node",
+					request = "launch",
+					name = "PNPM",
+					cwd = "${workspaceFolder}",
+					runtimeExecutable = "pnpm",
+					runtimeArgs = {
+						"debug",
+					},
+				},
+				{
+					type = "pwa-node",
+					request = "attach",
+					name = "Attach to 3000",
+					address = "localhost",
+					port = 3000,
+					cwd = "${workspaceFolder}",
+					restart = true,
+				},
 				{
 					type = "pwa-node",
 					request = "attach",
@@ -339,11 +364,11 @@ return {
 			host = "::1",
 			port = "${port}",
 			executable = {
-			  command = jsexe,
-        args = {
-          "${port}"
-        }
-      }
+				command = jsexe,
+				args = {
+					"${port}",
+				},
+			},
 		}
 
 		adapters["pwa-chrome"] = {
