@@ -12,7 +12,7 @@ local isWindows = require("utils").isWindows
 
 return {
 	"mfussenegger/nvim-dap",
-	event = "VeryLazy",
+	cmd = "DapContinue",
 	dependencies = {
 		"theHamsta/nvim-dap-virtual-text",
 		"nvim-telescope/telescope-dap.nvim",
@@ -22,6 +22,13 @@ return {
 			"microsoft/vscode-js-debug",
 			build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 		},
+    {
+      "leoluz/nvim-dap-go",
+      ft = "go",
+      config = function (_, opts)
+        require("dap-go").setup(opts)
+      end
+    },
 		{
 			"mxsdev/nvim-dap-vscode-js",
 			config = function()

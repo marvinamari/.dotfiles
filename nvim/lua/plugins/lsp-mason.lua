@@ -388,6 +388,7 @@ return { -- LSP Configuration & Plugins
 			"csharpier",
 			"biome",
 			"debugpy",
+			"delve",
 			"dockerls",
 			"eslint",
 			"flake8",

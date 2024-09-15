@@ -1,8 +1,9 @@
 python 3.12.0
 java openjdk-21
 spring-boot 3.1.5
-nodejs 21.2.0
-golang 1.21.4
-dotnet 8.0.100
-pnpm 8.13.1
+nodejs 22.8.0
+golang 1.23.1
+dotnet 8.0.401
+pnpm 9.10.0
 gradle 8.5
+lua 5.1

@@ -88,33 +88,6 @@ keymap("v", ",dq", [[c"<c-r>""<esc>]], { silent = true }) -- surround double quo
 keymap("v", ",sq", [[c'<c-r>"'<esc>]], { silent = true }) -- surround double quotes
 keymap("v", ",st", [[c`<c-r>"`<esc>]], { silent = true }) -- surround double quotes
 keymap("v", ",sp", [[c(<c-r>")<esc>]], { silent = true }) -- surround double quotes
--- Chat normal mode
--- map('n', "<leader>cc", "<cmd>ChatGPT<CR>", {desc = "ChatGPT Toggle"})
--- map('n', "<leader>CC", "<cmd>ChatGPTCompleteCode<CR>", {desc = "ChatGPT Complete Code"})
--- map('n', "<leader>cg", "<cmd>ChatGPTRun grammar_correction<CR>", {desc = "Chat grammer correction"})
--- map('n', "<leader>ct", "<cmd>ChatGPTRun translate<CR>", {desc = "Chat translate"})
--- map('n', "<leader>ck", "<cmd>ChatGPTRun keywords<CR>", {desc = "Chat keywords"})
--- map('n', "<leader>cd", "<cmd>ChatGPTRun docstring<CR>", {desc = "Chat docstring"})
--- map('n', "<leader>ca", "<cmd>ChatGPTRun add_tests<CR>", {desc = "Chat add tests"})
--- map('n', "<leader>co", "<cmd>ChatGPTRun optimize_code<CR>", {desc = "Chat optimize code"})
--- map('n', "<leader>cs", "<cmd>ChatGPTRun summarize<CR>", {desc = "Chat summarize"})
--- map('n', "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {desc = "Chat fix bugs"})
--- map('n', "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {desc = "Chat explain code"})
--- map('n', "<leader>cr", "<cmd>ChatGPTRun roxygen_edit<CR>", {desc = "Chat roxygen_edit"})
--- map('n', "<leader>cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", {desc = "Chat code readability analysis"})
---
--- -- Chat visual mode
--- map('v', "<leader>ce", "<cmd>ChatGPTEditWithInstruction<CR>", {desc = "Chat Edit with instruction"})
--- map('v', "<leader>ct", "<cmd>ChatGPTRun translate<CR>", {desc = "Chat translate"})
--- map('v', "<leader>ck", "<cmd>ChatGPTRun keywords<CR>", {desc = "Chat keywords"})
--- map('v', "<leader>cd", "<cmd>ChatGPTRun docstring<CR>", {desc = "Chat docstring"})
--- map('v', "<leader>ca", "<cmd>ChatGPTRun add_tests<CR>", {desc = "Chat add tests"})
--- map('v', "<leader>co", "<cmd>ChatGPTRun optimize_code<CR>", {desc = "Chat optimize code"})
--- map('v', "<leader>cs", "<cmd>ChatGPTRun summarize<CR>", {desc = "Chat summarize"})
--- map('v', "<leader>cf", "<cmd>ChatGPTRun fix_bugs<CR>", {desc = "Chat fix bugs"})
--- map('v', "<leader>cx", "<cmd>ChatGPTRun explain_code<CR>", {desc = "Chat explain code"})
--- map('v', "<leader>cr", "<cmd>ChatGPTRun roxygen_edit<CR>", {desc = "Chat roxygen_edit"})
--- map('v', "<leader>cl", "<cmd>ChatGPTRun code_readability_analysis<CR>", {desc = "Chat code readability analysis"})
 
 -- Copilot
 wk.add({
@@ -129,13 +102,12 @@ map("v", "<leader>cr", "<cmd>CopilotChatReview<CR>", { desc = "Copilot Chat Revi
 
 map("n", "<leader>ca", "<cmd>Copilot auth<CR>", { desc = "Copilot auth" })
 
--- Gen ai
-map("n", "<LocalLeader>cc", "<cmd>Gen Chat<CR>", { desc = "Gen-ai chat" })
-map("n", "<LocalLeader>cC", "<cmd>Gen Change_Code<cr>", { desc = "Gen-ai change code" })
-map("n", "<LocalLeader>ca", "<cmd>Gen Ask<cr>", { desc = "Gen-ai ask" })
-map("n", "<LocalLeader>cR", "<cmd>Gen Review_Code<cr>", { desc = "Gen-ai review code" })
-map("n", "<LocalLeader>cs", "<cmd>Gen Summarize<cr>", { desc = "Gen-ai summarize" })
-map("n", "<LocalLeader>cS", "<cmd>lua require('gen').select_model()<cr>", { desc = "Gen-ai select model" })
+-- Avante
+map("n", "<LocalLeader>aa", "<cmd>AvanteToggle<CR>", { desc = "Avante Ask" })
+map("n", "<LocalLeader>ab", "<cmd>AvanteBuild<cr>", { desc = "Avante Build" })
+map("n", "<LocalLeader>ac", "<cmd>Avante Chat<cr>", { desc = "Avante Chat" })
+map("n", "<LocalLeader>ar", "<cmd>AvanteRefresh<cr>", { desc = "Avante Refresh" })
+map("n", "<LocalLeader>ae", "<cmd>AvanteEdit<cr>", { desc = "Avante Edit" })
 
 -- Dbee
 wk.add({
