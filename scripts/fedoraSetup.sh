@@ -6,7 +6,7 @@ sudo dnf upgrade -y
 
 # dev dependencies
 sudo dnf install -yy bat difftastic dnsutils \
-    fzf gcc git-delta gnupg make \
+    fzf gcc git-delta gnupg httpie jq make \
     rclone ripgrep tmux tree-sitter-cli wget wl-clipboard xclip zoxide zsh
 
 # Droid cam (https://www.dev47apps.com/droidcam/linux/)

@@ -102,7 +102,7 @@ ulimit -n 10240
 
 # GO
 export GOPATH=$HOME/go
-export GOROOT=$HOME/.asdf/shims
+#export GOROOT=$HOME/.asdf/shims
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin:${GOPATH}/bin"
 
 export PATH="$PATH:/home/marvin/.local/share/lvim/distant.nvim/bin"

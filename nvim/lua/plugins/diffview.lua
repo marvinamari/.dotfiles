@@ -1,6 +1,6 @@
 return {
   "sindrets/diffview.nvim",
-  cmd = "DiffviewOpen",
+  cmd = { "DiffviewOpen", "DiffviewFileHistory" },
   config = function()
     -- Lua
     local actions = require("diffview.actions")

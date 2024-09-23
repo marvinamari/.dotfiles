@@ -1,3 +1,4 @@
+local isWindows = require('utils').isWindows
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
@@ -10,7 +11,7 @@ return {
          ollama = {
            ["local"] = true,
            endpoint = "127.0.0.1:11434/v1",
-           model = "deepseek-coder-v2:16b",
+           model = "codellama",
            parse_curl_args = function(opts, code_opts)
              return {
                url = opts.endpoint .. "/chat/completions",
@@ -33,8 +34,7 @@ return {
        },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+  build = isWindows and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
   dependencies = {
     "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",

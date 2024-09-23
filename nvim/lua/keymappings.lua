@@ -160,13 +160,37 @@ keymap("n", "<C-Down>", ":resize -2<cr>")
 keymap("n", "<C-Left>", ":vertical resize -2<cr>")
 keymap("n", "<C-Right>", ":vertical resize +2<cr>")
 
--- Rest
+-- Curl
 wk.add({
-	{ "<LocalLeader>r", group = "Rest" },
+	{ "<LocalLeader>c", group = "Curl" },
 })
-keymap("n", "<LocalLeader>rr", ":Rest run<cr>", { desc = "Rest run" })
-keymap("n", "<LocalLeader>ro", ":Rest open<cr>", { desc = "Rest open" })
-keymap("n", "<LocalLeader>rl", ":Rest last<cr>", { desc = "Rest run last" })
+local curl = require("curl")
+curl.setup({})
+
+vim.keymap.set("n", "<LocalLeader>cc", function()
+    curl.open_curl_tab()
+end, { desc = "Open a curl tab scoped to the current working directory" })
+
+vim.keymap.set("n", "<LocalLeader>co", function()
+    curl.open_global_tab()
+end, { desc = "Open a curl tab with gloabl scope" })
+
+-- These commands will prompt you for a name for your collection
+vim.keymap.set("n", "<LocalLeader>csc", function()
+      curl.create_scoped_collection()
+end, { desc = "Create or open a collection with a name from user input" })
+
+vim.keymap.set("n", "<LocalLeader>cgc", function()
+      curl.create_global_collection()
+end, { desc = "Create or open a global collection with a name from user input" })
+
+vim.keymap.set("n", "<LocalLeader>fsc", function()
+      curl.pick_scoped_collection()
+end, { desc = "Choose a scoped collection and open it" })
+
+vim.keymap.set("n", "<LocalLeader>fgc", function()
+      curl.pick_global_collection()
+end, { desc = "Choose a global collection and open it" })
 
 -- toggleterm
 keymap("n", "<LocalLeader>th", ":ToggleTerm size=20 direction=horizontal<CR>", { desc = "Terminal horizontal" })
@@ -317,19 +341,23 @@ map("n", "<LocalLeader>fl", ":lua require('fzf-lua').live_grep()<CR>", { desc = 
 map("n", "<LocalLeader>fc", ":lua require('fzf-lua').lgrep_curbuf()<CR>", { desc = "Fzf Live Grep Current Buffer" })
 map("n", "<LocalLeader>fu", ":lua require('fzf-lua').grep_cword()<CR>", { desc = "Fzf Grep Word Under Cursor" })
 
--- telescope-dap
-map("n", "<leader>dtf", ":Telescope dap frames<CR>", { desc = "Telescope dap frames" })
-map("n", "<leader>dtc", ":Telescope dap commands<CR>", { desc = "Telescope dap commands" })
-map("n", "<leader>dto", ":Telescope dap configurations<CR>", { desc = "Telescope dap configuration" })
-map("n", "<leader>dlb", ":Telescope dap list_breakpoints<CR>", { desc = "Telescope dap breakpoints" })
-map("n", "<leader>dv", ":Telescope dap variables<CR>", { desc = "Telescope dap variables" })
 
+--
 -- Telescope -- See `:help telescope.builtin`
+--
 -- navigate preview window with ctl-d ctl-u
 wk.add({
 	{ "<leader>f", group = "Telescope Find" },
 })
+-- Function to search files in the opened directory
+local function search_files_in_opened_directory()
+  local current_dir = vim.fn.expand('%:p:h') -- Get the current working directory
+  current_dir = current_dir:gsub('^oil://', '')
+  require('telescope.builtin').find_files({ cwd = current_dir })
+end
+
 vim.keymap.set("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>", { desc = "[f]ind [f]iles" })
+vim.keymap.set('n', '<leader>fo', function() search_files_in_opened_directory() end, { desc=  "[F]ind [O]pen directory"})
 map(
 	"n",
 	"<Leader>fi",
@@ -371,6 +399,13 @@ map("n", "<Leader>gt", ":Telescope git_stash<CR>", { desc = "Telescope git stash
 map("n", "<Leader>gb", ":Telescope git_branches<CR>", { desc = "Telescope git branches" })
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
+
+-- telescope-dap
+map("n", "<leader>dtf", ":Telescope dap frames<CR>", { desc = "Telescope dap frames" })
+map("n", "<leader>dtc", ":Telescope dap commands<CR>", { desc = "Telescope dap commands" })
+map("n", "<leader>dto", ":Telescope dap configurations<CR>", { desc = "Telescope dap configuration" })
+map("n", "<leader>dlb", ":Telescope dap list_breakpoints<CR>", { desc = "Telescope dap breakpoints" })
+map("n", "<leader>dv", ":Telescope dap variables<CR>", { desc = "Telescope dap variables" })
 
 -- git
 --vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
