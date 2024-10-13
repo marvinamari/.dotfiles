@@ -339,7 +339,7 @@ return { -- LSP Configuration & Plugins
 					)
 				end
 
-				if server_name == "vtsls" then
+				if server_name == "ts_ls" then
 					client.server_capabilities.documentFormattingProvider = false
 				end
 
@@ -408,8 +408,8 @@ return { -- LSP Configuration & Plugins
 			"pyright",
 			"sqlls",
 			"stylua",
+			"ts_ls",
 			"yamlls",
-			"vtsls",
 		}
 
 		-- Enable the following language servers
@@ -560,23 +560,23 @@ return { -- LSP Configuration & Plugins
 			-- end
 		})
 
-		lspconfig.vtsls.setup({
+		lspconfig.ts_ls.setup({
 			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "typescript.tsx" },
 			root_dir = util.root_pattern("package.json"),
 			handlers = handlers,
-			on_attach = _G.on_attach("vtsls"),
+			on_attach = _G.on_attach("ts_ls"),
 			capabilities = capabilities,
-			settings = {
-				typescript = {
-					inlayHints = {
-						parameterNames = { enabled = "literals" },
-						parameterTypes = { enabled = true },
-						variableTypes = { enabled = true },
-						propertyDeclarationTypes = { enabled = true },
-						functionLikeReturnTypes = { enabled = true },
-						enumMemberValues = { enabled = true },
-					},
-				},
+			init_options = {
+preferences = {
+            includeInlayParameterNameHints = 'all',
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+            importModuleSpecifierPreference = 'non-relative',
+        },
 			},
 		})
 
