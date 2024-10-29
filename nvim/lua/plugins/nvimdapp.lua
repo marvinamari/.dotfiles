@@ -20,7 +20,7 @@ return {
 		"rcarriga/nvim-dap-ui",
 		{
 			"microsoft/vscode-js-debug",
-			build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+			build = isWindows and "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && Move-Item -Path dist -Destination out" or "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 		},
     {
       "leoluz/nvim-dap-go",
@@ -29,22 +29,6 @@ return {
         require("dap-go").setup(opts)
       end
     },
-		{
-			"mxsdev/nvim-dap-vscode-js",
-			config = function()
-				require("dap-vscode-js").setup({
-					debugger_path = vim.fn.resolve(neovim_home .. "/lazy/vscode-js-debug"),
-					adapters = {
-						"chrome",
-						"pwa-node",
-						"pwa-chrome",
-						"pwa-extensionHost",
-						"node-terminal",
-						"node",
-					},
-				})
-			end,
-		},
 	},
 	config = function()
 		--https://alpha2phi.medium.com/neovim-dap-enhanced-ebc730ff498b

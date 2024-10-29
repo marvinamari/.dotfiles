@@ -3,7 +3,7 @@ local wo = vim.wo
 local g = vim.g
 local opt = vim.opt
 
-vim.cmd("set autoread")
+opt.autoread = false -- potentially help prevent neovim freezes
 vim.cmd("set modifiable")
 -- Colorscheme
 vim.cmd("colorscheme material")
@@ -84,7 +84,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Decrease update time
-vim.o.updatetime = 250
+--vim.o.updatetime = 250 -- might be causing nvim freezing
 vim.wo.signcolumn = 'yes'
 
 -- Set completeopt to have a better completion experience

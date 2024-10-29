@@ -8,7 +8,7 @@ return {
       config = {
         scratch_repl = true, -- discard repls,
         repl_definition = {
-          csharp = {
+          cs = {
             command = { "csharprepl"}
           },
           java = {

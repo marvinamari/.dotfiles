@@ -28,6 +28,14 @@ vmap N :action UnselectPreviousOccurrence<cr>
 vmap <C-d> :action SelectNextOccurrence<cr>
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
+" Ace jump
+
+" Press `S` in normal mode to activate AceJump mode before the caret
+nmap S <Action>(AceBackwardAction)
+" Press `s` in normal mode to activate AceJump mode after the caret
+nmap s <Action>(AceForwardAction)
+
+" End Ace jump
 
 " Create new vertical splits on right and horizontals on below
 " set splitright
@@ -35,6 +43,7 @@ vmap <C-d> :action SelectNextOccurrence<cr>
 "
 nmap <S-k> :action ShowErrorDescription<cr>
 
+nmap gc :action ShowIntentionActions<cr>
 
 " Use Q for formatting the current paragraph (or visual selection)
 vmap Q gq
@@ -78,7 +87,7 @@ nmap <leader>wp :action PrevSplitter<cr>
 nmap ,s :action PrevSplitter<cr>
 
 " Full screen window
-nmap <leader>wf :action HideAllWindows<cr>
+nmap <leader>e :action HideAllWindows<cr>
 
 " Splits manipulation
 nmap <leader>ws :action SplitHorizontally<cr>
@@ -91,8 +100,8 @@ nmap <leader>wd :action OpenEditorInOppositeTabGroup<cr>
 " nmap <leader>ww :action JumpToLastWindow<cr>
 
 " NERDTree
-map <leader>ee :NERDTree<CR>
-nmap <leader>eh :action HideActiveWindow<cr>
+"map <leader>ee :NERDTree<CR>
+"nmap <leader>eh :action HideActiveWindow<cr>
 
 " Navigation / Movements
 nmap <leader>h :action Back<cr>
@@ -142,15 +151,15 @@ nmap <leader>gm :action Git.Merge<cr>
 nmap ,a :action GotoAction<cr>
 
 " Errors
-nmap <leader>x :action GotoNextError<cr>
-nmap <leader>X :action GotoPreviousError<cr>
+nmap ]d :action GotoNextError<cr>
+nmap [d :action GotoPreviousError<cr>
 
 " Editor
 nmap<leader>F :action ReformatCode<cr>
 " Refactorings
 vmap T :action Refactorings.QuickListPopupAction<cr>
 vmap <leader>rm :action ExtractMethod<cr>
-nmap <leader>rr :action RenameElement<cr>
+nmap rn :action RenameElement<cr>
 nmap <leader>rq :action Refactoring.QuickListPopupAction<cr>
 nmap <leader>rg :action Generate<cr>
 nmap <leader>rI :action OptimizeImports<cr>

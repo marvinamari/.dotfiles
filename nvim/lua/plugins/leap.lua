@@ -1,16 +1,9 @@
 return {
   "ggandor/leap.nvim",
   config = function()
-    require("leap").add_default_mappings()
-    -- require("flash").jump({
-    -- modes = {
-    --     search = {
-    --         search = {
-    --             incremental = true,
-    --             trigger = ";",
-    --         },
-    --     },
-    -- },
-    -- })
+    local leap = require("leap")
+    leap.add_default_mappings()
+    leap.opts.case_sensitive = true
+    -- default keybinding is s S gs
   end
 }

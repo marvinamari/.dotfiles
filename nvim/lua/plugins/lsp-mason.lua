@@ -25,6 +25,12 @@ local roslyn_setup_keymaps = function()
 	)
 	vim.keymap.set(
 		"n",
+		"<leader>irP",
+		"<cmd>lua require('easy-dotnet').run_with_profile(false)<cr>",
+		{ buffer = 0, desc = "Dotnet run profile" }
+	)
+	vim.keymap.set(
+		"n",
 		"<leader>ird",
 		"<cmd>lua require('easy-dotnet').run_default()<cr>",
 		{ buffer = 0, desc = "Dotnet run default" }
@@ -449,7 +455,9 @@ return { -- LSP Configuration & Plugins
 			vim.lsp.protocol.make_client_capabilities(),
 			require("cmp_nvim_lsp").default_capabilities()
 		)
-		--capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+
+		-- in 0.9 neovim doesn't enable watch mechanism by default, lsp doesn't get notified of changes outside of nvim
+		capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 
 		for _, lsp in ipairs(lsp_servers) do
 			lspconfig[lsp].setup({

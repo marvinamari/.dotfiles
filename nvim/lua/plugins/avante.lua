@@ -6,7 +6,7 @@ return {
   version = false, -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
-       provider = "ollama", -- openai
+       provider = "ollama", -- openai | ollama | copilot
        vendors = {
          ollama = {
            ["local"] = true,
@@ -34,7 +34,7 @@ return {
        },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = isWindows and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
+  build = isWindows and "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
   dependencies = {
     "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",

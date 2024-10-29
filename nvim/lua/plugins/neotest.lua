@@ -27,7 +27,10 @@ return {
         }),
         require "neotest-rust",
         require("neotest-dotnet")({
-          dap = { justMyCode = false },
+          dap = { 
+            args = {justMyCode = false },
+            adapter_name = "netcoredbg"
+          }
         }),
         require "neotest-scala",
         -- require "neotest-haskell",
