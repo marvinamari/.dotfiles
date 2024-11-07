@@ -1,6 +1,6 @@
 return {
   "FabijanZulj/blame.nvim",
-  cmd = "ToggleBlame",
+  cmd = "BlameToggle",
   config = function()
     require('blame').setup({})
   end

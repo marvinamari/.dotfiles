@@ -2,6 +2,7 @@ return {
   {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
+  cmd = 'Telescope',
   dependencies = {
     'nvim-lua/plenary.nvim'
   },
@@ -30,6 +31,8 @@ return {
             ["<s-tab>"] = actions.toggle_selection + actions.move_selection_previous,
             ["<C-w>"] = actions.send_selected_to_qflist,
             ["<C-q>"] = actions.send_to_qflist,
+            ["d"] = actions.delete_buffer,
+            ["q"] = actions.close
           }
         },
         dynamic_preview_title = true,

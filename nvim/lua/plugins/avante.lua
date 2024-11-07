@@ -6,7 +6,7 @@ return {
   version = false, -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
-       provider = "ollama", -- openai | ollama | copilot
+       provider = "copilot", -- openai | ollama | copilot
        vendors = {
          ollama = {
            ["local"] = true,

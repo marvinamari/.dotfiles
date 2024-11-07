@@ -1,6 +1,6 @@
 -- echo v:lua.vim.uv.os_name().sysname -- lua print(vim.uv.os_uname().sysname)
 -- Go to previous location Ctrl + o
--- Go to next location Ctrl + i
+-- Go to next location Ctrl + 
 -- Go to next method, change, diagnostic [] m|c|d
 -- Increment Decrement number Ctrl-A Ctrl-X
 -- substitue in block <,>s/old/new/g
@@ -9,6 +9,12 @@
 -- {Marks}
 -- create mark m<register>
 -- go to mark '<register>
+
+-- buffer of messages
+-- :redir > messages.txt
+-- :messages
+-- :redir END
+-- :e messages.txt
 
 -- variables
 local keymap = require("utils").keymap
@@ -83,11 +89,12 @@ keymap("v", "<C-V>", '<ESC>"+pa', { silent = true })
 
 -- Wrap selection
 keymap("v", ",cb", [[c{ <c-r>" }<esc>]], { silent = true }) -- surround curly braces
-keymap("v", ",ss", [[c <c-r>" <esc>]], { silent = true }) -- surround white space
+keymap("v", ",bt", [[c`<c-r>"`<esc>]], { silent = true }) -- surround back ticks
+keymap("v", ",ss", [[c <c-r>" <esc>]], { silent = true }) -- surround single space
 keymap("v", ",dq", [[c"<c-r>""<esc>]], { silent = true }) -- surround double quotes
-keymap("v", ",sq", [[c'<c-r>"'<esc>]], { silent = true }) -- surround double quotes
-keymap("v", ",st", [[c`<c-r>"`<esc>]], { silent = true }) -- surround double quotes
-keymap("v", ",sp", [[c(<c-r>")<esc>]], { silent = true }) -- surround double quotes
+keymap("v", ",sq", [[c'<c-r>"'<esc>]], { silent = true }) -- surround single quotes
+keymap("v", ",sp", [[c(<c-r>")<esc>]], { silent = true }) -- surround single parentheses
+keymap("v", ",sb", [[c[<c-r>"]<esc>]], { silent = true }) -- surround square brackets
 
 -- Copilot
 wk.add({
@@ -141,18 +148,6 @@ keymap("n", "<S-right>", "10zl")
 -- Move selected block in visual mode
 keymap("x", "K", ":move '<-2<CR>gv-gv")
 keymap("x", "J", ":move '>+1<CR>gv-gv")
-
--- Tab switch buffer
-wk.add({
-	{ "<leader>B", group = "Bufferline" },
-})
-keymap("n", "<S-l>", ":bnext<CR>") -- :BufferLineCycleNext
-keymap("n", "<S-h>", ":bprevious<CR>") -- :BufferLineCyclePrev
-keymap("n", "<leader>Bq", ":BufferLineCloseOthers<CR>")
-keymap("n", "<leader>Bp", ":BufferLinePick<CR>", { desc = "Buffer pick" })
-map("n", "<leader>Bc", ":BufferLinePickClose<CR>", { desc = "Buffer Pick close" })
-map("n", "<leader>Bl", ":BufferLineCloseLeft<CR>", { desc = "Buffer close left" })
-map("n", "<leader>Br", ":BufferLineCloseRight<CR>", { desc = "Buffer close right" })
 
 -- resize with arrows
 keymap("n", "<C-Up>", ":resize +2<cr>")
@@ -306,18 +301,23 @@ map("n", "<leader>hl", ":Telescope harpoon marks<CR>", { desc = "Harpoon list ma
 vim.keymap.set("n", "<leader>hm", function()
 	harpoon:list():add()
 end, { desc = "Harpoon add mark file" })
-vim.keymap.set("n", "<leader>ht", function()
+
+vim.keymap.set("n", "<leader>hh", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = "Harpoon toggle menu" })
+
 vim.keymap.set("n", ";1", function()
 	harpoon:list():select(1)
 end, { desc = "Harpoon select file 1" })
+
 vim.keymap.set("n", ";2", function()
 	harpoon:list():select(2)
 end, { desc = "Harpoon select file 2" })
+
 vim.keymap.set("n", ";3", function()
 	harpoon:list():select(3)
 end, { desc = "Harpoon select file 3" })
+
 vim.keymap.set("n", ";4", function()
 	harpoon:list():select(4)
 end, { desc = "Harpoon select file 4" })
@@ -356,6 +356,8 @@ local function search_files_in_opened_directory()
   require('telescope.builtin').find_files({ cwd = current_dir })
 end
 
+map("n", "<S-h>", ":Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal theme=ivy<cr>", {desc = "Telescope open buffers"})
+
 vim.keymap.set("n", "<Leader>ff", ":lua require('telescope.builtin').find_files()<CR>", { desc = "[f]ind [f]iles" })
 vim.keymap.set('n', '<leader>fo', function() search_files_in_opened_directory() end, { desc=  "[F]ind [O]pen directory"})
 map(
@@ -373,7 +375,7 @@ map(
 )
 map("n", "<Leader>fC", ":lua require('telescope.builtin').colorscheme()<CR>")
 vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
+vim.keymap.set("n", "<leader><space>", "<cmd>e #<cr>", { desc = "Alternate Buffer" }) 
 map("n", "<Leader>fc", ":Telescope commands<CR>", { desc = "Telescope commands" })
 map("n", "<Leader>jl", ":Telescope jumplist<CR>", { desc = "Telescope jumplist" })
 map("n", "<Leader>fq", ":Telescope quickfix<CR>", { desc = "Telescope quickfix" })
@@ -410,7 +412,7 @@ map("n", "<leader>dv", ":Telescope dap variables<CR>", { desc = "Telescope dap v
 -- git
 --vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 map("n", "<leader>lg", ":LazyGit<CR>", { desc = "Lazy git" })
-map("n", "<LocalLeader>gb", ":GitSigns blame_line<cr>", { desc = "Git Blame" })
+map("n", "<LocalLeader>gb", ":BlameToggle<cr>", { desc = "Git Blame" })
 -- Merge conflicts
 vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>", { desc = "Diffget LOCAL" })
 vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>", { desc = "Diffget BASE" })
