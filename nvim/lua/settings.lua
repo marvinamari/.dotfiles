@@ -7,9 +7,16 @@ opt.autoread = false -- potentially help prevent neovim freezes
 vim.cmd("set modifiable")
 -- Colorscheme
 vim.cmd("hi Cursor guibg=green")
+vim.cmd [[
+hi DiagnosticUnderlineError guisp='Red' gui=underline
+hi DiagnosticUnderlineWarn guisp='Cyan' gui=undercurl
+set termguicolors
+]]
+-- spell checker
+opt.spelllang = 'en_us'
+opt.spell = true
+
 --vim.cmd[[set guicursor=n-v-c-i:block]]
---Lua:
---vim.cmd("colorscheme tokyonight-moon")
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
@@ -19,6 +26,8 @@ vim.g.loaded_netrwPlugin = 1
 -- vim.g.loaded_ruby_provider = 0
 
 vim.cmd[[filetype plugin on]]
+
+--opt.inccommand = "split"
 
 --Editor
 opt.backup = false

@@ -29,6 +29,7 @@ local profile = userProfile:gsub("\\", "\\\\")
 -- config.default_domain = 'WSL:Ubuntu'
 if os.getenv("OS") == "Windows_NT" then
 	config.default_prog = { profile .. "\\scoop\\apps\\pwsh\\current\\pwsh.exe" }
+  config.default_domain = 'WSL:Ubuntu'
 end
 config.color_scheme = "MaterialDarker"
 -- tmux

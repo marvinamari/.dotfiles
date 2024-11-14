@@ -100,7 +100,7 @@ end
 return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	opts = {
-		inlay_hints = { enabled = true },
+		--inlay_hints = { enabled = true },
 	},
 	dependencies = {
 		-- Automatically install LSPs to stdpath for neovim
@@ -157,13 +157,32 @@ return { -- LSP Configuration & Plugins
 		}
 
 		-- Add border to the diagnostic popup window
+		-- vim.diagnostic.config({
+		-- 	virtual_text = {
+		-- 		prefix = "■ ", -- Could be '●', '▎', 'x', '■', , 
+		-- 	},
+		-- 	float = { border = border },
+		-- })
+
+		-------------------------------------------
+		--- diagnostics: linting and formatting ---
+		-------------------------------------------
 		vim.diagnostic.config({
 			virtual_text = {
-				prefix = "■ ", -- Could be '●', '▎', 'x', '■', , 
+				source = true,
+				prefix = "●",
 			},
-			float = { border = border },
+			underline = false,
+			signs = true,
+			severity_sort = true,
+			float = {
+				border = "rounded",
+				source = true,
+				header = "",
+				prefix = "",
+				focusable = false,
+			},
 		})
-
 		-- LSP settings.
 		--  This function gets run when an LSP connects to a particular buffer.
 		_G.on_attach = function(server_name)
@@ -171,6 +190,7 @@ return { -- LSP Configuration & Plugins
 				-- Create a command `:Format` local to the LSP buffer
 				-- Set keymaps here so they only pertain to buffers that a lang server attaches too
 				-- buffer=0 means only set for current buffer
+				local bufopts = { noremap = true, silent = true, buffer = bufnr }
 				vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 					if vim.lsp.buf.format then
 						vim.lsp.buf.format()
@@ -179,10 +199,66 @@ return { -- LSP Configuration & Plugins
 					end
 				end, { desc = "Format current buffer with LSP" })
 
-				if client.server_capabilities.inlayHintProvider then
-					vim.lsp.inlay_hint.enable(true)
+				-- if client.server_capabilities.inlayHintProvider then
+				-- 	vim.lsp.inlay_hint.enable(true)
+				-- end
+				-- toggle inlay hints
+				vim.g.inlay_hints_visible = false
+				local function toggle_inlay_hints()
+					if vim.g.inlay_hints_visible then
+						vim.g.inlay_hints_visible = false
+						vim.lsp.inlay_hint.enable(false)
+					else
+						if client.server_capabilities.inlayHintProvider then
+							vim.g.inlay_hints_visible = true
+							vim.lsp.inlay_hint.enable(true)
+						else
+							print("no inlay hints available")
+						end
+					end
 				end
 
+				--- toggle diagnostics
+				vim.g.diagnostics_visible = true
+				local function toggle_diagnostics()
+					if vim.g.diagnostics_visible then
+						vim.g.diagnostics_visible = false
+						vim.diagnostic.enable(false)
+					else
+						vim.g.diagnostics_visible = true
+						vim.diagnostic.enable()
+					end
+				end
+
+				--- autocmd to show diagnostics on CursorHold
+				vim.api.nvim_create_autocmd("CursorHold", {
+					buffer = bufnr,
+					desc = "✨lsp show diagnostics on CursorHold",
+					callback = function()
+						local hover_opts = {
+							focusable = false,
+							close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+							border = "rounded",
+							source = "always",
+							prefix = " ",
+						}
+						vim.diagnostic.open_float(nil, hover_opts)
+					end,
+				})
+
+				vim.keymap.set(
+					"n",
+					"<leader>dh",
+					toggle_inlay_hints,
+					vim.tbl_extend("force", bufopts, { desc = "✨lsp toggle inlay hints" })
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>l",
+					toggle_diagnostics,
+					vim.tbl_extend("force", bufopts, { desc = "✨lsp toggle diagnostics" })
+				)
+				---
 				on_attach_lsp_signature(client, bufnr)
 
 				vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { buffer = 0 })
@@ -267,18 +343,18 @@ return { -- LSP Configuration & Plugins
 					"<cmd>vim.diagnostic.setloclist()<cr>",
 					{ buffer = 0, desc = "Set loc list" }
 				)
-				vim.keymap.set(
-					"n",
-					"<LocalLeader>dh",
-					":lua vim.diagnostic.hide()<CR>",
-					{ buffer = 0, desc = "Hide diagnostics" }
-				)
-				vim.keymap.set(
-					"n",
-					"<LocalLeader>ds",
-					":lua vim.diagnostic.show()<CR>",
-					{ buffer = 0, desc = "Show diagnostics" }
-				)
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"<LocalLeader>dh",
+				-- 	":lua vim.diagnostic.hide()<CR>",
+				-- 	{ buffer = 0, desc = "Hide diagnostics" }
+				-- )
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"<LocalLeader>ds",
+				-- 	":lua vim.diagnostic.show()<CR>",
+				-- 	{ buffer = 0, desc = "Show diagnostics" }
+				-- )
 				vim.keymap.set(
 					"n",
 					"<leader>ls",
@@ -392,6 +468,7 @@ return { -- LSP Configuration & Plugins
 			"bashls",
 			"black",
 			"csharpier",
+			"cspell",
 			"biome",
 			"debugpy",
 			"delve",
@@ -575,16 +652,16 @@ return { -- LSP Configuration & Plugins
 			on_attach = _G.on_attach("ts_ls"),
 			capabilities = capabilities,
 			init_options = {
-preferences = {
-            includeInlayParameterNameHints = 'all',
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-            importModuleSpecifierPreference = 'non-relative',
-        },
+				preferences = {
+					includeInlayParameterNameHints = "all",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+					importModuleSpecifierPreference = "non-relative",
+				},
 			},
 		})
 
@@ -606,5 +683,10 @@ preferences = {
 				},
 			},
 		})
+
+		-------------------
+		--- lsp logging ---
+		-------------------
+		vim.lsp.set_log_level("off")
 	end,
 }

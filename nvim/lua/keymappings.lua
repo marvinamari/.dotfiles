@@ -411,7 +411,7 @@ map("n", "<leader>dv", ":Telescope dap variables<CR>", { desc = "Telescope dap v
 
 -- git
 --vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-map("n", "<leader>lg", ":LazyGit<CR>", { desc = "Lazy git" })
+--map("n", "<leader>lg", ":LazyGit<CR>", { desc = "Lazy git" })
 map("n", "<LocalLeader>gb", ":BlameToggle<cr>", { desc = "Git Blame" })
 -- Merge conflicts
 vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>", { desc = "Diffget LOCAL" })
